@@ -153,27 +153,7 @@
     "href": "pages/overview.html#basic-use",
     "title": "Overview",
     "section": "Basic use",
-    "text": "Basic use",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "pages/overview.html#some-use-case",
-    "href": "pages/overview.html#some-use-case",
-    "title": "Overview",
-    "section": "Some use case",
-    "text": "Some use case\nThe functionname function does … munch_group_library.modulename.functionname does … functionname does …\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\n\nfrom vsnb.modulename import functionname\nfunctionname(3, 4)\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\ncontents:\n  - MdRenderer\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "pages/overview.html#learning-more",
-    "href": "pages/overview.html#learning-more",
-    "title": "Overview",
-    "section": "Learning more",
-    "text": "Learning more\nGo to the anvanced page to learn how to …\n\nExamples page: sites using quartodoc.",
+    "text": "Basic use\n\nfrom vsnb import set_vscode_theme, cpu_monitor, pqdm, prange\n\nset_vscode_theme()\n\n\n%%cpu_monitor\n\ntime.sleep(3)\n\n\nimport time\n\nfor i in prange(10):\n    for i in prange(10):\n        time.sleep(0.1)",
     "crumbs": [
       "Overview"
     ]
