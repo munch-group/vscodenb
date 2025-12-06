@@ -18,6 +18,11 @@ classifiers = [
 ]
 dependencies = [
     "IPython",
+    "seaborn",
+    "numpy",
+    "json5",
+    "psutil",
+    "tqdm",
 ]
 
 [project.urls]
