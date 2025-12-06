@@ -23,6 +23,7 @@ dependencies = [
     "numpy",
     "json5",
     "psutil",
+    "rich",
     "tqdm",
 ]
 
