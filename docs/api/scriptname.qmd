@@ -1,6 +1,6 @@
-# scriptname { #munch_group_template.modulename.scriptname }
+# scriptname { #vsnb.modulename.scriptname }
 
 ```python
-munch_group_template.modulename.scriptname()
+vsnb.modulename.scriptname()
 ```
 

@@ -12,7 +12,7 @@ build:
   script: $PYTHON -m pip install . -vv
   python_version_independent: true
   entry_points:
-    - vsnb = munch_group_template:munch_group_template
+    - vsnb = vsnb:vsnb
 
 requirements:
   host:
@@ -36,7 +36,7 @@ dependencies:   # keep this block with only these packages
 
 test:
   imports:
-    - munch_group_template
+    - vsnb
 
 about:
   home: https://github.com/munch-group/vsnb.git

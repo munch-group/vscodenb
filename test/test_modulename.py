@@ -1,6 +1,6 @@
 import unittest
 
-from munch_group_template.modulename import functionname
+from vsnb.modulename import functionname
 
 class TestModulename(unittest.TestCase):
 
