@@ -1,18 +1,18 @@
 {% set pyproject = load_file_data("../pyproject.toml", from_recipe_dir=True) %}
 
 package:
-  name: munch-group-library
+  name: vsnb
   version: {{ pyproject.get("project").get("version") }}
 
 source:
-  git_url: https://github.com/munch-group/munch-group-library.git
+  git_url: https://github.com/munch-group/vsnb.git
 
 build:
   number: 0
   script: $PYTHON -m pip install . -vv
   python_version_independent: true
   entry_points:
-    - munch-group-library = munch_group_template:munch_group_template
+    - vsnb = munch_group_template:munch_group_template
 
 requirements:
   host:
@@ -39,7 +39,7 @@ test:
     - munch_group_template
 
 about:
-  home: https://github.com/munch-group/munch-group-library.git
+  home: https://github.com/munch-group/vsnb.git
   license: MIT
-  dev_url: https://github.com/munch-group/munch-group-library.git
-  doc_url: https://munch-group.org/munch-group-library
+  dev_url: https://github.com/munch-group/vsnb.git
+  doc_url: https://munch-group.org/vsnb

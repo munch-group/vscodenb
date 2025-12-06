@@ -1,5 +1,5 @@
 # Sphinx inventory version 2
-# Project: munch-group-library
+# Project: vsnb
 # Version: 0.0.9999
 # The remainder of this file is compressed using zlib.
 munch_group_template.modulename.functionname py:function 1 api/functionname.html#munch_group_template.modulename.functionname -
