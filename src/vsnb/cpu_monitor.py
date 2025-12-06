@@ -29,7 +29,6 @@ Date: 2025-10-08
 """
 
 import os
-import sys
 import time
 import threading
 import shutil
@@ -37,7 +36,7 @@ import functools
 import subprocess
 from dataclasses import dataclass, field
 from typing import Optional, List, Dict, Any, Callable
-from collections import defaultdict
+import re
 
 # Core dependencies
 import psutil
@@ -59,8 +58,6 @@ try:
 except ImportError:
     HAS_NOTEBOOK_TQDM = False
     notebook_tqdm = std_tqdm
-
-logger = get_logger(__name__)
 
 
 # ============================================================================
@@ -259,8 +256,64 @@ def _query_slurm_jobs_on_node() -> Optional[Dict[str, Any]]:
 
     except (subprocess.CalledProcessError, FileNotFoundError,
             subprocess.TimeoutExpired, Exception) as e:
-        logger.debug(f"Could not query SLURM jobs: {e}")
         return None
+
+
+def detect_slurm_environment() -> Dict[str, Any]:
+    """
+    Detect and parse SLURM environment variables.
+
+    Returns
+    -------
+    dict
+        Dictionary with SLURM configuration:
+        - 'is_slurm': bool - Whether running under SLURM
+        - 'job_id': str - Job ID
+        - 'process_id': int - Process rank (SLURM_PROCID)
+        - 'num_processes': int - Total processes (SLURM_NTASKS)
+        - 'cpus_per_task': int - CPUs per task
+        - 'nodelist': str - List of nodes
+        - 'node_count': int - Number of nodes
+    """
+    env = {}
+
+    # Check if running under SLURM
+    env['is_slurm'] = 'SLURM_JOB_ID' in os.environ
+
+    if not env['is_slurm']:
+        # logger.info("Not running under SLURM - using single-node setup")
+        return env
+
+    # Parse SLURM environment variables
+    env['job_id'] = os.environ.get('SLURM_JOB_ID')
+    env['process_id'] = int(os.environ.get('SLURM_PROCID', 0))
+    env['num_processes'] = int(os.environ.get('SLURM_NTASKS', 1))
+    env['cpus_per_task'] = int(os.environ.get('SLURM_CPUS_PER_TASK', 1))
+    env['nodelist'] = os.environ.get('SLURM_JOB_NODELIST', '')
+    env['node_count'] = int(os.environ.get('SLURM_JOB_NUM_NODES', 1))
+
+    # Check if actually running under srun/sbatch (not just in allocation)
+    # SLURM_STEP_ID is only set when running as part of a job step
+    env['in_job_step'] = 'SLURM_STEP_ID' in os.environ
+
+    if env['num_processes'] > 1 and not env['in_job_step']:
+        # logger.warning(
+        #     f"SLURM allocation has {env['num_processes']} tasks but not running under srun/sbatch.\n"
+        #     f"  Distributed mode will NOT be initialized - only single-process mode.\n"
+        #     f"  To enable distributed mode, run with: srun python <script>"
+        # )
+        # Override num_processes to prevent distributed initialization
+        env['num_processes'] = 1
+
+    # logger.info(f"SLURM environment detected:")
+    # logger.info(f"  Job ID: {env['job_id']}")
+    # logger.info(f"  Process: {env['process_id']}/{env['num_processes']}")
+    # logger.info(f"  CPUs per task: {env['cpus_per_task']}")
+    # logger.info(f"  Nodes: {env['node_count']}")
+    # logger.info(f"  In job step: {env['in_job_step']}")
+
+    return env
+
 
 
 def detect_compute_nodes() -> List[NodeInfo]:
@@ -276,7 +329,6 @@ def detect_compute_nodes() -> List[NodeInfo]:
     # Check for SLURM environment variables
     if 'SLURM_JOB_ID' in os.environ:
         # Running inside SLURM allocation
-        from .distributed_utils import detect_slurm_environment
         slurm_env = detect_slurm_environment()
 
         if slurm_env.get('is_slurm', False):
@@ -301,7 +353,7 @@ def detect_compute_nodes() -> List[NodeInfo]:
                     nodes = result.stdout.strip().split('\n')
                 except (subprocess.CalledProcessError, FileNotFoundError,
                        subprocess.TimeoutExpired) as e:
-                    logger.warning(f"Could not parse SLURM nodelist: {e}")
+                    # logger.warning(f"Could not parse SLURM nodelist: {e}")
                     nodes = [f"node-{i}" for i in range(node_count)]
             else:
                 nodes = [f"node-{i}" for i in range(node_count)]
@@ -372,7 +424,7 @@ def detect_compute_nodes() -> List[NodeInfo]:
 
     if slurm_job:
         # Found SLURM job on this node
-        logger.info(f"Detected SLURM job {slurm_job['job_id']} on this node")
+        # logger.info(f"Detected SLURM job {slurm_job['job_id']} on this node")
 
         # Parse nodelist
         nodelist = slurm_job['nodelist']
@@ -509,7 +561,6 @@ def detect_compute_tasks() -> List[TaskInfo]:
     # Check for SLURM environment variables
     if 'SLURM_JOB_ID' in os.environ:
         # Running inside SLURM allocation
-        from .distributed_utils import detect_slurm_environment
         slurm_env = detect_slurm_environment()
 
         if slurm_env.get('is_slurm', False):
@@ -540,7 +591,7 @@ def detect_compute_tasks() -> List[TaskInfo]:
                     nodes = result.stdout.strip().split('\n')
                 except (subprocess.CalledProcessError, FileNotFoundError,
                        subprocess.TimeoutExpired) as e:
-                    logger.warning(f"Could not parse SLURM nodelist: {e}")
+                    # logger.warning(f"Could not parse SLURM nodelist: {e}")
                     # Fallback: if single node, use current hostname; otherwise use generic names
                     if num_nodes == 1:
                         nodes = [current_hostname]
@@ -745,7 +796,7 @@ def _get_remote_cpu_usage(hostname: str, allocated_cpus: List[int], timeout: int
         )
 
         if result.returncode != 0:
-            logger.debug(f"SSH to {hostname} failed: {result.stderr}")
+            # logger.debug(f"SSH to {hostname} failed: {result.stderr}")
             return None, None
 
         # Parse JSON output
@@ -755,7 +806,7 @@ def _get_remote_cpu_usage(hostname: str, allocated_cpus: List[int], timeout: int
 
     except (subprocess.TimeoutExpired, subprocess.CalledProcessError,
             json.JSONDecodeError, Exception) as e:
-        logger.debug(f"Could not get remote CPU usage from {hostname}: {e}")
+        # logger.debug(f"Could not get remote CPU usage from {hostname}: {e}")
         return None, None
 
 
@@ -932,7 +983,7 @@ class CPUMonitor:
         remote_units = [u for u in self.units if not u.is_local]
 
         if not local_units:
-            logger.warning("Could not identify local unit")
+            # logger.warning("Could not identify local unit")
             return
 
         while self._monitoring:
@@ -989,7 +1040,7 @@ class CPUMonitor:
                             self._current_memory[unit.name] = 0.0
 
             except Exception as e:
-                logger.error(f"Error in monitoring loop: {e}")
+                # logger.error(f"Error in monitoring loop: {e}")
                 time.sleep(self.update_interval)
 
     def _create_terminal_display(self) -> Table:
@@ -1459,7 +1510,7 @@ class CPUMonitor:
     def start(self):
         """Start monitoring."""
         if self._monitoring:
-            logger.warning("Monitoring already started")
+            # logger.warning("Monitoring already started")
             return
 
         self._monitoring = True
@@ -1502,7 +1553,9 @@ class CPUMonitor:
                 initial_memory_mb = psutil.virtual_memory().used / (1024 ** 2)
                 self._current_memory[our_unit.name] = initial_memory_mb
         except Exception as e:
-            logger.debug(f"Could not get initial CPU sample: {e}")
+            # logger.debug(f"Could not get initial CPU sample: {e}")
+            print(f"Could not get initial CPU sample: {e}")
+            raise e
 
         # Start monitoring thread
         self._monitor_thread = threading.Thread(target=self._monitor_loop, daemon=True)
