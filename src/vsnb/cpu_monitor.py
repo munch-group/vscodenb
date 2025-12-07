@@ -887,6 +887,9 @@ class CPUMonitor:
     group_by : str, default="node"
         How to group CPU bars: "node" groups by physical node, "task" groups
         by SLURM task. For non-SLURM environments, both modes behave the same.
+    label : str, optional
+        Label to display at the top left of the widget. If None (default),
+        no label is displayed.
 
     Examples
     --------
@@ -904,6 +907,9 @@ class CPUMonitor:
 
     >>> with CPUMonitor(summary=True):
     ...     result = computation()  # Show table with CPU and memory stats
+
+    >>> with CPUMonitor(label="Training Epoch 1"):
+    ...     result = computation()  # Display with custom label
     """
 
     def __init__(
@@ -915,7 +921,8 @@ class CPUMonitor:
         color: bool = False,
         summary: bool = False,
         fold: int = 16,
-        group_by: str = "node"
+        group_by: str = "node",
+        label: Optional[str] = None
     ):
         self.width = width
         self.update_interval = update_interval
@@ -925,6 +932,7 @@ class CPUMonitor:
         self.summary = summary
         self.fold = fold
         self.group_by = group_by
+        self.label = label
 
         # Validate group_by parameter
         if group_by not in ("node", "task"):
@@ -1192,9 +1200,57 @@ class CPUMonitor:
                 bar.refresh()
                 self._tqdm_bars.append(bar)
 
+    def _format_cpu_time(self, seconds: float) -> str:
+        """
+        Format CPU time with automatic scaling to appropriate unit.
+        Returns string with at most 5 digits (including decimal point) and space before unit.
+
+        Examples: "1234.5 s", "123.45 ms", "0.0005 ms"
+        """
+        units = [
+            (1, 's'),           # seconds
+            (1e-3, 'ms'),       # milliseconds
+            (1e-6, 'μs'),       # microseconds
+            (1e-9, 'ns'),       # nanoseconds
+            (1e-12, 'ps'),      # picoseconds
+        ]
+
+        # Find appropriate unit
+        for scale, unit in units:
+            value = seconds / scale
+            if value >= 1.0 or unit == 'ps':  # Use this unit or last resort
+                # Format to fit in 5 characters including decimal point
+                if value >= 10000:
+                    formatted = f"{value:.0f}"
+                elif value >= 1000:
+                    formatted = f"{value:.1f}"
+                elif value >= 100:
+                    formatted = f"{value:.2f}"
+                elif value >= 10:
+                    formatted = f"{value:.3f}"
+                else:
+                    formatted = f"{value:.4f}"
+
+                # Trim to max 5 chars if needed
+                if len(formatted) > 5:
+                    formatted = formatted[:5].rstrip('.')
+
+                return f"{formatted} {unit}"
+
+        return f"{seconds:.4f} s"  # Fallback
+
     def _generate_html_table(self):
         """Generate HTML table with CPU statistics."""
-        html = '<div style="font-family: monospace; font-size: 10px; padding: 10px;">'
+        # Build container styles
+        container_styles = 'font-family: monospace; font-size: 10px; padding: 10px;'
+        if self.width is not None:
+            container_styles += f' max-width: {self.width}ch;'
+
+        html = f'<div style="{container_styles}">'
+
+        # Add label if specified
+        if self.label is not None:
+            html += f'<div style="margin-bottom: 8px; font-weight: bold; font-size: 12px;">{self.label}</div>'
 
         for unit_idx, unit in enumerate(self.units):
             stats = self._stats[unit.name]
@@ -1237,6 +1293,12 @@ class CPUMonitor:
             html += '</tr>'
 
             html += '</table>'
+
+            # Add total CPU time below the table
+            cpu_seconds = summary.get('cpu_seconds', 0.0)
+            formatted_time = self._format_cpu_time(cpu_seconds)
+            html += f'<div style="margin-top: 6px; font-size: 11px;">Total CPU time: <span style="font-weight: normal; color: #666;">{formatted_time}</span></div>'
+
             html += '</div>'  # Close unit container
 
         html += '</div>'
@@ -1279,7 +1341,16 @@ class CPUMonitor:
         if self.summary and summary_mode:
             return self._generate_html_table()
 
-        html = '<div style="font-family: monospace; font-size: 10px; padding: 10px;">'
+        # Build container styles
+        container_styles = 'font-family: monospace; font-size: 10px; padding: 10px;'
+        if self.width is not None:
+            container_styles += f' max-width: {self.width}ch;'
+
+        html = f'<div style="{container_styles}">'
+
+        # Add label if specified
+        if self.label is not None:
+            html += f'<div style="margin-bottom: 8px; font-weight: bold; font-size: 12px;">{self.label}</div>'
 
         for unit_idx, unit in enumerate(self.units):
             # Add separator between units (except before first)
@@ -1655,6 +1726,9 @@ def monitor(func: Callable = None, **monitor_kwargs):
     """
     Decorator for CPU monitoring.
 
+    By default, the function name is used as the label. You can override
+    this by passing label=None or label="custom label".
+
     Parameters
     ----------
     func : callable
@@ -1667,18 +1741,28 @@ def monitor(func: Callable = None, **monitor_kwargs):
     >>> @monitor
     >>> def my_function():
     ...     # computation
-    ...     pass
+    ...     pass  # Label will be "my_function"
 
     >>> @monitor(width=100, update_interval=1.0)
     >>> def my_function():
     ...     # computation
-    ...     pass
+    ...     pass  # Label will be "my_function"
+
+    >>> @monitor(label=None)
+    >>> def my_function():
+    ...     # computation
+    ...     pass  # No label
     """
     def decorator(f):
+        # Set label to function name if not explicitly provided
+        kwargs = monitor_kwargs.copy()
+        if 'label' not in kwargs:
+            kwargs['label'] = f.__name__
+
         @functools.wraps(f)
-        def wrapper(*args, **kwargs):
-            with CPUMonitor(**monitor_kwargs):
-                return f(*args, **kwargs)
+        def wrapper(*args, **kwargs_inner):
+            with CPUMonitor(**kwargs):
+                return f(*args, **kwargs_inner)
         return wrapper
 
     if func is None:
@@ -1719,6 +1803,8 @@ class CPUMonitorMagics(Magics):
                 help='Group CPU bars by "node" (default) or "task"')
     @argument('--per-node-layout', '-n', action='store_true',
                 help='Use per-node layout for CPU bars')
+    @argument('--label', '-l', type=str, default=None,
+                help='Label to display at top left of widget')
     def monitor(self, line, cell):
         """
         Monitor CPU usage during cell execution.
@@ -1741,12 +1827,15 @@ class CPUMonitorMagics(Magics):
 
             %%monitor --group-by task
             # group by SLURM task instead of node
+
+            %%monitor --label "Training Epoch 1"
+            # display with custom label
         """
         args = parse_argstring(self.monitor, line)
 
         monitor = CPUMonitor(width=args.width, update_interval=args.interval,
                         persist=args.persist, color=args.color, summary=args.summary,
-                        fold=args.fold, group_by=args.group_by)
+                        fold=args.fold, group_by=args.group_by, label=args.label)
 
         monitor.start()
         try:
