@@ -441,7 +441,7 @@ def detect_compute_nodes() -> List[NodeInfo]:
             )
             nodes = result.stdout.strip().split('\n')
         except Exception as e:
-            logger.warning(f"Could not parse nodelist: {e}")
+            # logger.warning(f"Could not parse nodelist: {e}")
             # Use current hostname
             nodes = [socket.gethostname().split('.')[0]]
 

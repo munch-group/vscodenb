@@ -24,7 +24,9 @@ import types
 import time
 from pathlib import Path
 from IPython.core.magic import Magics, magics_class, cell_magic
+from IPython.core.magic_arguments import argument, magic_arguments, parse_argstring
 from IPython.core.getipython import get_ipython
+from IPython.display import display, HTML
 import numpy as np
 import pandas as pd
 import shutil
@@ -208,100 +210,67 @@ if len(sys.argv) > 2:
 
 @magics_class
 class SlurmMagic(Magics):
+    """IPython magics for running code in SLURM jobs."""
 
     @cell_magic
+    @magic_arguments()
+    @argument('--no-imports', action='store_true',
+              help="Don't include previous imports")
+    @argument('--no-state', action='store_true',
+              help="Don't transfer global state (true isolation)")
+    @argument('--python', type=str, default=None,
+              help='Path to Python interpreter')
+    @argument('--timeout', type=float, default=None,
+              help='Timeout for job in seconds')
+    @argument('--show-script', action='store_true',
+              help='Print the generated script before running')
+    @argument('--show-state', action='store_true',
+              help='Show what variables are being transferred')
+    @argument('--mem', '-m', type=str, default=None,
+              help='Memory per CPU (SLURM)')
+    @argument('--cores', '-c', type=int, default=None,
+              help='CPUs per task (SLURM)')
+    @argument('--time', '-t', type=str, default=None,
+              help='Walltime limit (SLURM)')
+    @argument('--account', '-A', type=str, default=None,
+              help='Account to charge (SLURM)')
     def slurm(self, line, cell):
         """
         Run code in a SLURM job with optional state transfer.
 
         Usage:
-            %%slurm [options]
-            code...
+            %%slurm
+            # your code here
 
-        Options:
-            --no-imports : Don't include previous imports
-            --no-state : Don't transfer global state (true isolation)
-            --python PATH : Use specific Python interpreter
-            --timeout SECONDS : Set timeout for job
-            --show-script : Print the generated script before running
-            --show-state : Show what variables are being transferred
-            --mem VALUE : Memory per CPU (SLURM)
-            --cores VALUE : CPUs per task (SLURM)
-            --time VALUE : Walltime limit (SLURM)
-            --account VALUE : Account to charge (SLURM)
+            %%slurm --mem 4G --cores 4 --time 00:10:00
+            # your code here with SLURM resources
+
+            %%slurm --no-state
+            # run truly isolated without state transfer
         """
-        
-        # Parse arguments
-        args = line.strip().split() if line else []
-        no_imports = '--no-imports' in args
-        no_state = '--no-state' in args
-        show_script = '--show-script' in args
-        show_state = '--show-state' in args
-        timeout = None
-        python_path = sys.executable
-        
-        # Parse timeout
-        if '--timeout' in args:
-            idx = args.index('--timeout')
-            if idx + 1 < len(args):
-                try:
-                    timeout = float(args[idx + 1])
-                except ValueError:
-                    print(f"Warning: Invalid timeout value, using default: {timeout}")
-        
-        # Parse Python path
-        if '--python' in args:
-            idx = args.index('--python')
-            if idx + 1 < len(args):
-                python_path = args[idx + 1]
+        args = parse_argstring(self.slurm, line)
 
-        # slurm memory per cpu
-        mem = None
-        if '--mem' in args:
-            idx = args.index('--mem')
-            if idx + 1 < len(args):
-                mem = args[idx + 1]
-
-        # slurm nr cpus
-        cores = None
-        if '--cores' in args:
-            idx = args.index('--cores')
-            if idx + 1 < len(args):
-                cores = args[idx + 1]
-
-        walltime = None
-        if '--time' in args:
-            idx = args.index('--time')
-            if idx + 1 < len(args):
-                walltime = args[idx + 1]
-
-        account = None
-        if '--account' in args:
-            idx = args.index('--account')
-            if idx + 1 < len(args):
-                account = args[idx + 1]                
-
-        # Install dill if not available
-        import dill
+        python_path = args.python if args.python else sys.executable
 
         # Collect imports
         imports = []
-        if not no_imports:
+        if not args.no_imports:
             try:
                 imports = get_all_previous_imports(self.shell)
             except Exception:
                 pass
-        
+
         # Prepare state transfer
         state_file = None
         output_state_file = None
-        
-        if not no_state:
+        serializable = {}
+
+        if not args.no_state:
             # Get current globals
             user_globals = self.shell.user_ns
             serializable, failed = serialize_globals(user_globals)
-            
-            if show_state:
+
+            if args.show_state:
                 print("=" * 50)
                 print("Transferring variables:")
                 for key in sorted(serializable.keys()):
@@ -313,7 +282,7 @@ class SlurmMagic(Magics):
                         print(f"  {key}: {reason}")
                 print("=" * 50)
                 print()
-            
+
             # Create temporary files for state transfer
             # Use current directory (shared filesystem) instead of /tmp (local to node)
             with tempfile.NamedTemporaryFile(mode='wb', suffix='.pkl', delete=False, dir='.') as f:
@@ -322,24 +291,24 @@ class SlurmMagic(Magics):
 
             with tempfile.NamedTemporaryFile(mode='wb', suffix='.pkl', delete=False, dir='.') as f:
                 output_state_file = f.name
-        
-        # Create the script
-        script = create_subprocess_script(imports, cell, transfer_state=not no_state)
 
-        if show_script:
+        # Create the script
+        script = create_subprocess_script(imports, cell, transfer_state=not args.no_state)
+
+        if args.show_script:
             print("=" * 50)
             print("Generated script:")
             print("=" * 50)
             print(script)
             print("=" * 50)
             print()
-        
+
         # Write script to temporary file
         # Use current directory (shared filesystem) instead of /tmp (local to node)
         with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False, dir='.') as f:
             f.write(script)
             script_file = f.name
-        
+
         output_file = None
         try:
             # Create output file for stdout/stderr
@@ -348,30 +317,34 @@ class SlurmMagic(Magics):
 
             # Build sbatch command
             sbatch_cmd = ['sbatch', '--parsable']
-            if mem:
-                sbatch_cmd.append(f'--mem={mem}')
-            if cores:
-                sbatch_cmd.append(f'--cpus-per-task={cores}')
+            if args.mem:
+                sbatch_cmd.append(f'--mem={args.mem}')
+            if args.cores:
+                sbatch_cmd.append(f'--cpus-per-task={args.cores}')
             sbatch_cmd.append('--nodes=1')
-            if walltime:
-                sbatch_cmd.append(f'--time={walltime}')
-            if account:
-                sbatch_cmd.append(f'--account={account}')
+            if args.time:
+                sbatch_cmd.append(f'--time={args.time}')
+            if args.account:
+                sbatch_cmd.append(f'--account={args.account}')
             sbatch_cmd.extend([f'--output={output_file}', f'--error={output_file}'])
 
             # Build the command to run
             run_cmd = [python_path, script_file]
-            if not no_state:
+            if not args.no_state:
                 run_cmd.extend([state_file, output_state_file])
             sbatch_cmd.append('--wrap=' + ' '.join(run_cmd))
 
             # Submit the job
             result = subprocess.run(sbatch_cmd, capture_output=True, text=True)
             if result.returncode != 0:
-                print("Failed")
+                display(HTML(self._generate_status_html([('Failed', '#666666')])))
                 return
 
             job_id = result.stdout.strip()
+
+            # Initialize HTML status display
+            status_stages = []
+            status_display = display(HTML(self._generate_status_html(status_stages)), display_id=True)
 
             # Poll for job state
             poll_interval = 0.5
@@ -391,16 +364,18 @@ class SlurmMagic(Magics):
 
                     if state and state != prev_state:
                         if state == 'PENDING' and prev_state is None:
-                            print("Allocated...", end='', flush=True)
+                            status_stages.append(('Allocated...', '#666666'))
+                            status_display.update(HTML(self._generate_status_html(status_stages)))
                         elif state == 'RUNNING':
-                            print("Running...", end='', flush=True)
+                            status_stages.append(('Running...', '#666666'))
+                            status_display.update(HTML(self._generate_status_html(status_stages)))
                         prev_state = state
 
                     if state in ('COMPLETED', 'FAILED', 'CANCELLED', 'TIMEOUT', 'OUT_OF_MEMORY'):
                         final_state = state
                         break
 
-                    if timeout and (time.time() - start_time) > timeout:
+                    if args.timeout and (time.time() - start_time) > args.timeout:
                         # Cancel the job
                         subprocess.run(['scancel', job_id], capture_output=True)
                         final_state = 'TIMEOUT'
@@ -412,18 +387,10 @@ class SlurmMagic(Magics):
                 subprocess.run(['scancel', job_id], capture_output=True)
                 final_state = 'CANCELLED'
 
-            # Print output from job
-            if Path(output_file).exists():
-                with open(output_file, 'r') as f:
-                    output = f.read()
-                if output:
-                    print()
-                    print(output, end='')
-
             # Handle final state
             if final_state == 'COMPLETED':
                 # Load the updated state back into the notebook
-                if not no_state and output_state_file:
+                if not args.no_state and output_state_file:
                     try:
                         with open(output_state_file, 'rb') as f:
                             updated_state = dill.load(f)
@@ -435,20 +402,29 @@ class SlurmMagic(Magics):
                                 self.shell.user_ns[key] = value
                     except Exception:
                         pass
-                print("Completed")
+                status_stages.append(('Completed', '#666666'))
             elif final_state == 'TIMEOUT':
-                print("Timeout")
+                status_stages.append(('Timeout', '#666666'))
             elif final_state == 'CANCELLED':
-                print("Killed")
+                status_stages.append(('Killed', '#666666'))
             elif final_state == 'OUT_OF_MEMORY':
-                print("Out of Memory")
+                status_stages.append(('Out of Memory', '#666666'))
             else:
-                print("Failed")
+                status_stages.append(('Failed', '#666666'))
+
+            status_display.update(HTML(self._generate_status_html(status_stages)))
+
+            # Print output from job
+            if Path(output_file).exists():
+                with open(output_file, 'r') as f:
+                    output = f.read()
+                if output:
+                    print(output, end='')
 
         except KeyboardInterrupt:
-            print("Killed")
+            display(HTML(self._generate_status_html([('Killed', '#666666')])))
         except Exception:
-            print("Failed")
+            display(HTML(self._generate_status_html([('Failed', '#666666')])))
         finally:
             # Clean up temporary files
             for temp_file in [script_file, state_file, output_state_file, output_file]:
@@ -470,6 +446,20 @@ class SlurmMagic(Magics):
                 return val1 == val2
         except:
             return False
+
+    def _generate_status_html(self, stages):
+        """Generate HTML for status display.
+
+        Args:
+            stages: list of (status_text, color) tuples
+        """
+        # Color mapping for final states
+        spans = []
+        for text, color in stages:
+            spans.append(f'<span style="color: {color};">{text}</span>')
+
+        html = f'''<div style="font-family: monospace; font-size: 10px; padding: 4px;">{''.join(spans)}</div>'''
+        return html
 
 
 # def load_ipython_extension(ipython):
