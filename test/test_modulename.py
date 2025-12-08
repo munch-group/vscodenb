@@ -1,6 +1,6 @@
 import unittest
 
-from vsnb.modulename import functionname
+from vscodenb.modulename import functionname
 
 class TestModulename(unittest.TestCase):
 

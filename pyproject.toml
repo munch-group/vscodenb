@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "vsnb"
+name = "vscodenb"
 version = "0.1.6"
 description = "Utilities and styling for notebooks in vscode"
 authors = [
@@ -29,9 +29,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/munch-group/vsnb"
-Repository = "https://github.com/munch-group/vsnb"
-Documentation = "https://munch-group.org/vsnb"
+Homepage = "https://github.com/munch-group/vscodenb"
+Repository = "https://github.com/munch-group/vscodenb"
+Documentation = "https://munch-group.org/vscodenb"
 
 [tool.setuptools]
 include-package-data = true
@@ -41,7 +41,7 @@ where = ["src"]
 exclude = ["test*"]
 
 [tool.setuptools.package-data]
-vsnb = ["data/*.txt", "data/*.csv", "data/*.pickle", "data/*.h5"]
+vscodenb = ["data/*.txt", "data/*.csv", "data/*.pickle", "data/*.h5"]
 
 [tool.pixi.workspace]
 channels = ["conda-forge", "munch-group"]

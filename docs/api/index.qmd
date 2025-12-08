@@ -7,7 +7,7 @@ Some description...
 
 | | |
 | --- | --- |
-| [functionname](functionname.qmd#vsnb.modulename.functionname) | The sum of two numbers. |
+| [functionname](functionname.qmd#vscodenb.modulename.functionname) | The sum of two numbers. |
 
 ## Some other section
 
@@ -16,4 +16,4 @@ Some description...
 
 | | |
 | --- | --- |
-| [scriptname](scriptname.qmd#vsnb.modulename.scriptname) |  |
+| [scriptname](scriptname.qmd#vscodenb.modulename.scriptname) |  |

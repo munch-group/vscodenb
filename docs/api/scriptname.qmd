@@ -1,6 +1,6 @@
-# scriptname { #vsnb.modulename.scriptname }
+# scriptname { #vscodenb.modulename.scriptname }
 
 ```python
-vsnb.modulename.scriptname()
+vscodenb.modulename.scriptname()
 ```
 

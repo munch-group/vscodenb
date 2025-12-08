@@ -37,7 +37,7 @@ interlinks:
     #   inv: objects-test.txt
 
 website:
-  title: "vsnb"
+  title: "vscodenb"
   page-navigation: true
   navbar:
     left:
@@ -47,7 +47,7 @@ website:
       #   text: Gallery
     right:
       - icon: github
-        href: https://github.com/munch-group/vsnb/
+        href: https://github.com/munch-group/vscodenb/
   sidebar:
     - id: pages
       title: Get Started
@@ -76,7 +76,7 @@ format:
       theme: neutral 
 
 quartodoc:
-  package: vsnb
+  package: vscodenb
   style: pkgdown
   dir: api
   render_interlinks: true
@@ -90,13 +90,13 @@ quartodoc:
 
   sections:
     - title: Some section
-      package: vsnb.modulename
+      package: vscodenb.modulename
       desc: |
         Some description...
       contents:
         - functionname
     - title: Some other section
-      package: vsnb.modulename
+      package: vscodenb.modulename
       desc: |
         Some description...
       contents:

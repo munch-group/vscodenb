@@ -1,18 +1,18 @@
 {% set pyproject = load_file_data("../pyproject.toml", from_recipe_dir=True) %}
 
 package:
-  name: vsnb
+  name: vscodenb
   version: {{ pyproject.get("project").get("version") }}
 
 source:
-  git_url: https://github.com/munch-group/vsnb.git
+  git_url: https://github.com/munch-group/vscodenb.git
 
 build:
   number: 0
   script: $PYTHON -m pip install . -vv
   python_version_independent: true
   entry_points:
-    - vsnb = vsnb:vsnb
+    - vscodenb = vscodenb:vscodenb
 
 requirements:
   host:
@@ -36,10 +36,10 @@ dependencies:   # keep this block with only these packages
 
 test:
   imports:
-    - vsnb
+    - vscodenb
 
 about:
-  home: https://github.com/munch-group/vsnb.git
+  home: https://github.com/munch-group/vscodenb.git
   license: MIT
-  dev_url: https://github.com/munch-group/vsnb.git
-  doc_url: https://munch-group.org/vsnb
+  dev_url: https://github.com/munch-group/vscodenb.git
+  doc_url: https://munch-group.org/vscodenb

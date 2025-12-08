@@ -1,6 +1,6 @@
 # Sphinx inventory version 2
-# Project: vsnb
+# Project: vscodenb
 # Version: 0.0.9999
 # The remainder of this file is compressed using zlib.
-vsnb.modulename.functionname py:function 1 api/functionname.html#vsnb.modulename.functionname -
-vsnb.modulename.scriptname py:function 1 api/scriptname.html#vsnb.modulename.scriptname -
+vscodenb.modulename.functionname py:function 1 api/functionname.html#vscodenb.modulename.functionname -
+vscodenb.modulename.scriptname py:function 1 api/scriptname.html#vscodenb.modulename.scriptname -
