@@ -250,6 +250,10 @@ class SlurmMagic(Magics):
         """
         args = parse_argstring(self.slurm, line)
 
+        if not shutil.which("sbatch"):
+            print("Not running on SLURM cluster.", file=sys.stderr)
+            return
+
         python_path = args.python if args.python else sys.executable
 
         # Collect imports

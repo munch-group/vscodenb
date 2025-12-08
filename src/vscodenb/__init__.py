@@ -19,7 +19,7 @@ try:
     ipython = get_ipython()
     if ipython is not None and CPUMonitorMagics is not None:
         ipython.register_magics(CPUMonitorMagics)
-    if ipython is not None and SlurmMagic is not None and shutil.which("sbatch"):
+    if ipython is not None and SlurmMagic is not None:
         ipython.register_magics(SlurmMagic)
 except (ImportError, NameError):
     print("IPython not available, skipping magic registration.", file=sys.stderr)
