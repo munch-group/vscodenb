@@ -39,42 +39,69 @@ jobs:
         path: dist/*.tar.gz
 
   build-wheels:
-    name: Build wheels on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-14, windows-latest]
+    name: Build universal wheel
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
       with:
         persist-credentials: false
 
-    # Set up QEMU for ARM64 Linux builds
-    - name: Set up QEMU
-      if: runner.os == 'Linux'
-      uses: docker/setup-qemu-action@v3
+    - name: Set up Python
+      uses: actions/setup-python@v5
       with:
-        platforms: arm64
+        python-version: "3.x"
 
-    - name: Build wheels
-      uses: pypa/cibuildwheel@v2.22
-      env:
-        CIBW_BUILD: cp39-* cp310-* cp311-* cp312-* cp313-*
-        # Skip musllinux (not commonly needed) and 32-bit builds
-        CIBW_SKIP: "*-musllinux_* *-win32 *-manylinux_i686"
-        # Build ARM64 wheels on Linux using QEMU
-        CIBW_ARCHS_LINUX: x86_64 aarch64
-        # macOS: macos-13 builds x86_64 ONLY, macos-14 builds arm64 ONLY
-        CIBW_ARCHS_MACOS: ${{ matrix.os == 'macos-14' && 'arm64' || 'x86_64' }}
-        # Windows: only x86_64 (most common)
-        CIBW_ARCHS_WINDOWS: AMD64
+    - name: Install build
+      run: python3 -m pip install build
 
-    - name: Store the wheels
+    - name: Build wheel
+      run: python3 -m build --wheel
+
+    - name: Store the wheel
       uses: actions/upload-artifact@v4
       with:
-        name: python-wheels-${{ matrix.os }}
-        path: wheelhouse/*.whl
+        name: python-wheels
+        path: dist/*.whl
+
+  # Uncomment this job if you add compiled extensions to your package
+  # build-wheels-multiplatform:
+  #   name: Build wheels on ${{ matrix.os }}
+  #   runs-on: ${{ matrix.os }}
+  #   strategy:
+  #     matrix:
+  #       os: [ubuntu-latest, macos-14, windows-latest]
+  #
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #     with:
+  #       persist-credentials: false
+  #
+  #   # Set up QEMU for ARM64 Linux builds
+  #   - name: Set up QEMU
+  #     if: runner.os == 'Linux'
+  #     uses: docker/setup-qemu-action@v3
+  #     with:
+  #       platforms: arm64
+  #
+  #   - name: Build wheels
+  #     uses: pypa/cibuildwheel@v2.22
+  #     env:
+  #       CIBW_BUILD: cp39-* cp310-* cp311-* cp312-* cp313-*
+  #       # Skip musllinux (not commonly needed) and 32-bit builds
+  #       CIBW_SKIP: "*-musllinux_* *-win32 *-manylinux_i686"
+  #       # Build ARM64 wheels on Linux using QEMU
+  #       CIBW_ARCHS_LINUX: x86_64 aarch64
+  #       # macOS: macos-13 builds x86_64 ONLY, macos-14 builds arm64 ONLY
+  #       CIBW_ARCHS_MACOS: ${{ matrix.os == 'macos-14' && 'arm64' || 'x86_64' }}
+  #       # Windows: only x86_64 (most common)
+  #       CIBW_ARCHS_WINDOWS: AMD64
+  #
+  #   - name: Store the wheels
+  #     uses: actions/upload-artifact@v4
+  #     with:
+  #       name: python-wheels-${{ matrix.os }}
+  #       path: wheelhouse/*.whl
         
         
   publish-to-pypi:
