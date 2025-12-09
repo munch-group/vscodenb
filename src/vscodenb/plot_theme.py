@@ -68,7 +68,17 @@ def hsl_to_rgb(h, s, l):
 
     return r, g, b
 
+class suppress_plotting_output:
+    def __init__(self):
+        pass
 
+    def __enter__(self):
+        plt.ioff()
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        plt.ion()
+
+    
 def get_vscode_settings_path() -> Path:
     """Get the path to VS Code's user settings.json based on the OS."""
     system = platform.system()
@@ -81,31 +91,56 @@ def get_vscode_settings_path() -> Path:
         return Path.home() / ".config" / "Code" / "User" / "settings.json"
 
 
-def get_vscode_theme() -> str | None:
+def get_vscode_theme_from_config() -> str | None:
     """Parse VS Code settings and return the workbench.colorTheme value."""
     settings_path = get_vscode_settings_path()
     
-    if not settings_path.exists():
-        print(f"Settings file not found at: {settings_path}")
+    if settings_path.exists():
+
+        with open(settings_path, "r", encoding="utf-8") as f:
+            content = f.read()
+        
+        # Remove single-line comments (// ...) and multi-line comments (/* ... */)
+        # This handles JSONC (JSON with Comments)
+        import re
+        content = re.sub(r'//.*?$', '', content, flags=re.MULTILINE)
+        content = re.sub(r'/\*.*?\*/', '', content, flags=re.DOTALL)
+        
+        settings = json.loads(content)
+        return settings.get("workbench.colorTheme", "Default Dark Modern")
+    else:
+        # print(f"No settings file not found at: {settings_path}")
         return None
-    
-    with open(settings_path, "r", encoding="utf-8") as f:
-        content = f.read()
-    
-    # Remove single-line comments (// ...) and multi-line comments (/* ... */)
-    # This handles JSONC (JSON with Comments)
-    import re
-    content = re.sub(r'//.*?$', '', content, flags=re.MULTILINE)
-    content = re.sub(r'/\*.*?\*/', '', content, flags=re.DOTALL)
-    
-    settings = json.loads(content)
-    return settings.get("workbench.colorTheme", "Default Dark Modern")
 
 
-def is_vscode_dark_theme() -> bool:
+def is_vscode_dark_theme(mode=None) -> bool:
     """Determine if a given VS Code theme name is dark or light."""
-    theme = get_vscode_theme()
-    return theme is None or 'dark' in theme.lower() # default to dark when failing on slurm
+
+    is_dark = None
+
+    env_theme = os.environ.get('NOTEBOOK_THEME', None)
+    if env_theme is not None:
+        print("Overriding theme from NOTEBOOK_THEME environment variable.", sys.stderr)
+        return 'dark' in env_theme.lower()
+
+    if mode is not None:
+        is_dark = 'dark' in mode.lower()
+    else:
+        theme = get_vscode_theme_from_config()
+        if theme is not None:
+            is_dark = 'dark' in theme.lower()
+
+    if is_dark is None:
+        with suppress_plotting_output():
+            # make a plot to check background color
+            fig, ax = plt.subplots()
+            bg_color = ax.get_facecolor()
+            plt.close(fig)
+            luminance = matplotlib.colors.rgb_to_hsv(matplotlib.colors.to_rgb(bg_color))[2]
+            print(luminance)
+            is_dark = luminance < 0.5
+
+    return is_dark
 
 
 def lighten_colors(colors, factor=0.0, n_colors=None, as_cmap=None, target_lightness=None):
@@ -202,19 +237,8 @@ def lighten_colors(colors, factor=0.0, n_colors=None, as_cmap=None, target_light
     
     return lightened
 
-class suppress_plotting_output:
-    def __init__(self):
-        pass
 
-    def __enter__(self):
-        plt.ioff()
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        plt.ion()
-
-    
-
-def set_vscode_theme(dark=None, cmap=None, figsize=(5, 3.7), font_scale=1.0):
+def set_vscode_theme(mode=None, cmap=None, figsize=(5, 3.7), font_scale=1.0):
     """
     Set the default theme for the graph plotter.
     The theme can be either 'dark' or 'light'. The default theme is autodetected.
@@ -222,14 +246,19 @@ def set_vscode_theme(dark=None, cmap=None, figsize=(5, 3.7), font_scale=1.0):
 
     Parameters
     ----------
-    theme : 
-        _description_
+    mode : str, optional
+        'dark' or 'light' to force a specific theme. If None, autodetected.
+    cmap : Colormap, optional
+        Matplotlib colormap to use for plots.
+    figsize : tuple, optional
+        Default figure size.
+    font_scale : float, optional
+        Scale factor for fonts.
     """
 
-    if dark not in [None, True, False]:
-        raise ValueError("dark parameter must be None, True, or False.")
-
     with suppress_plotting_output():
+
+        is_dark = is_vscode_dark_theme(mode=mode)
 
         set_matplotlib_formats('retina', 'png')
 
@@ -243,20 +272,12 @@ def set_vscode_theme(dark=None, cmap=None, figsize=(5, 3.7), font_scale=1.0):
         # dark_cmap = lighten_colors(cmap, factor=0, as_cmap=True)
         # light_cmap = lighten_colors(cmap, factor=0, as_cmap=True)
 
-        if dark is None:
-            dark = is_vscode_dark_theme()
-
-        env_theme = os.environ.get('NOTEBOOK_THEME', None)
-        if env_theme is not None:
-            dark = env_theme.lower() == 'dark'
-            print("Overriding theme from NOTEBOOK_THEME environment variable.", sys.stderr)
-
-        if dark:
+        if is_dark:
             plt.style.use('dark_background')
         else:
             plt.style.use('default')
 
-        if dark:
+        if is_dark:
             plt.rcParams.update({
                 'figure.facecolor': '#1F1F1F', 
                 'axes.facecolor': '#1F1F1F',
@@ -271,7 +292,7 @@ def set_vscode_theme(dark=None, cmap=None, figsize=(5, 3.7), font_scale=1.0):
                 'axes.facecolor': 'white',
                 'grid.color': '#000000',
                 'grid.linewidth': 0.4,
-                'grid.alpha': 0.7,            
+                'grid.alpha': 0.3,            
                 })
             # plt.set_cmap(cmap if cmap else light_cmap)
 
@@ -319,14 +340,14 @@ def black_white(ax):
     return 'black' if luminance > 0.5 else '#FDFDFD'
 
 class vscode_theme:
-    def __init__(self, dark: bool | None = None, **theme_kwargs):
-        self.dark = dark if dark is not None else is_vscode_dark_theme()    
+    def __init__(self, mode=None, **theme_kwargs):
+        self.mode = mode
         self.theme_kwargs = theme_kwargs
         self.orig_rcParams = matplotlib.rcParams.copy()
         self.orig_cmap = matplotlib.pyplot.get_cmap()
         
     def __enter__(self):
-        set_vscode_theme(self.dark, **self.theme_kwargs)
+        set_vscode_theme(mode=self.mode, **self.theme_kwargs)
 
     def __exit__(self, exc_type, exc_value, traceback):
         matplotlib.rcParams.update(self.orig_rcParams)
