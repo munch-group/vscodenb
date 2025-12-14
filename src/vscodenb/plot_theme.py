@@ -333,10 +333,15 @@ def set_vscode_theme(mode=None, style='grid', frame=False, cmap=None, figsize=(5
         .cell-output-ipywidget-background {
             background-color: transparent !important;
         }
+       .jp-OutputArea-output {
+           background-color: transparent;
+        }  
+        /*
         :root {
             --jp-widgets-color: var(--vscode-editor-foreground);
             --jp-widgets-font-size: var(--vscode-editor-font-size);
         }  
+        */
         </style>                          
         """))
 
