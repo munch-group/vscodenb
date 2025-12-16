@@ -366,7 +366,7 @@ def set_vscode_theme(mode=None, style='grid', frame=False, cmap=None, figsize=(5
             min-height: 5px !important;
             margin-top: 12px !important;    
         }
-        div.progress-bar { /* Inner bar */
+        div.progress-bar { /* inner bar */
             height: 5px !important;
             min-height: 5px !important;
             line-height: 5px !important;
