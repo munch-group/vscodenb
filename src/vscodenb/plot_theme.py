@@ -343,7 +343,6 @@ def set_vscode_theme(mode=None, style='grid', frame=False, cmap=None, figsize=(5
             --jp-widgets-font-size: var(--vscode-editor-font-size);
         }  
         */
-
         /* tqdm styling: */
         .widget-label,
         .widget-html,
