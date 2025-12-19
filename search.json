@@ -119,7 +119,7 @@
     "href": "pages/overview.html#installation",
     "title": "Overview",
     "section": "Installation",
-    "text": "Installation\n\nPixicondaPip\n\n\npixi workspace channel add munch-group\npixi add vscodenb\n\n\nconda install -c munch-group vscodenb\n\n\npip install vscodenb\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nTo enable automatic theme detection, you must add the following setting to your vscode settings.json:\n\"jupyter.themeMatplotlibPlots\": true,\nYou can open settings.json from the command palette (Cmd-Shift-p) by typing “user settings” and select “Preferences: Open User Settings (JSON)”.\n\n\n\nfrom numpy.random import random\nimport matplotlib.pyplot as plt\nimport time\n\n\nplt.rcParams['figure.figsize'] = (5, 3.7)",
+    "text": "Installation\n\npixicondapip\n\n\npixi workspace channel add munch-group\npixi add vscodenb\n\n\nconda install -c munch-group vscodenb\n\n\npip install vscodenb\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nTo enable automatic theme detection, you must add the following setting to your vscode settings.json:\n\"jupyter.themeMatplotlibPlots\": true,\nYou can open settings.json from the command palette (Cmd-Shift-p) by typing “user settings” and select “Preferences: Open User Settings (JSON)”.\n\n\n\nfrom numpy.random import random\nimport matplotlib.pyplot as plt\nimport time\n\n\nplt.rcParams['figure.figsize'] = (5, 3.7)",
     "crumbs": [
       "Overview"
     ]
@@ -159,7 +159,7 @@
     "href": "pages/overview.html#slurm-cell-magic",
     "title": "Overview",
     "section": "SLURM cell magic",
-    "text": "SLURM cell magic\nRun a single cell as a SLURM job:\n\n%%slurm\n\ns = \"Variable values updated in the slurm job are automatically transferred back to the notebook!\"\n\nNot running on SLURM cluster.\n\n\n\nprint(f\"It works: {s}\")\n\nIt works: Variable values updated in the slurm job are automatically transferred back to the notebook!\n\n\nSee a full demo at here.",
+    "text": "SLURM cell magic\nRun a single cell as a SLURM job:\n\n%%slurm\n\ns = \"Variable values updated in the slurm job are automatically transferred back to the notebook!\"\n\nUnable to display output for mime type(s): application/vnd.code.notebook.stderr\n\n\n\nprint(f\"It works: {s}\")\n\nIt works: Variable values updated in the slurm job are automatically transferred back to the notebook!\n\n\nSee a full demo at here.",
     "crumbs": [
       "Overview"
     ]
