@@ -63,6 +63,7 @@ tqdm = ">=4.67.1,<5"
 multiprocess = ">=0.70.18,<0.71"
 nbconvert = ">=7.16.6,<8"
 jupyter = ">=1.1.1,<2"
+pytest = ">=9.0.2,<10"
 
 # [tool.pixi.pypi-dependencies]
 # Optional PyPI dependencies can be added here
@@ -92,53 +93,39 @@ seaborn = "*"
 pytables = "*"
 pip = "*"
 
+[tool.pixi.tasks.init]
+cmd = "python ./scripts/rename.py && gh repo set-default https://github.com/munch-group/{{new_name}}"
+
 [tool.pixi.tasks.install-dev]
 cmd = "pip install -e ."
 # cmd = "pip install --no-build-isolation --no-deps --disable-pip-version-check -e ."
 description = "Install the package in development mode"
 
 [tool.pixi.tasks.docs]
-cmd = "./scripts/docs-run-notebooks.sh && ./scripts/docs-build-render.sh"
-description = "Run documentation notebooks and build quartodoc api docs"
+depends-on = ["install-dev"]
+cmd = "./scripts/docs-run-notebooks.sh && ./scripts/docs-build-render.sh && git add -u docs"
+description = "Run documentation notebooks and build quartodoc api doc pages"
 
 [tool.pixi.tasks.clean]
 cmd = "git clean -id"
 description = "Removes untracked files and directories but respects your .gitignores"
 
-[tool.pixi.tasks.add-commit-push]
-cmd = "git add -u && git commit && git push"
-description = "Release latest version on Github"
-
-[tool.pixi.tasks._add-commit]
-cmd = "git add -u && git commit"
-
 [tool.pixi.tasks.test]
-cmd = "python -m unittest"
+depends-on = ["install-dev"]
+cmd = "pytest test/"
 description = "Run tests"
 
-# [tool.pixi.tasks.bump-changelog]
-# cmd = "./scripts/bump_changelog.py --yes"
-# description = "Bump version patch and build/release conda packages"
+[tool.pixi.tasks.commit]
+depends-on = ["docs", "test"]
+cmd = "./scripts/git-commit.sh"
 
-[tool.pixi.tasks.bump-version]
+[tool.pixi.tasks.version]
 args = [
   { "arg" = "kind", "default" = "patch" },  # can be patch, minor, major
   { "arg" = "flag", "default" = "" },     # can be --pre, --release
 ]
-cmd = "./scripts/bump_version.py --{{ kind }} {{ flag }} &&  git add -u &&  git commit -m '{{ kind }} {{ flag }} version bump' && git push" 
-depends-on = ["_add-commit"]
-description = "Bump version patch and build/release conda packages"
+cmd = "./scripts/bump_version.py --{{ kind }} {{ flag }} && git commit -m '{{ kind }} {{ flag }} version bump' && git push && ./scripts/github-release.sh && echo 'Update released!'"
+depends-on = ["commit"]
+description = "Bump version patch and push tag to build/upload conda/pypi packages"
 
-[tool.pixi.tasks.github-release]
-cmd = "./scripts/github-release.sh"
-depends-on = ["bump-version"]
-description = "Release latest version on Github"
 
-[tool.pixi.tasks.submit-patch]
-cmd = "echo 'Update released!'"
-depends-on = ["github-release"]
-description = "Push committed patch make new release of package"
-
-[tool.pixi.tasks.acpr]
-depends-on = ["submit-patch"]
-description = "Alias for submit-patch"

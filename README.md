@@ -7,7 +7,7 @@
 
 - In the link above, replace `libraryname` with your library's name.
 - Rename the `libraryname` folder to the name of your library, do *not* use hyphens, '-', in the name. 
-- Replace all instances of `libraryname`, `modulename`, and `functionname` for the names of/in your library (`Shift-Cmd-F` in VScode). 
+- Replace all instances of `libraryname`, `vscodenb`, and `functionname` for the names of/in your library (`Shift-Cmd-F` in VScode). 
 
 ![example event parameter](https://github.com/munch-group/libraryname/actions/workflows/quarto-publish.yml/badge.svg?event=push)
 
@@ -28,7 +28,7 @@ The only version you need to change is the one in `setup.cfg`.
 
 ## Unit tests
 
-Test are put in `test/test_modulename.py`. Run these and all other `test_*` files you create by running `./scripts/test.sh`.
+Test are put in `test/test_vscodenb.py`. Run these and all other `test_*` files you create by running `./scripts/test.sh`.
 
 ## Creating docs
 

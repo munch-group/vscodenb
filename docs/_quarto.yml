@@ -88,16 +88,16 @@ quartodoc:
   sidebar: "api/_sidebar.yml"
   css: "api/_styles-quartodoc.css"
 
-  sections:
-    - title: Some section
-      package: vscodenb.modulename
-      desc: |
-        Some description...
-      contents:
-        - functionname
-    - title: Some other section
-      package: vscodenb.modulename
-      desc: |
-        Some description...
-      contents:
-        - scriptname
+  # sections:
+  #   - title: Some section
+  #     package: vscodenb.modulename
+  #     desc: |
+  #       Some description...
+  #     contents:
+  #       - functionname
+  #   - title: Some other section
+  #     package: vscodenb.modulename
+  #     desc: |
+  #       Some description...
+  #     contents:
+  #       - scriptname

@@ -159,11 +159,11 @@ class HTMLProgressBar:
 
         # Build HTML (matching cpu_monitor.py style at lines 1203, 1327-1329)
         html = f'''
-        <div style="font-family: monospace; font-size: 10px; padding: 0px 10px;">
-            <div style="margin-bottom: 6px;">
+        <div style="font-family: monospace; font-size: 10px; padding: 0px 10px; display: flex; align-items: center; gap: 10px;">
+            <div style="width: 35ch; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                 {self.desc} {percentage:.0f}% | {progress_text} | {remaining_str}
             </div>
-            <div style="width: 100%; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;">
+            <div style="flex: 1; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;">
                 <div style="width: {percentage}%; height: 100%; background: {bar_color}; transition: width 0.3s;"></div>
             </div>
         </div>
