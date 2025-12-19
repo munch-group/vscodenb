@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>index – vscodenb</title>
+<title>tqdm like progress bars – vscodenb</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,10 +20,45 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -68,6 +103,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="api/_styles-quartodoc.css">
@@ -113,92 +151,87 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#function-reference" id="toc-function-reference" class="nav-link active" data-scroll-target="#function-reference">Function reference</a>
-  <ul class="collapse">
-  <li><a href="#vscodenb" id="toc-vscodenb" class="nav-link" data-scroll-target="#vscodenb">vscodenb</a></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">tqdm like progress bars</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="function-reference" class="level1 doc doc-index">
-<h1 class="doc doc-index">Function reference</h1>
-<section id="vscodenb" class="level2">
-<h2 class="anchored" data-anchor-id="vscodenb">vscodenb</h2>
-<table class="caption-top table">
-<tbody>
-<tr class="odd">
-<td><a href="set_vscode_theme.qmd#vscodenb.set_vscode_theme">set_vscode_theme</a></td>
-<td>Set the default theme for the graph plotter.</td>
-</tr>
-<tr class="even">
-<td><a href="vscode_theme.qmd#vscodenb.vscode_theme">vscode_theme</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="pqdm.qmd#vscodenb.pqdm">pqdm</a></td>
-<td>HTML progress bar for notebooks, tqdm for terminal.</td>
-</tr>
-<tr class="even">
-<td><a href="prange.qmd#vscodenb.prange">prange</a></td>
-<td>HTML progress bar for range() in notebooks, tqdm for terminal.</td>
-</tr>
-<tr class="odd">
-<td><a href="CPUMonitor.qmd#vscodenb.CPUMonitor">CPUMonitor</a></td>
-<td>Live CPU monitoring with adaptive display.</td>
-</tr>
-<tr class="even">
-<td><a href="monitor.qmd#vscodenb.monitor">monitor</a></td>
-<td>Decorator for CPU monitoring.</td>
-</tr>
-<tr class="odd">
-<td><a href="CPUMonitorMagics.qmd#vscodenb.CPUMonitorMagics">CPUMonitorMagics</a></td>
-<td>IPython magics for CPU monitoring.</td>
-</tr>
-<tr class="even">
-<td><a href="detect_compute_nodes.qmd#vscodenb.detect_compute_nodes">detect_compute_nodes</a></td>
-<td>Detect compute nodes and allocated CPUs.</td>
-</tr>
-<tr class="odd">
-<td><a href="get_cached_nodes.qmd#vscodenb.get_cached_nodes">get_cached_nodes</a></td>
-<td>Get cached compute nodes, detecting them if not already cached.</td>
-</tr>
-<tr class="even">
-<td><a href="SlurmMagic.qmd#vscodenb.SlurmMagic">SlurmMagic</a></td>
-<td>IPython magics for running code in SLURM jobs.</td>
-</tr>
-<tr class="odd">
-<td><a href="truncate_colormap.qmd#vscodenb.truncate_colormap">truncate_colormap</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="Left.qmd#vscodenb.Left">Left</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="ipython.qmd#vscodenb.ipython">ipython</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="html_style.qmd#vscodenb.html_style">html_style</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+    
+  
+    
+  </div>
+  
 
 
-</section>
-</section>
+</header>
+
+
+<div id="bd23d9d5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2025-12-19T10:43:08.037908Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-12-19T10:43:08.037807Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-12-19T10:43:09.354147Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-12-19T10:43:09.353499Z&quot;}}" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> vscodenb <span class="co"># importing automatically registers the ipython magic</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> vscodenb <span class="im">import</span> pqdm, prange</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+
+<style>
+.widget-label,
+.widget-html,
+.widget-button,
+.widget-dropdown,
+.widget-text,
+.widget-textarea {
+    color: #CCCCCC !important;  /* Set to desired color */
+    font-size: 10px !important;      /* Font size */
+
+}
+div.widget-html-content > progress { /* Outer container */
+    height: 10px !important;
+
+}
+div.jp-OutputArea-output td.output_html { /* tqdm HTML output area */
+    height: 5px !important;
+}
+div.progress { /* Jupyter Notebook (classic) */
+    height: 5px !important;
+    min-height: 5px !important;
+    margin-top: 12px !important;    
+}
+div.progress-bar { /* Inner bar */
+    height: 5px !important;
+    min-height: 5px !important;
+    line-height: 5px !important;
+    color: 'white' !important;
+    padding-bottom: 0px !important;    
+}
+</style>
+</div>
+</div>
+<div id="6787815d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2025-12-19T10:43:09.355862Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-12-19T10:43:09.355656Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-12-19T10:43:10.424923Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-12-19T10:43:10.423376Z&quot;}}" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> prange(<span class="dv">10</span>):</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="fl">0.1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="4462830a" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2025-12-19T10:43:10.427887Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-12-19T10:43:10.427604Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-12-19T10:43:11.493557Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-12-19T10:43:11.492131Z&quot;}}" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>elememnts <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> pqdm(elememnts):</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="fl">0.1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="893a6b09" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2025-12-19T10:43:11.495911Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-12-19T10:43:11.495786Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-12-19T10:43:12.469557Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-12-19T10:43:12.468381Z&quot;}}" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> prange(<span class="dv">3</span>):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> prange(<span class="dv">3</span>):</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        time.sleep(<span class="fl">0.1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

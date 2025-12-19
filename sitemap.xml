@@ -1,23 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://munch-group.github.io/vsnb/pages/example.html</loc>
-    <lastmod>2025-12-06T13:07:23.640Z</lastmod>
+    <loc>https://munch-group.github.io/vscodenb/pages/cpu_monitoring.html</loc>
+    <lastmod>2025-12-19T14:05:41.874Z</lastmod>
   </url>
   <url>
-    <loc>https://munch-group.github.io/vsnb/api/scriptname.html</loc>
-    <lastmod>2025-12-06T13:07:23.639Z</lastmod>
+    <loc>https://munch-group.github.io/vscodenb/pages/plot_theme.html</loc>
+    <lastmod>2025-12-19T14:05:41.876Z</lastmod>
   </url>
   <url>
-    <loc>https://munch-group.github.io/vsnb/api/functionname.html</loc>
-    <lastmod>2025-12-06T13:07:23.638Z</lastmod>
+    <loc>https://munch-group.github.io/vscodenb/pages/progress.html</loc>
+    <lastmod>2025-12-19T14:05:41.877Z</lastmod>
   </url>
   <url>
-    <loc>https://munch-group.github.io/vsnb/api/index.html</loc>
-    <lastmod>2025-12-06T13:07:23.639Z</lastmod>
+    <loc>https://munch-group.github.io/vscodenb/api/scriptname.html</loc>
+    <lastmod>2025-12-19T14:05:41.870Z</lastmod>
   </url>
   <url>
-    <loc>https://munch-group.github.io/vsnb/pages/overview.html</loc>
-    <lastmod>2025-12-06T13:07:23.641Z</lastmod>
+    <loc>https://munch-group.github.io/vscodenb/api/index.html</loc>
+    <lastmod>2025-12-19T14:05:41.870Z</lastmod>
+  </url>
+  <url>
+    <loc>https://munch-group.github.io/vscodenb/api/functionname.html</loc>
+    <lastmod>2025-12-19T14:05:41.870Z</lastmod>
+  </url>
+  <url>
+    <loc>https://munch-group.github.io/vscodenb/pages/slurm_magic.html</loc>
+    <lastmod>2025-12-19T14:05:41.877Z</lastmod>
+  </url>
+  <url>
+    <loc>https://munch-group.github.io/vscodenb/pages/overview.html</loc>
+    <lastmod>2025-12-19T14:05:41.875Z</lastmod>
   </url>
 </urlset>
