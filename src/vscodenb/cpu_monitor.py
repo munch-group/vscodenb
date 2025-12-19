@@ -730,14 +730,19 @@ def detect_compute_tasks() -> List[TaskInfo]:
 
 
 def is_jupyter() -> bool:
-    """Check if running in Jupyter notebook."""
+    """Check if running in Jupyter notebook or nbconvert execution."""
     try:
         from IPython import get_ipython
         shell = get_ipython()
         if shell is None:
             return False
         shell_type = str(type(shell))
-        return 'ZMQInteractiveShell' in shell_type
+        # Terminal IPython should not be treated as Jupyter
+        if 'TerminalInteractiveShell' in shell_type:
+            return False
+        # ZMQInteractiveShell = Jupyter notebook/lab, VSCode notebooks
+        # Other non-terminal shells (like nbconvert's kernel) also support HTML display
+        return True
     except (ImportError, NameError):
         return False
 
@@ -1140,8 +1145,9 @@ class CPUMonitor:
 
     def _create_jupyter_display(self):
         """Create tqdm bars for Jupyter display."""
-        # VSCode has issues with tqdm.notebook - use HTML display instead
-        if self.is_vscode:
+        # Use HTML display for all notebook contexts (VSCode, Jupyter, nbconvert)
+        # tqdm.notebook doesn't render well in nbconvert or VSCode
+        if self.is_jupyter:
             try:
                 from IPython.display import display, HTML
                 self._has_ipython_display = True
@@ -1493,8 +1499,8 @@ class CPUMonitor:
 
     def _update_jupyter_display(self):
         """Update tqdm bars in Jupyter."""
-        # VSCode HTML display
-        if self.is_vscode and hasattr(self, '_use_html_display') and self._use_html_display:
+        # HTML display for notebook contexts
+        if self.is_jupyter and hasattr(self, '_use_html_display') and self._use_html_display:
             try:
                 from IPython.display import HTML
                 html = self._generate_html_display()
@@ -1534,8 +1540,8 @@ class CPUMonitor:
         if not self.show_summary:
             return
 
-        # Don't print text summary if using HTML display in Jupyter/VSCode
-        if self.is_jupyter and self.is_vscode and hasattr(self, '_use_html_display') and self._use_html_display:
+        # Don't print text summary if using HTML display in notebook
+        if self.is_jupyter and hasattr(self, '_use_html_display') and self._use_html_display:
             # HTML summary will be shown instead
             return
 
@@ -1689,23 +1695,21 @@ class CPUMonitor:
 
         if show_final_display:
             # Show summary (bars or table)
-            if self.is_vscode and hasattr(self, '_use_html_display') and self._use_html_display:
+            if self.is_jupyter and hasattr(self, '_use_html_display') and self._use_html_display:
                 if hasattr(self, '_html_display'):
                     from IPython.display import HTML
                     summary_html = self._generate_html_display(summary_mode=True)
+                    # Update the existing display handle with final content
                     self._html_display.update(HTML(summary_html))
-            # Print summary (will be skipped for VSCode HTML)
+            # Print summary (will be skipped for notebook HTML)
             self._print_summary()
         else:
             # Clear display if not persisting
-            if self.is_vscode and hasattr(self, '_use_html_display') and self._use_html_display:
-                if hasattr(self, '_html_display'):
-                    try:
-                        from IPython.display import clear_output
-                        if not had_error:
-                            clear_output(wait=False)
-                    except:
-                        pass
+            if self.is_jupyter and hasattr(self, '_use_html_display') and self._use_html_display:
+                if hasattr(self, '_html_display') and not had_error:
+                    from IPython.display import HTML
+                    # Update display to empty to clear it
+                    self._html_display.update(HTML(''))
 
     def __enter__(self):
         """Context manager entry."""

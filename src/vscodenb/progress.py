@@ -33,13 +33,23 @@ def _set_persist_flag(value):
 
 
 def _is_notebook():
-    """Detect if running in Jupyter/VS Code notebook environment."""
+    """Detect if running in Jupyter/VS Code notebook environment or nbconvert execution."""
     try:
         from IPython import get_ipython
         shell = get_ipython()
         if shell is None:
             return False
-        return 'ZMQInteractiveShell' in str(type(shell))
+
+        shell_type = str(type(shell))
+
+        # Terminal IPython should use tqdm fallback
+        if 'TerminalInteractiveShell' in shell_type:
+            return False
+
+        # ZMQInteractiveShell = Jupyter notebook/lab, VSCode notebooks
+        # Other non-terminal shells (like nbconvert's kernel) also support HTML display
+        return True
+
     except (ImportError, NameError):
         return False
 
@@ -157,11 +167,22 @@ class HTMLProgressBar:
             # Use specified color
             bar_color = self.color
 
+        # # Build HTML (matching cpu_monitor.py style at lines 1203, 1327-1329)
+        # html = f'''
+        # <div style="font-family: monospace; font-size: 10px; padding: 0px 10px; display: flex; align-items: center; gap: 10px;">
+        #     <div style="width: 2ch; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+        #         {self.desc} {percentage:.0f}% | {progress_text} | {remaining_str}
+        #     </div>
+        #     <div style="flex: 1; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;">
+        #         <div style="width: {percentage}%; height: 100%; background: {bar_color}; transition: width 0.3s;"></div>
+        #     </div>
+        # </div>
+        # '''
         # Build HTML (matching cpu_monitor.py style at lines 1203, 1327-1329)
         html = f'''
         <div style="font-family: monospace; font-size: 10px; padding: 0px 10px; display: flex; align-items: center; gap: 10px;">
-            <div style="width: 35ch; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                {self.desc} {percentage:.0f}% | {progress_text} | {remaining_str}
+            <div style="width: 10ch; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                {self.desc} {percentage:.0f}% | {remaining_str}
             </div>
             <div style="flex: 1; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;">
                 <div style="width: {percentage}%; height: 100%; background: {bar_color}; transition: width 0.3s;"></div>
