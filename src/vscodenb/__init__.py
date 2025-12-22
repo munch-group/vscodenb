@@ -1,7 +1,13 @@
 import shutil
 import sys
+import matplotlib
 
 from .plot_theme import set_vscode_theme, vscode_theme, lighten_colors, truncate_colormap
+
+iridis = truncate_colormap('viridis', minval=0.1)
+matplotlib.colormaps.register(cmap=iridis, name='iridis')
+matplotlib.colormaps.register(cmap=iridis.reversed(), name='iridis_r')
+
 from .progress import pqdm, prange  
 # CPU monitoring
 from .cpu_monitor import (
@@ -12,7 +18,7 @@ from .cpu_monitor import (
     get_cached_nodes,
 )
 from .slurm_magic import SlurmMagic
-from .utils import truncate_colormap, Left
+from .utils import Left
 
 try:
     from IPython import get_ipython
