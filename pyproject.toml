@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "vscodenb"
-version = "0.1.23"
+version = "0.1.24"
 description = "Utilities and styling for notebooks in vscode"
 authors = [
     {name = "Kasper Munch", email = "kaspermunch@birc.au.dk"}
@@ -64,6 +64,7 @@ multiprocess = ">=0.70.18,<0.71"
 nbconvert = ">=7.16.6,<8"
 jupyter = ">=1.1.1,<2"
 pytest = ">=9.0.2,<10"
+nbdime = ">=4.0.2,<5"
 
 # [tool.pixi.pypi-dependencies]
 # Optional PyPI dependencies can be added here
