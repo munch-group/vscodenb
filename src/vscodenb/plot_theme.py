@@ -128,6 +128,11 @@ def is_vscode_dark_theme(mode=None) -> bool:
 
     is_dark = None
 
+    # always light theme when executing via nbconvert
+    is_nbconvert = os.environ.get('NBCONVERT_EXECUTION', False) or '__NBCONVERT__' in os.environ
+    if is_nbconvert:
+        return False
+
     env_theme = os.environ.get('NOTEBOOK_THEME', None)
     if env_theme is not None:
         print("Overriding theme from NOTEBOOK_THEME environment variable.", sys.stderr)
@@ -285,18 +290,20 @@ def set_vscode_theme(mode=None, style='grid', frame=False, cmap=None, figsize=(5
 
         sns.set_context('paper', font_scale=font_scale)
 
-        # if cmap is None:
-        #     cmap = plt.get_cmap()
+        if cmap is None:
+            cmap = plt.get_cmap()
 
-        # # dark_cmap = lighten_colors(cmap, target_lightness=0.4, as_cmap=True)
-        # # light_cmap = lighten_colors(cmap, target_lightness=0.6, as_cmap=True)
+        # dark_cmap = lighten_colors(cmap, target_lightness=0.4, as_cmap=True)
+        # light_cmap = lighten_colors(cmap, target_lightness=0.6, as_cmap=True)
         # dark_cmap = lighten_colors(cmap, factor=0, as_cmap=True)
         # light_cmap = lighten_colors(cmap, factor=0, as_cmap=True)
 
         if is_dark:
-            plt.style.use('dark_background')
+            plt.style.use('dark_background')            
+            matplotlib.pyplot.set_cmap(cmap)
         else:
             plt.style.use('default')
+            matplotlib.pyplot.set_cmap(cmap)
 
         if is_dark:
             plt.rcParams.update({
@@ -402,7 +409,7 @@ class vscode_theme:
         self.theme_kwargs = theme_kwargs
         self.orig_rcParams = matplotlib.rcParams.copy()
         self.orig_cmap = matplotlib.pyplot.get_cmap()
-        
+
     def __enter__(self):
         set_vscode_theme(mode=self.mode, style=self.style, frame=self.frame, **self.theme_kwargs)
 
