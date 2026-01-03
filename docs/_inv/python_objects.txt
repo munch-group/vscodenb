@@ -5846,7 +5846,6 @@ concurrent.futures.ThreadPoolExecutor py:class 1 library/concurrent.futures.html
 concurrent.futures.TimeoutError py:exception 1 library/concurrent.futures.html#$ -
 concurrent.futures.as_completed py:function 1 library/concurrent.futures.html#$ -
 concurrent.futures.interpreter.BrokenInterpreterPool py:exception 1 library/concurrent.futures.html#$ -
-concurrent.futures.interpreter.ExecutionFailed py:exception 1 library/concurrent.futures.html#$ -
 concurrent.futures.process.BrokenProcessPool py:exception 1 library/concurrent.futures.html#$ -
 concurrent.futures.thread.BrokenThreadPool py:exception 1 library/concurrent.futures.html#$ -
 concurrent.futures.wait py:function 1 library/concurrent.futures.html#$ -

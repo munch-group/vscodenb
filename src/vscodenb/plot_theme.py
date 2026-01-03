@@ -329,7 +329,7 @@ def set_vscode_theme(mode=None, style='grid', frame=False, cmap=None, figsize=(5
             'axes.grid.axis': 'both',
             'axes.grid.which': 'major',
             'axes.titlelocation': 'right',
-            'axes.titlesize': 'large',
+            'axes.titlesize': 'medium',
             'axes.titleweight': 'normal',
             'axes.labelsize': 'medium',
             'axes.labelweight': 'normal',
