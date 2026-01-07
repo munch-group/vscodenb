@@ -153,6 +153,8 @@ def is_vscode_dark_theme(mode=None) -> bool:
             plt.close(fig)
             luminance = matplotlib.colors.rgb_to_hsv(matplotlib.colors.to_rgb(bg_color))[2]
             is_dark = luminance < 0.5
+    
+    plt.close('all')
 
     return is_dark
 
