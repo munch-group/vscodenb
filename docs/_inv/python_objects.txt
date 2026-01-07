@@ -15665,6 +15665,7 @@ deprecations/pending-removal-in-3.14 std:doc -1 deprecations/pending-removal-in-
 deprecations/pending-removal-in-3.15 std:doc -1 deprecations/pending-removal-in-3.15.html Pending removal in Python 3.15
 deprecations/pending-removal-in-3.16 std:doc -1 deprecations/pending-removal-in-3.16.html Pending removal in Python 3.16
 deprecations/pending-removal-in-3.17 std:doc -1 deprecations/pending-removal-in-3.17.html Pending removal in Python 3.17
+deprecations/pending-removal-in-3.18 std:doc -1 deprecations/pending-removal-in-3.18.html Pending removal in Python 3.18
 deprecations/pending-removal-in-3.19 std:doc -1 deprecations/pending-removal-in-3.19.html Pending removal in Python 3.19
 deprecations/pending-removal-in-future std:doc -1 deprecations/pending-removal-in-future.html Pending removal in future versions
 describing-warning-filters std:label -1 library/warnings.html#$ Describing Warning Filters
