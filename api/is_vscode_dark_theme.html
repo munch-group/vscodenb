@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>vscode_theme – vscodenb</title>
+<title>is_vscode_dark_theme – vscodenb</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../api/is_vscode_dark_theme.html" rel="next">
-<link href="../api/set_vscode_theme.html" rel="prev">
+<link href="../api/lighten_colors.html" rel="next">
+<link href="../api/vscode_theme.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -150,7 +150,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../api/set_vscode_theme.html">vscodenb</a></li><li class="breadcrumb-item"><a href="../api/vscode_theme.html">vscode_theme</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../api/set_vscode_theme.html">vscodenb</a></li><li class="breadcrumb-item"><a href="../api/is_vscode_dark_theme.html">is_vscode_dark_theme</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -185,13 +185,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../api/vscode_theme.html" class="sidebar-item-text sidebar-link active">
+  <a href="../api/vscode_theme.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">vscode_theme</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../api/is_vscode_dark_theme.html" class="sidebar-item-text sidebar-link">
+  <a href="../api/is_vscode_dark_theme.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">is_vscode_dark_theme</span></a>
   </div>
 </li>
@@ -291,19 +291,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#vscodenb.vscode_theme" id="toc-vscodenb.vscode_theme" class="nav-link active" data-scroll-target="#vscodenb.vscode_theme">vscode_theme</a></li>
+  <li><a href="#vscodenb.is_vscode_dark_theme" id="toc-vscodenb.is_vscode_dark_theme" class="nav-link active" data-scroll-target="#vscodenb.is_vscode_dark_theme">is_vscode_dark_theme</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../api/set_vscode_theme.html">vscodenb</a></li><li class="breadcrumb-item"><a href="../api/vscode_theme.html">vscode_theme</a></li></ol></nav></header>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../api/set_vscode_theme.html">vscodenb</a></li><li class="breadcrumb-item"><a href="../api/is_vscode_dark_theme.html">is_vscode_dark_theme</a></li></ol></nav></header>
 
 
 
 
-<section id="vscodenb.vscode_theme" class="level1">
-<h1>vscode_theme</h1>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>vscodenb.vscode_theme(mode<span class="op">=</span><span class="va">None</span>, style<span class="op">=</span><span class="st">'grid'</span>, frame<span class="op">=</span><span class="va">False</span>, <span class="op">**</span>theme_kwargs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="vscodenb.is_vscode_dark_theme" class="level1">
+<h1>is_vscode_dark_theme</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>vscodenb.is_vscode_dark_theme(mode<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Determine if a given VS Code theme name is dark or light.</p>
 
 
 </section>
@@ -711,13 +712,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../api/set_vscode_theme.html" class="pagination-link" aria-label="set_vscode_theme">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">set_vscode_theme</span>
+      <a href="../api/vscode_theme.html" class="pagination-link" aria-label="vscode_theme">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">vscode_theme</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../api/is_vscode_dark_theme.html" class="pagination-link" aria-label="is_vscode_dark_theme">
-        <span class="nav-page-text">is_vscode_dark_theme</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../api/lighten_colors.html" class="pagination-link" aria-label="lighten_colors">
+        <span class="nav-page-text">lighten_colors</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

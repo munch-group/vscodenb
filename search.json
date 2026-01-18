@@ -53,58 +53,217 @@
     ]
   },
   {
-    "objectID": "api/SlurmMagic.html",
-    "href": "api/SlurmMagic.html",
-    "title": "SlurmMagic",
+    "objectID": "api/html_style.html",
+    "href": "api/html_style.html",
+    "title": "html_style",
     "section": "",
-    "text": "vscodenb.SlurmMagic()\nIPython magics for running code in SLURM jobs.\n\n\n\n\n\nName\nDescription\n\n\n\n\nslurm\nRun code in a SLURM job with optional state transfer.\n\n\n\n\n\nvscodenb.SlurmMagic.slurm(line, cell)\nRun code in a SLURM job with optional state transfer.\nUsage: %%slurm # your code here\n%%slurm --mem 4G --cores 4 --time 00:10:00\n# your code here with SLURM resources\n\n%%slurm --no-state\n# run truly isolated without state transfer",
+    "text": "html_style\nvscodenb.html_style",
     "crumbs": [
       "vscodenb",
-      "SlurmMagic"
+      "html_style"
     ]
   },
   {
-    "objectID": "api/SlurmMagic.html#methods",
-    "href": "api/SlurmMagic.html#methods",
-    "title": "SlurmMagic",
+    "objectID": "api/CPUMonitorMagics.html",
+    "href": "api/CPUMonitorMagics.html",
+    "title": "CPUMonitorMagics",
     "section": "",
-    "text": "Name\nDescription\n\n\n\n\nslurm\nRun code in a SLURM job with optional state transfer.\n\n\n\n\n\nvscodenb.SlurmMagic.slurm(line, cell)\nRun code in a SLURM job with optional state transfer.\nUsage: %%slurm # your code here\n%%slurm --mem 4G --cores 4 --time 00:10:00\n# your code here with SLURM resources\n\n%%slurm --no-state\n# run truly isolated without state transfer",
+    "text": "vscodenb.CPUMonitorMagics()\nIPython magics for CPU monitoring.\n\n\n\n\n\nName\nDescription\n\n\n\n\nmonitor\nMonitor CPU usage during cell execution.\n\n\n\n\n\nvscodenb.CPUMonitorMagics.monitor(line, cell)\nMonitor CPU usage during cell execution.\nUsage: %%monitor # your code here\n%%monitor --width 100 --interval 1.0\n# your code here\n\n%%monitor --persist\n# display remains after completion\n\n%%monitor --color\n# use color coding (green/yellow/red)\n\n%%monitor --summary\n# show table with CPU and memory statistics\n\n%%monitor --group-by task\n# group by SLURM task instead of node\n\n%%monitor --label \"Training Epoch 1\"\n# display with custom label",
     "crumbs": [
       "vscodenb",
-      "SlurmMagic"
+      "CPUMonitorMagics"
     ]
   },
   {
-    "objectID": "api/monitor.html",
-    "href": "api/monitor.html",
-    "title": "monitor",
+    "objectID": "api/CPUMonitorMagics.html#methods",
+    "href": "api/CPUMonitorMagics.html#methods",
+    "title": "CPUMonitorMagics",
     "section": "",
-    "text": "vscodenb.monitor(func=None, **monitor_kwargs)\nDecorator for CPU monitoring.\nBy default, the function name is used as the label. You can override this by passing label=None or label=“custom label”.\n\n\n\nfunc : callable = None\n\nFunction to monitor\n\n****monitor_kwargs** :  = {}\n\nArguments passed to CPUMonitor\n\n\n\n\n\n&gt;&gt;&gt; @monitor\n&gt;&gt;&gt; def my_function():\n...     # computation\n...     pass  # Label will be \"my_function\"\n&gt;&gt;&gt; @monitor(width=100, update_interval=1.0)\n&gt;&gt;&gt; def my_function():\n...     # computation\n...     pass  # Label will be \"my_function\"\n&gt;&gt;&gt; @monitor(label=None)\n&gt;&gt;&gt; def my_function():\n...     # computation\n...     pass  # No label",
+    "text": "Name\nDescription\n\n\n\n\nmonitor\nMonitor CPU usage during cell execution.\n\n\n\n\n\nvscodenb.CPUMonitorMagics.monitor(line, cell)\nMonitor CPU usage during cell execution.\nUsage: %%monitor # your code here\n%%monitor --width 100 --interval 1.0\n# your code here\n\n%%monitor --persist\n# display remains after completion\n\n%%monitor --color\n# use color coding (green/yellow/red)\n\n%%monitor --summary\n# show table with CPU and memory statistics\n\n%%monitor --group-by task\n# group by SLURM task instead of node\n\n%%monitor --label \"Training Epoch 1\"\n# display with custom label",
     "crumbs": [
       "vscodenb",
-      "monitor"
+      "CPUMonitorMagics"
     ]
   },
   {
-    "objectID": "api/monitor.html#parameters",
-    "href": "api/monitor.html#parameters",
-    "title": "monitor",
+    "objectID": "api/truncate_colormap.html",
+    "href": "api/truncate_colormap.html",
+    "title": "truncate_colormap",
     "section": "",
-    "text": "func : callable = None\n\nFunction to monitor\n\n****monitor_kwargs** :  = {}\n\nArguments passed to CPUMonitor",
+    "text": "truncate_colormap\nvscodenb.truncate_colormap(cmap, minval=0.0, maxval=1.0, n=100)",
     "crumbs": [
       "vscodenb",
-      "monitor"
+      "truncate_colormap"
     ]
   },
   {
-    "objectID": "api/monitor.html#examples",
-    "href": "api/monitor.html#examples",
-    "title": "monitor",
+    "objectID": "api/vscode_theme.html",
+    "href": "api/vscode_theme.html",
+    "title": "vscode_theme",
     "section": "",
-    "text": "&gt;&gt;&gt; @monitor\n&gt;&gt;&gt; def my_function():\n...     # computation\n...     pass  # Label will be \"my_function\"\n&gt;&gt;&gt; @monitor(width=100, update_interval=1.0)\n&gt;&gt;&gt; def my_function():\n...     # computation\n...     pass  # Label will be \"my_function\"\n&gt;&gt;&gt; @monitor(label=None)\n&gt;&gt;&gt; def my_function():\n...     # computation\n...     pass  # No label",
+    "text": "vscode_theme\nvscodenb.vscode_theme(mode=None, style='grid', frame=False, **theme_kwargs)",
     "crumbs": [
       "vscodenb",
-      "monitor"
+      "vscode_theme"
+    ]
+  },
+  {
+    "objectID": "api/scriptname.html",
+    "href": "api/scriptname.html",
+    "title": "scriptname",
+    "section": "",
+    "text": "scriptname\nvscodenb.modulename.scriptname()"
+  },
+  {
+    "objectID": "api/get_cached_nodes.html",
+    "href": "api/get_cached_nodes.html",
+    "title": "get_cached_nodes",
+    "section": "",
+    "text": "vscodenb.get_cached_nodes()\nGet cached compute nodes, detecting them if not already cached.\n\n\n\n : List[NodeInfo]\n\nList of detected compute nodes",
+    "crumbs": [
+      "vscodenb",
+      "get_cached_nodes"
+    ]
+  },
+  {
+    "objectID": "api/get_cached_nodes.html#returns",
+    "href": "api/get_cached_nodes.html#returns",
+    "title": "get_cached_nodes",
+    "section": "",
+    "text": ": List[NodeInfo]\n\nList of detected compute nodes",
+    "crumbs": [
+      "vscodenb",
+      "get_cached_nodes"
+    ]
+  },
+  {
+    "objectID": "api/pqdm.html",
+    "href": "api/pqdm.html",
+    "title": "pqdm",
+    "section": "",
+    "text": "pqdm\nvscodenb.pqdm(iterable=None, total=None, desc='', persist=False, **kwargs)\nHTML progress bar for notebooks, tqdm for terminal. Renders as thin bar matching cpu_monitor.py style.\nArgs: iterable: The iterable to iterate over. total: Total number of items (optional if iterable has len). desc: Description text shown next to the progress bar. persist: If False (default), the progress bar disappears after completion. If True, the progress bar remains visible in its completed state. **kwargs: Additional arguments passed to tqdm (terminal fallback).\nUsage: for item in pqdm(iterable, desc=“Processing”): process(item)",
+    "crumbs": [
+      "vscodenb",
+      "pqdm"
+    ]
+  },
+  {
+    "objectID": "api/Left.html",
+    "href": "api/Left.html",
+    "title": "Left",
+    "section": "",
+    "text": "Left\nvscodenb.Left()",
+    "crumbs": [
+      "vscodenb",
+      "Left"
+    ]
+  },
+  {
+    "objectID": "api/lighten_colors.html",
+    "href": "api/lighten_colors.html",
+    "title": "lighten_colors",
+    "section": "",
+    "text": "vscodenb.lighten_colors(\n    colors,\n    factor=0.0,\n    n_colors=None,\n    as_cmap=None,\n    target_lightness=None,\n)\nLighten a colormap or palette using HSL color space.\n\n\n\ncolors : str, Colormap, or list\n\nMatplotlib colormap, seaborn palette name, or list of colors\n\nfactor : float = 0.0\n\nBlend factor toward white (0 = original, 1 = white). Ignored if target_lightness is set.\n\nn_colors : int = None\n\nNumber of colors for discrete palettes\n\nas_cmap : bool = None\n\nForce output type. If None, auto-detects based on input.\n\ntarget_lightness : float = None\n\nIf set (0-1), all colors will be adjusted to this lightness value, preserving hue and saturation.\n\n\n\n\n\n\n : list or LinearSegmentedColormap",
+    "crumbs": [
+      "vscodenb",
+      "lighten_colors"
+    ]
+  },
+  {
+    "objectID": "api/lighten_colors.html#parameters",
+    "href": "api/lighten_colors.html#parameters",
+    "title": "lighten_colors",
+    "section": "",
+    "text": "colors : str, Colormap, or list\n\nMatplotlib colormap, seaborn palette name, or list of colors\n\nfactor : float = 0.0\n\nBlend factor toward white (0 = original, 1 = white). Ignored if target_lightness is set.\n\nn_colors : int = None\n\nNumber of colors for discrete palettes\n\nas_cmap : bool = None\n\nForce output type. If None, auto-detects based on input.\n\ntarget_lightness : float = None\n\nIf set (0-1), all colors will be adjusted to this lightness value, preserving hue and saturation.",
+    "crumbs": [
+      "vscodenb",
+      "lighten_colors"
+    ]
+  },
+  {
+    "objectID": "api/lighten_colors.html#returns",
+    "href": "api/lighten_colors.html#returns",
+    "title": "lighten_colors",
+    "section": "",
+    "text": ": list or LinearSegmentedColormap",
+    "crumbs": [
+      "vscodenb",
+      "lighten_colors"
+    ]
+  },
+  {
+    "objectID": "api/detect_compute_nodes.html",
+    "href": "api/detect_compute_nodes.html",
+    "title": "detect_compute_nodes",
+    "section": "",
+    "text": "detect_compute_nodes\nvscodenb.detect_compute_nodes()\nDetect compute nodes and allocated CPUs.\nReturns list of NodeInfo objects, one per node. For local execution, returns single node. For SLURM, returns all allocated nodes.",
+    "crumbs": [
+      "vscodenb",
+      "detect_compute_nodes"
+    ]
+  },
+  {
+    "objectID": "api/iridis.html",
+    "href": "api/iridis.html",
+    "title": "iridis",
+    "section": "",
+    "text": "iridis\nvscodenb.iridis",
+    "crumbs": [
+      "vscodenb",
+      "iridis"
+    ]
+  },
+  {
+    "objectID": "api/index.html",
+    "href": "api/index.html",
+    "title": "Function reference",
+    "section": "",
+    "text": "set_vscode_theme\nSet the default theme for the graph plotter.\n\n\nvscode_theme\n\n\n\nis_vscode_dark_theme\nDetermine if a given VS Code theme name is dark or light.\n\n\nlighten_colors\nLighten a colormap or palette using HSL color space.\n\n\ntruncate_colormap\n\n\n\niridis\n\n\n\npqdm\nHTML progress bar for notebooks, tqdm for terminal.\n\n\nprange\nHTML progress bar for range() in notebooks, tqdm for terminal.\n\n\nCPUMonitor\nLive CPU monitoring with adaptive display.\n\n\nmonitor\nDecorator for CPU monitoring.\n\n\nCPUMonitorMagics\nIPython magics for CPU monitoring.\n\n\ndetect_compute_nodes\nDetect compute nodes and allocated CPUs.\n\n\nget_cached_nodes\nGet cached compute nodes, detecting them if not already cached.\n\n\nSlurmMagic\nIPython magics for running code in SLURM jobs.\n\n\nLeft\n\n\n\nipython\n\n\n\nhtml_style",
+    "crumbs": [
+      "Function reference"
+    ]
+  },
+  {
+    "objectID": "api/index.html#vscodenb",
+    "href": "api/index.html#vscodenb",
+    "title": "Function reference",
+    "section": "",
+    "text": "set_vscode_theme\nSet the default theme for the graph plotter.\n\n\nvscode_theme\n\n\n\nis_vscode_dark_theme\nDetermine if a given VS Code theme name is dark or light.\n\n\nlighten_colors\nLighten a colormap or palette using HSL color space.\n\n\ntruncate_colormap\n\n\n\niridis\n\n\n\npqdm\nHTML progress bar for notebooks, tqdm for terminal.\n\n\nprange\nHTML progress bar for range() in notebooks, tqdm for terminal.\n\n\nCPUMonitor\nLive CPU monitoring with adaptive display.\n\n\nmonitor\nDecorator for CPU monitoring.\n\n\nCPUMonitorMagics\nIPython magics for CPU monitoring.\n\n\ndetect_compute_nodes\nDetect compute nodes and allocated CPUs.\n\n\nget_cached_nodes\nGet cached compute nodes, detecting them if not already cached.\n\n\nSlurmMagic\nIPython magics for running code in SLURM jobs.\n\n\nLeft\n\n\n\nipython\n\n\n\nhtml_style",
+    "crumbs": [
+      "Function reference"
+    ]
+  },
+  {
+    "objectID": "api/set_vscode_theme.html",
+    "href": "api/set_vscode_theme.html",
+    "title": "set_vscode_theme",
+    "section": "",
+    "text": "vscodenb.set_vscode_theme(\n    mode=None,\n    style='grid',\n    frame=False,\n    cmap=None,\n    figsize=(5, 3.7),\n    font_scale=1.0,\n)\nSet the default theme for the graph plotter. The theme can be either ‘dark’ or ‘light’. The default theme is autodetected. NOTEBOOK_THEME environment variable can be used to override the theme.\n\n\n\nmode : str = None\n\n‘dark’ or ‘light’ to force a specific theme. If None, autodetected.\n\nstyle : str = 'grid'\n\n‘grid’ for grid style, ‘ticks’ for ticks style.\n\nframe : bool = False\n\nWhether to show frame around plots.\n\ncmap : Colormap = None\n\nMatplotlib colormap to use for plots.\n\nfigsize : tuple = (5, 3.7)\n\nDefault figure size.\n\nfont_scale : float = 1.0\n\nScale factor for fonts.",
+    "crumbs": [
+      "vscodenb",
+      "set_vscode_theme"
+    ]
+  },
+  {
+    "objectID": "api/set_vscode_theme.html#parameters",
+    "href": "api/set_vscode_theme.html#parameters",
+    "title": "set_vscode_theme",
+    "section": "",
+    "text": "mode : str = None\n\n‘dark’ or ‘light’ to force a specific theme. If None, autodetected.\n\nstyle : str = 'grid'\n\n‘grid’ for grid style, ‘ticks’ for ticks style.\n\nframe : bool = False\n\nWhether to show frame around plots.\n\ncmap : Colormap = None\n\nMatplotlib colormap to use for plots.\n\nfigsize : tuple = (5, 3.7)\n\nDefault figure size.\n\nfont_scale : float = 1.0\n\nScale factor for fonts.",
+    "crumbs": [
+      "vscodenb",
+      "set_vscode_theme"
+    ]
+  },
+  {
+    "objectID": "api/ipython.html",
+    "href": "api/ipython.html",
+    "title": "ipython",
+    "section": "",
+    "text": "ipython\nvscodenb.ipython",
+    "crumbs": [
+      "vscodenb",
+      "ipython"
     ]
   },
   {
@@ -143,217 +302,69 @@
     "text": "libraryname.modulename.scriptname"
   },
   {
-    "objectID": "api/ipython.html",
-    "href": "api/ipython.html",
-    "title": "ipython",
+    "objectID": "api/monitor.html",
+    "href": "api/monitor.html",
+    "title": "monitor",
     "section": "",
-    "text": "ipython\nvscodenb.ipython",
+    "text": "vscodenb.monitor(func=None, **monitor_kwargs)\nDecorator for CPU monitoring.\nBy default, the function name is used as the label. You can override this by passing label=None or label=“custom label”.\n\n\n\nfunc : callable = None\n\nFunction to monitor\n\n****monitor_kwargs** :  = {}\n\nArguments passed to CPUMonitor\n\n\n\n\n\n&gt;&gt;&gt; @monitor\n&gt;&gt;&gt; def my_function():\n...     # computation\n...     pass  # Label will be \"my_function\"\n&gt;&gt;&gt; @monitor(width=100, update_interval=1.0)\n&gt;&gt;&gt; def my_function():\n...     # computation\n...     pass  # Label will be \"my_function\"\n&gt;&gt;&gt; @monitor(label=None)\n&gt;&gt;&gt; def my_function():\n...     # computation\n...     pass  # No label",
     "crumbs": [
       "vscodenb",
-      "ipython"
+      "monitor"
     ]
   },
   {
-    "objectID": "api/set_vscode_theme.html",
-    "href": "api/set_vscode_theme.html",
-    "title": "set_vscode_theme",
+    "objectID": "api/monitor.html#parameters",
+    "href": "api/monitor.html#parameters",
+    "title": "monitor",
     "section": "",
-    "text": "vscodenb.set_vscode_theme(\n    mode=None,\n    style='grid',\n    frame=False,\n    cmap=None,\n    figsize=(5, 3.7),\n    font_scale=1.0,\n)\nSet the default theme for the graph plotter. The theme can be either ‘dark’ or ‘light’. The default theme is autodetected. NOTEBOOK_THEME environment variable can be used to override the theme.\n\n\n\nmode : str = None\n\n‘dark’ or ‘light’ to force a specific theme. If None, autodetected.\n\nstyle : str = 'grid'\n\n‘grid’ for grid style, ‘ticks’ for ticks style.\n\nframe : bool = False\n\nWhether to show frame around plots.\n\ncmap : Colormap = None\n\nMatplotlib colormap to use for plots.\n\nfigsize : tuple = (5, 3.7)\n\nDefault figure size.\n\nfont_scale : float = 1.0\n\nScale factor for fonts.",
+    "text": "func : callable = None\n\nFunction to monitor\n\n****monitor_kwargs** :  = {}\n\nArguments passed to CPUMonitor",
     "crumbs": [
       "vscodenb",
-      "set_vscode_theme"
+      "monitor"
     ]
   },
   {
-    "objectID": "api/set_vscode_theme.html#parameters",
-    "href": "api/set_vscode_theme.html#parameters",
-    "title": "set_vscode_theme",
+    "objectID": "api/monitor.html#examples",
+    "href": "api/monitor.html#examples",
+    "title": "monitor",
     "section": "",
-    "text": "mode : str = None\n\n‘dark’ or ‘light’ to force a specific theme. If None, autodetected.\n\nstyle : str = 'grid'\n\n‘grid’ for grid style, ‘ticks’ for ticks style.\n\nframe : bool = False\n\nWhether to show frame around plots.\n\ncmap : Colormap = None\n\nMatplotlib colormap to use for plots.\n\nfigsize : tuple = (5, 3.7)\n\nDefault figure size.\n\nfont_scale : float = 1.0\n\nScale factor for fonts.",
+    "text": "&gt;&gt;&gt; @monitor\n&gt;&gt;&gt; def my_function():\n...     # computation\n...     pass  # Label will be \"my_function\"\n&gt;&gt;&gt; @monitor(width=100, update_interval=1.0)\n&gt;&gt;&gt; def my_function():\n...     # computation\n...     pass  # Label will be \"my_function\"\n&gt;&gt;&gt; @monitor(label=None)\n&gt;&gt;&gt; def my_function():\n...     # computation\n...     pass  # No label",
     "crumbs": [
       "vscodenb",
-      "set_vscode_theme"
+      "monitor"
     ]
   },
   {
-    "objectID": "api/index.html",
-    "href": "api/index.html",
-    "title": "Function reference",
+    "objectID": "api/SlurmMagic.html",
+    "href": "api/SlurmMagic.html",
+    "title": "SlurmMagic",
     "section": "",
-    "text": "set_vscode_theme\nSet the default theme for the graph plotter.\n\n\nvscode_theme\n\n\n\nis_vscode_dark_theme\nDetermine if a given VS Code theme name is dark or light.\n\n\nlighten_colors\nLighten a colormap or palette using HSL color space.\n\n\ntruncate_colormap\n\n\n\niridis\n\n\n\npqdm\nHTML progress bar for notebooks, tqdm for terminal.\n\n\nprange\nHTML progress bar for range() in notebooks, tqdm for terminal.\n\n\nCPUMonitor\nLive CPU monitoring with adaptive display.\n\n\nmonitor\nDecorator for CPU monitoring.\n\n\nCPUMonitorMagics\nIPython magics for CPU monitoring.\n\n\ndetect_compute_nodes\nDetect compute nodes and allocated CPUs.\n\n\nget_cached_nodes\nGet cached compute nodes, detecting them if not already cached.\n\n\nSlurmMagic\nIPython magics for running code in SLURM jobs.\n\n\nLeft\n\n\n\nipython\n\n\n\nhtml_style",
-    "crumbs": [
-      "Function reference"
-    ]
-  },
-  {
-    "objectID": "api/index.html#vscodenb",
-    "href": "api/index.html#vscodenb",
-    "title": "Function reference",
-    "section": "",
-    "text": "set_vscode_theme\nSet the default theme for the graph plotter.\n\n\nvscode_theme\n\n\n\nis_vscode_dark_theme\nDetermine if a given VS Code theme name is dark or light.\n\n\nlighten_colors\nLighten a colormap or palette using HSL color space.\n\n\ntruncate_colormap\n\n\n\niridis\n\n\n\npqdm\nHTML progress bar for notebooks, tqdm for terminal.\n\n\nprange\nHTML progress bar for range() in notebooks, tqdm for terminal.\n\n\nCPUMonitor\nLive CPU monitoring with adaptive display.\n\n\nmonitor\nDecorator for CPU monitoring.\n\n\nCPUMonitorMagics\nIPython magics for CPU monitoring.\n\n\ndetect_compute_nodes\nDetect compute nodes and allocated CPUs.\n\n\nget_cached_nodes\nGet cached compute nodes, detecting them if not already cached.\n\n\nSlurmMagic\nIPython magics for running code in SLURM jobs.\n\n\nLeft\n\n\n\nipython\n\n\n\nhtml_style",
-    "crumbs": [
-      "Function reference"
-    ]
-  },
-  {
-    "objectID": "api/iridis.html",
-    "href": "api/iridis.html",
-    "title": "iridis",
-    "section": "",
-    "text": "iridis\nvscodenb.iridis",
+    "text": "vscodenb.SlurmMagic()\nIPython magics for running code in SLURM jobs.\n\n\n\n\n\nName\nDescription\n\n\n\n\nslurm\nRun code in a SLURM job with optional state transfer.\n\n\n\n\n\nvscodenb.SlurmMagic.slurm(line, cell)\nRun code in a SLURM job with optional state transfer.\nUsage: %%slurm # your code here\n%%slurm --mem 4G --cores 4 --time 00:10:00\n# your code here with SLURM resources\n\n%%slurm --no-state\n# run truly isolated without state transfer",
     "crumbs": [
       "vscodenb",
-      "iridis"
+      "SlurmMagic"
     ]
   },
   {
-    "objectID": "api/detect_compute_nodes.html",
-    "href": "api/detect_compute_nodes.html",
-    "title": "detect_compute_nodes",
+    "objectID": "api/SlurmMagic.html#methods",
+    "href": "api/SlurmMagic.html#methods",
+    "title": "SlurmMagic",
     "section": "",
-    "text": "detect_compute_nodes\nvscodenb.detect_compute_nodes()\nDetect compute nodes and allocated CPUs.\nReturns list of NodeInfo objects, one per node. For local execution, returns single node. For SLURM, returns all allocated nodes.",
+    "text": "Name\nDescription\n\n\n\n\nslurm\nRun code in a SLURM job with optional state transfer.\n\n\n\n\n\nvscodenb.SlurmMagic.slurm(line, cell)\nRun code in a SLURM job with optional state transfer.\nUsage: %%slurm # your code here\n%%slurm --mem 4G --cores 4 --time 00:10:00\n# your code here with SLURM resources\n\n%%slurm --no-state\n# run truly isolated without state transfer",
     "crumbs": [
       "vscodenb",
-      "detect_compute_nodes"
+      "SlurmMagic"
     ]
   },
   {
-    "objectID": "api/lighten_colors.html",
-    "href": "api/lighten_colors.html",
-    "title": "lighten_colors",
+    "objectID": "api/is_vscode_dark_theme.html",
+    "href": "api/is_vscode_dark_theme.html",
+    "title": "is_vscode_dark_theme",
     "section": "",
-    "text": "vscodenb.lighten_colors(\n    colors,\n    factor=0.0,\n    n_colors=None,\n    as_cmap=None,\n    target_lightness=None,\n)\nLighten a colormap or palette using HSL color space.\n\n\n\ncolors : str, Colormap, or list\n\nMatplotlib colormap, seaborn palette name, or list of colors\n\nfactor : float = 0.0\n\nBlend factor toward white (0 = original, 1 = white). Ignored if target_lightness is set.\n\nn_colors : int = None\n\nNumber of colors for discrete palettes\n\nas_cmap : bool = None\n\nForce output type. If None, auto-detects based on input.\n\ntarget_lightness : float = None\n\nIf set (0-1), all colors will be adjusted to this lightness value, preserving hue and saturation.\n\n\n\n\n\n\n : list or LinearSegmentedColormap",
+    "text": "is_vscode_dark_theme\nvscodenb.is_vscode_dark_theme(mode=None)\nDetermine if a given VS Code theme name is dark or light.",
     "crumbs": [
       "vscodenb",
-      "lighten_colors"
-    ]
-  },
-  {
-    "objectID": "api/lighten_colors.html#parameters",
-    "href": "api/lighten_colors.html#parameters",
-    "title": "lighten_colors",
-    "section": "",
-    "text": "colors : str, Colormap, or list\n\nMatplotlib colormap, seaborn palette name, or list of colors\n\nfactor : float = 0.0\n\nBlend factor toward white (0 = original, 1 = white). Ignored if target_lightness is set.\n\nn_colors : int = None\n\nNumber of colors for discrete palettes\n\nas_cmap : bool = None\n\nForce output type. If None, auto-detects based on input.\n\ntarget_lightness : float = None\n\nIf set (0-1), all colors will be adjusted to this lightness value, preserving hue and saturation.",
-    "crumbs": [
-      "vscodenb",
-      "lighten_colors"
-    ]
-  },
-  {
-    "objectID": "api/lighten_colors.html#returns",
-    "href": "api/lighten_colors.html#returns",
-    "title": "lighten_colors",
-    "section": "",
-    "text": ": list or LinearSegmentedColormap",
-    "crumbs": [
-      "vscodenb",
-      "lighten_colors"
-    ]
-  },
-  {
-    "objectID": "api/Left.html",
-    "href": "api/Left.html",
-    "title": "Left",
-    "section": "",
-    "text": "Left\nvscodenb.Left()",
-    "crumbs": [
-      "vscodenb",
-      "Left"
-    ]
-  },
-  {
-    "objectID": "api/pqdm.html",
-    "href": "api/pqdm.html",
-    "title": "pqdm",
-    "section": "",
-    "text": "pqdm\nvscodenb.pqdm(iterable=None, total=None, desc='', persist=False, **kwargs)\nHTML progress bar for notebooks, tqdm for terminal. Renders as thin bar matching cpu_monitor.py style.\nArgs: iterable: The iterable to iterate over. total: Total number of items (optional if iterable has len). desc: Description text shown next to the progress bar. persist: If False (default), the progress bar disappears after completion. If True, the progress bar remains visible in its completed state. **kwargs: Additional arguments passed to tqdm (terminal fallback).\nUsage: for item in pqdm(iterable, desc=“Processing”): process(item)",
-    "crumbs": [
-      "vscodenb",
-      "pqdm"
-    ]
-  },
-  {
-    "objectID": "api/get_cached_nodes.html",
-    "href": "api/get_cached_nodes.html",
-    "title": "get_cached_nodes",
-    "section": "",
-    "text": "vscodenb.get_cached_nodes()\nGet cached compute nodes, detecting them if not already cached.\n\n\n\n : List[NodeInfo]\n\nList of detected compute nodes",
-    "crumbs": [
-      "vscodenb",
-      "get_cached_nodes"
-    ]
-  },
-  {
-    "objectID": "api/get_cached_nodes.html#returns",
-    "href": "api/get_cached_nodes.html#returns",
-    "title": "get_cached_nodes",
-    "section": "",
-    "text": ": List[NodeInfo]\n\nList of detected compute nodes",
-    "crumbs": [
-      "vscodenb",
-      "get_cached_nodes"
-    ]
-  },
-  {
-    "objectID": "api/scriptname.html",
-    "href": "api/scriptname.html",
-    "title": "scriptname",
-    "section": "",
-    "text": "scriptname\nvscodenb.modulename.scriptname()"
-  },
-  {
-    "objectID": "api/vscode_theme.html",
-    "href": "api/vscode_theme.html",
-    "title": "vscode_theme",
-    "section": "",
-    "text": "vscode_theme\nvscodenb.vscode_theme(mode=None, style='grid', frame=False, **theme_kwargs)",
-    "crumbs": [
-      "vscodenb",
-      "vscode_theme"
-    ]
-  },
-  {
-    "objectID": "api/truncate_colormap.html",
-    "href": "api/truncate_colormap.html",
-    "title": "truncate_colormap",
-    "section": "",
-    "text": "truncate_colormap\nvscodenb.truncate_colormap(cmap, minval=0.0, maxval=1.0, n=100)",
-    "crumbs": [
-      "vscodenb",
-      "truncate_colormap"
-    ]
-  },
-  {
-    "objectID": "api/CPUMonitorMagics.html",
-    "href": "api/CPUMonitorMagics.html",
-    "title": "CPUMonitorMagics",
-    "section": "",
-    "text": "vscodenb.CPUMonitorMagics()\nIPython magics for CPU monitoring.\n\n\n\n\n\nName\nDescription\n\n\n\n\nmonitor\nMonitor CPU usage during cell execution.\n\n\n\n\n\nvscodenb.CPUMonitorMagics.monitor(line, cell)\nMonitor CPU usage during cell execution.\nUsage: %%monitor # your code here\n%%monitor --width 100 --interval 1.0\n# your code here\n\n%%monitor --persist\n# display remains after completion\n\n%%monitor --color\n# use color coding (green/yellow/red)\n\n%%monitor --summary\n# show table with CPU and memory statistics\n\n%%monitor --group-by task\n# group by SLURM task instead of node\n\n%%monitor --label \"Training Epoch 1\"\n# display with custom label",
-    "crumbs": [
-      "vscodenb",
-      "CPUMonitorMagics"
-    ]
-  },
-  {
-    "objectID": "api/CPUMonitorMagics.html#methods",
-    "href": "api/CPUMonitorMagics.html#methods",
-    "title": "CPUMonitorMagics",
-    "section": "",
-    "text": "Name\nDescription\n\n\n\n\nmonitor\nMonitor CPU usage during cell execution.\n\n\n\n\n\nvscodenb.CPUMonitorMagics.monitor(line, cell)\nMonitor CPU usage during cell execution.\nUsage: %%monitor # your code here\n%%monitor --width 100 --interval 1.0\n# your code here\n\n%%monitor --persist\n# display remains after completion\n\n%%monitor --color\n# use color coding (green/yellow/red)\n\n%%monitor --summary\n# show table with CPU and memory statistics\n\n%%monitor --group-by task\n# group by SLURM task instead of node\n\n%%monitor --label \"Training Epoch 1\"\n# display with custom label",
-    "crumbs": [
-      "vscodenb",
-      "CPUMonitorMagics"
-    ]
-  },
-  {
-    "objectID": "api/html_style.html",
-    "href": "api/html_style.html",
-    "title": "html_style",
-    "section": "",
-    "text": "html_style\nvscodenb.html_style",
-    "crumbs": [
-      "vscodenb",
-      "html_style"
+      "is_vscode_dark_theme"
     ]
   },
   {
