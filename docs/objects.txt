@@ -6,6 +6,8 @@ vscodenb.set_vscode_theme py:function 1 api/set_vscode_theme.html#vscodenb.set_v
 vscodenb.plot_theme.set_vscode_theme py:function 1 api/set_vscode_theme.html#vscodenb.set_vscode_theme vscodenb.set_vscode_theme
 vscodenb.vscode_theme py:class 1 api/vscode_theme.html#vscodenb.vscode_theme -
 vscodenb.plot_theme.vscode_theme py:class 1 api/vscode_theme.html#vscodenb.vscode_theme vscodenb.vscode_theme
+vscodenb.is_vscode_dark_theme py:function 1 api/is_vscode_dark_theme.html#vscodenb.is_vscode_dark_theme -
+vscodenb.plot_theme.is_vscode_dark_theme py:function 1 api/is_vscode_dark_theme.html#vscodenb.is_vscode_dark_theme vscodenb.is_vscode_dark_theme
 vscodenb.lighten_colors py:function 1 api/lighten_colors.html#vscodenb.lighten_colors -
 vscodenb.plot_theme.lighten_colors py:function 1 api/lighten_colors.html#vscodenb.lighten_colors vscodenb.lighten_colors
 vscodenb.truncate_colormap py:function 1 api/truncate_colormap.html#vscodenb.truncate_colormap -

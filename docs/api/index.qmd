@@ -8,6 +8,7 @@
 | --- | --- |
 | [set_vscode_theme](set_vscode_theme.qmd#vscodenb.set_vscode_theme) | Set the default theme for the graph plotter. |
 | [vscode_theme](vscode_theme.qmd#vscodenb.vscode_theme) |  |
+| [is_vscode_dark_theme](is_vscode_dark_theme.qmd#vscodenb.is_vscode_dark_theme) | Determine if a given VS Code theme name is dark or light. |
 | [lighten_colors](lighten_colors.qmd#vscodenb.lighten_colors) | Lighten a colormap or palette using HSL color space. |
 | [truncate_colormap](truncate_colormap.qmd#vscodenb.truncate_colormap) |  |
 | [iridis](iridis.qmd#vscodenb.iridis) |  |

@@ -5,6 +5,7 @@ website:
     - contents:
       - api/set_vscode_theme.qmd
       - api/vscode_theme.qmd
+      - api/is_vscode_dark_theme.qmd
       - api/lighten_colors.qmd
       - api/truncate_colormap.qmd
       - api/iridis.qmd
