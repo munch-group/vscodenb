@@ -2,7 +2,7 @@ import shutil
 import sys
 import matplotlib
 
-from .plot_theme import set_vscode_theme, vscode_theme, lighten_colors, truncate_colormap
+from .plot_theme import set_vscode_theme, vscode_theme, is_vscode_dark_theme, lighten_colors, truncate_colormap
 
 iridis = truncate_colormap('viridis', minval=0.1)
 matplotlib.colormaps.register(cmap=iridis, name='iridis')
