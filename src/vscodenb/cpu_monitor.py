@@ -1268,8 +1268,8 @@ class CPUMonitor:
             if unit_idx > 0:
                 html += '<div style="height: 12px;"></div>'
 
-            # Start unit container
-            unit_style = 'margin-bottom: 12px;'
+            # Start unit container (margin-bottom only between units, not after last)
+            unit_style = 'margin-bottom: 12px;' if unit_idx < len(self.units) - 1 else ''
             html += f'<div style="{unit_style}">'
 
             # Unit name with memory percentage (mean/max) - convert MB to percentage
@@ -1363,8 +1363,8 @@ class CPUMonitor:
             if unit_idx > 0:
                 html += '<div style="height: 12px;"></div>'
 
-            # Start unit container
-            unit_style = 'margin-bottom: 12px;'
+            # Start unit container (margin-bottom only between units, not after last)
+            unit_style = 'margin-bottom: 12px;' if unit_idx < len(self.units) - 1 else ''
             html += f'<div style="{unit_style}">'
 
             if summary_mode:

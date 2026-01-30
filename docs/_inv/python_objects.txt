@@ -1854,16 +1854,22 @@ PyMemAllocatorEx c:type 1 c-api/memory.html#c.$ -
 PyMem_Calloc c:function 1 c-api/memory.html#c.$ -
 PyMem_Calloc.elsize c:functionParam 1 c-api/memory.html#c.PyMem_Calloc -
 PyMem_Calloc.nelem c:functionParam 1 c-api/memory.html#c.PyMem_Calloc -
+PyMem_DEL c:macro 1 c-api/memory.html#c.$ -
 PyMem_Del c:function 1 c-api/memory.html#c.$ -
 PyMem_Del.p c:functionParam 1 c-api/memory.html#c.PyMem_Del -
+PyMem_FREE c:macro 1 c-api/memory.html#c.$ -
 PyMem_Free c:function 1 c-api/memory.html#c.$ -
 PyMem_Free.p c:functionParam 1 c-api/memory.html#c.PyMem_Free -
 PyMem_GetAllocator c:function 1 c-api/memory.html#c.$ -
 PyMem_GetAllocator.allocator c:functionParam 1 c-api/memory.html#c.PyMem_GetAllocator -
 PyMem_GetAllocator.domain c:functionParam 1 c-api/memory.html#c.PyMem_GetAllocator -
+PyMem_MALLOC c:macro 1 c-api/memory.html#c.$ -
 PyMem_Malloc c:function 1 c-api/memory.html#c.$ -
 PyMem_Malloc.n c:functionParam 1 c-api/memory.html#c.PyMem_Malloc -
+PyMem_NEW c:macro 1 c-api/memory.html#c.$ -
 PyMem_New c:macro 1 c-api/memory.html#c.$ -
+PyMem_REALLOC c:macro 1 c-api/memory.html#c.$ -
+PyMem_RESIZE c:macro 1 c-api/memory.html#c.$ -
 PyMem_RawCalloc c:function 1 c-api/memory.html#c.$ -
 PyMem_RawCalloc.elsize c:functionParam 1 c-api/memory.html#c.PyMem_RawCalloc -
 PyMem_RawCalloc.nelem c:functionParam 1 c-api/memory.html#c.PyMem_RawCalloc -
@@ -2288,10 +2294,6 @@ PyOS_InputHook c:member 1 c-api/veryhigh.html#c.$ -
 PyOS_InterruptOccurred c:function 1 c-api/sys.html#c.$ -
 PyOS_ReadlineFunctionPointer c:member 1 c-api/veryhigh.html#c.$ -
 PyOS_double_to_string c:function 1 c-api/conversion.html#c.$ -
-PyOS_double_to_string.Py_DTSF_ADD_DOT_0 c:macro 1 c-api/conversion.html#c.$ -
-PyOS_double_to_string.Py_DTSF_ALT c:macro 1 c-api/conversion.html#c.$ -
-PyOS_double_to_string.Py_DTSF_NO_NEG_0 c:macro 1 c-api/conversion.html#c.$ -
-PyOS_double_to_string.Py_DTSF_SIGN c:macro 1 c-api/conversion.html#c.$ -
 PyOS_double_to_string.flags c:functionParam 1 c-api/conversion.html#c.PyOS_double_to_string -
 PyOS_double_to_string.format_code c:functionParam 1 c-api/conversion.html#c.PyOS_double_to_string -
 PyOS_double_to_string.precision c:functionParam 1 c-api/conversion.html#c.PyOS_double_to_string -
@@ -3956,6 +3958,13 @@ Py_DEBUG c:macro 1 c-api/intro.html#c.$ -
 Py_DECREF c:function 1 c-api/refcounting.html#c.$ -
 Py_DECREF.o c:functionParam 1 c-api/refcounting.html#c.Py_DECREF -
 Py_DEPRECATED c:macro 1 c-api/intro.html#c.$ -
+Py_DTSF_ADD_DOT_0 c:macro 1 c-api/conversion.html#c.$ -
+Py_DTSF_ALT c:macro 1 c-api/conversion.html#c.$ -
+Py_DTSF_NO_NEG_0 c:macro 1 c-api/conversion.html#c.$ -
+Py_DTSF_SIGN c:macro 1 c-api/conversion.html#c.$ -
+Py_DTST_FINITE c:macro 1 c-api/conversion.html#c.$ -
+Py_DTST_INFINITE c:macro 1 c-api/conversion.html#c.$ -
+Py_DTST_NAN c:macro 1 c-api/conversion.html#c.$ -
 Py_DebugFlag c:member 1 c-api/init.html#c.$ -
 Py_DecRef c:function 1 c-api/refcounting.html#c.$ -
 Py_DecRef.o c:functionParam 1 c-api/refcounting.html#c.Py_DecRef -
@@ -7771,6 +7780,7 @@ ftplib.error_reply py:exception 1 library/ftplib.html#$ -
 ftplib.error_temp py:exception 1 library/ftplib.html#$ -
 function.__annotate__ py:attribute 1 reference/datamodel.html#$ -
 function.__annotations__ py:attribute 1 reference/datamodel.html#$ -
+function.__builtins__ py:attribute 1 reference/datamodel.html#$ -
 function.__closure__ py:attribute 1 reference/datamodel.html#$ -
 function.__code__ py:attribute 1 reference/datamodel.html#$ -
 function.__defaults__ py:attribute 1 reference/datamodel.html#$ -
@@ -8293,11 +8303,6 @@ importlib.abc.PathEntryFinder.find_spec py:method 1 library/importlib.html#$ -
 importlib.abc.PathEntryFinder.invalidate_caches py:method 1 library/importlib.html#$ -
 importlib.abc.ResourceLoader py:class 1 library/importlib.html#$ -
 importlib.abc.ResourceLoader.get_data py:method 1 library/importlib.html#$ -
-importlib.abc.ResourceReader py:class 1 library/importlib.html#$ -
-importlib.abc.ResourceReader.contents py:method 1 library/importlib.html#$ -
-importlib.abc.ResourceReader.is_resource py:method 1 library/importlib.html#$ -
-importlib.abc.ResourceReader.open_resource py:method 1 library/importlib.html#$ -
-importlib.abc.ResourceReader.resource_path py:method 1 library/importlib.html#$ -
 importlib.abc.SourceLoader py:class 1 library/importlib.html#$ -
 importlib.abc.SourceLoader.exec_module py:method 1 library/importlib.html#$ -
 importlib.abc.SourceLoader.get_code py:method 1 library/importlib.html#$ -
@@ -8307,18 +8312,6 @@ importlib.abc.SourceLoader.load_module py:method 1 library/importlib.html#$ -
 importlib.abc.SourceLoader.path_mtime py:method 1 library/importlib.html#$ -
 importlib.abc.SourceLoader.path_stats py:method 1 library/importlib.html#$ -
 importlib.abc.SourceLoader.set_data py:method 1 library/importlib.html#$ -
-importlib.abc.Traversable py:class 1 library/importlib.html#$ -
-importlib.abc.Traversable.__truediv__ py:method 1 library/importlib.html#$ -
-importlib.abc.Traversable.is_dir py:method 1 library/importlib.html#$ -
-importlib.abc.Traversable.is_file py:method 1 library/importlib.html#$ -
-importlib.abc.Traversable.iterdir py:method 1 library/importlib.html#$ -
-importlib.abc.Traversable.joinpath py:method 1 library/importlib.html#$ -
-importlib.abc.Traversable.name py:attribute 1 library/importlib.html#$ -
-importlib.abc.Traversable.open py:method 1 library/importlib.html#$ -
-importlib.abc.Traversable.read_bytes py:method 1 library/importlib.html#$ -
-importlib.abc.Traversable.read_text py:method 1 library/importlib.html#$ -
-importlib.abc.TraversableResources py:class 1 library/importlib.html#$ -
-importlib.abc.TraversableResources.files py:method 1 library/importlib.html#$ -
 importlib.import_module py:function 1 library/importlib.html#$ -
 importlib.invalidate_caches py:function 1 library/importlib.html#$ -
 importlib.machinery py:module 0 library/importlib.html#module-$ -
@@ -15035,6 +15028,7 @@ PYTHON_FROZEN_MODULES std:envvar 1 using/cmdline.html#envvar-$ -
 PYTHON_GIL std:envvar 1 using/cmdline.html#envvar-$ -
 PYTHON_HISTORY std:envvar 1 using/cmdline.html#envvar-$ -
 PYTHON_JIT std:envvar 1 using/cmdline.html#envvar-$ -
+PYTHON_MANAGER_AUTOMATIC_INSTALL std:envvar 1 using/windows.html#envvar-$ -
 PYTHON_MANAGER_DEFAULT std:envvar 1 using/windows.html#envvar-$ -
 PYTHON_PERF_JIT_SUPPORT std:envvar 1 using/cmdline.html#envvar-$ -
 PYTHON_PRESITE std:envvar 1 using/cmdline.html#envvar-$ -
@@ -15959,6 +15953,7 @@ floor division std:term -1 glossary.html#term-floor-division -
 follow_symlinks std:label -1 library/os.html#follow-symlinks -
 for std:label -1 reference/compound_stmts.html#$ The for statement
 fork-and-threads std:label -1 c-api/init.html#$ Cautions about fork()
+format-block std:label -1 library/idle.html#$ Format block
 format-characters std:label -1 library/struct.html#$ Format Characters
 format-codes std:label -1 library/datetime.html#$ strftime() and strptime() Format Codes
 format-menu std:label -1 library/idle.html#$ Format menu (Editor window only)
