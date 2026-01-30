@@ -180,8 +180,8 @@ class HTMLProgressBar:
         # '''
         # Build HTML (matching cpu_monitor.py style at lines 1203, 1327-1329)
         html = f'''
-        <div style="font-family: monospace; font-size: 10px; padding: 0px 10px, 5px 10px; display: flex; align-items: center; gap: 10px;">
-            <div style="width: 15ch; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+        <div style="font-family: monospace; font-size: 10px; padding: 0px 10px 5px 10px; display: flex; align-items: center; gap: 1ch;">
+            <div style="white-space: nowrap; flex-shrink: 0;">
                 {self.desc} {percentage:.0f}% | {remaining_str}
             </div>
             <div style="flex: 1; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;">
