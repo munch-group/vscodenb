@@ -129,8 +129,7 @@ def is_vscode_dark_theme(mode=None) -> bool:
     is_dark = None
 
     # always light theme when executing via nbconvert
-    is_nbconvert = os.environ.get('NBCONVERT_EXECUTION', False) or '__NBCONVERT__' in os.environ
-    if is_nbconvert:
+    if os.environ.get('NBCONVERT', False):
         return False
 
     env_theme = os.environ.get('NOTEBOOK_THEME', None)
@@ -153,8 +152,7 @@ def is_vscode_dark_theme(mode=None) -> bool:
             plt.close(fig)
             luminance = matplotlib.colors.rgb_to_hsv(matplotlib.colors.to_rgb(bg_color))[2]
             is_dark = luminance < 0.5
-    
-    plt.close('all')
+            plt.close('all')
 
     return is_dark
 
