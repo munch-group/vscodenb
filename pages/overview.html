@@ -76,6 +76,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-0b37c64f34216b628666a8dac638b53b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -243,18 +246,18 @@ Tip
 <p>You can open <code>settings.json</code> from the command palette (Cmd-Shift-p) by typing “user settings” and select “Preferences: Open User Settings (JSON)”.</p>
 </div>
 </div>
-<div id="cell-4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-01-31T09:15:41.510418Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-01-31T09:15:41.510259Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-01-31T09:15:42.262387Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-01-31T09:15:42.261846Z&quot;}}" data-execution_count="2">
+<div id="cell-4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-02-09T00:16:43.344250Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-02-09T00:16:43.344140Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-02-09T00:16:43.795131Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-02-09T00:16:43.794600Z&quot;}}" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy.random <span class="im">import</span> random</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-01-31T09:15:42.264234Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-01-31T09:15:42.264042Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-01-31T09:15:42.280144Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-01-31T09:15:42.279604Z&quot;}}" data-execution_count="3">
+<div id="cell-5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-02-09T00:16:43.796705Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-02-09T00:16:43.796573Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-02-09T00:16:43.808959Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-02-09T00:16:43.808463Z&quot;}}" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'figure.figsize'</span>] <span class="op">=</span> (<span class="dv">5</span>, <span class="fl">3.7</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="plot-theme" class="level2">
 <h2 class="anchored" data-anchor-id="plot-theme">Plot theme</h2>
-<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-01-31T09:15:42.282008Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-01-31T09:15:42.281874Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-01-31T09:15:45.348784Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-01-31T09:15:45.348255Z&quot;}}" data-execution_count="4">
+<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-02-09T00:16:43.810544Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-02-09T00:16:43.810462Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-02-09T00:16:46.298525Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-02-09T00:16:46.297934Z&quot;}}" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> vscodenb</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>vscodenb.set_vscode_theme()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -292,9 +295,6 @@ div.progress-bar { /* Inner bar */
     padding-bottom: 0px !important;    
 }
 </style>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Overriding theme from NOTEBOOK_THEME environment variable. &lt;ipykernel.iostream.OutStream object at 0x1078054b0&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 
@@ -342,58 +342,65 @@ div.progress-bar { /* Inner bar */
         </style>                          
         
 </div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="overview_files/figure-html/cell-5-output-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="overview_files/figure-html/cell-5-output-3.png" width="441" height="328" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
 </div>
 <p>See a full demo at <a href="../pages/plot_theme.html">here</a>.</p>
 </section>
 <section id="resource-monitor-utils" class="level2">
 <h2 class="anchored" data-anchor-id="resource-monitor-utils">Resource monitor utils</h2>
-<div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-01-31T09:15:45.350915Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-01-31T09:15:45.350705Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-01-31T09:15:45.372342Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-01-31T09:15:45.371863Z&quot;}}" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> vscodenb <span class="co"># importing vscodenb automatically enables monitoring</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-02-09T00:16:46.300304Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-02-09T00:16:46.300091Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-02-09T00:16:46.324904Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-02-09T00:16:46.324412Z&quot;}}" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> vscodenb <span class="co"># importing vscodenb automatically enables monitoring</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-01-31T09:15:45.373936Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-01-31T09:15:45.373840Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-01-31T09:15:49.031608Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-01-31T09:15:49.030899Z&quot;}}" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>monitor <span class="op">-</span>p</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>time.sleep(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-02-09T00:16:46.326523Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-02-09T00:16:46.326435Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-02-09T00:16:49.991415Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-02-09T00:16:49.990724Z&quot;}}" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>monitor <span class="op">-</span>p</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>time.sleep(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div style="font-family: monospace; font-size: 10px; padding: 10px;"><div style=""><div style="margin-bottom: 6px; font-size: 11px;">macbookpro <span style="font-weight: normal; color: #666;">(38%/38% mem)</span></div><div style="display: flex; gap: 3px; width: 100%; margin-bottom: 3px;">
-                        <div style="width: calc((100% - 27px) / 10); min-width: 20px; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;" title="CPU 0: 64.0% avg">
-                            <div style="width: 64.01428571428572%; height: 100%; background: #666666;"></div>
+<div style="font-family: monospace; font-size: 10px; padding: 10px;"><div style=""><div style="margin-bottom: 6px; font-size: 11px;">macbookpro <span style="font-weight: normal; color: #666;">(37%/37% mem)</span></div><div style="display: flex; gap: 3px; width: 100%; margin-bottom: 3px;">
+                        <div style="width: calc((100% - 27px) / 10); min-width: 20px; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;" title="CPU 0: 88.6% avg">
+                            <div style="width: 88.58571428571429%; height: 100%; background: #666666;"></div>
                         </div>
                         
-                        <div style="width: calc((100% - 27px) / 10); min-width: 20px; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;" title="CPU 1: 63.6% avg">
-                            <div style="width: 63.614285714285714%; height: 100%; background: #666666;"></div>
+                        <div style="width: calc((100% - 27px) / 10); min-width: 20px; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;" title="CPU 1: 90.4% avg">
+                            <div style="width: 90.35714285714285%; height: 100%; background: #666666;"></div>
                         </div>
                         
-                        <div style="width: calc((100% - 27px) / 10); min-width: 20px; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;" title="CPU 2: 40.1% avg">
-                            <div style="width: 40.05714285714286%; height: 100%; background: #666666;"></div>
+                        <div style="width: calc((100% - 27px) / 10); min-width: 20px; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;" title="CPU 2: 48.7% avg">
+                            <div style="width: 48.72857142857142%; height: 100%; background: #666666;"></div>
                         </div>
                         
-                        <div style="width: calc((100% - 27px) / 10); min-width: 20px; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;" title="CPU 3: 41.7% avg">
-                            <div style="width: 41.65714285714286%; height: 100%; background: #666666;"></div>
+                        <div style="width: calc((100% - 27px) / 10); min-width: 20px; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;" title="CPU 3: 50.9% avg">
+                            <div style="width: 50.857142857142854%; height: 100%; background: #666666;"></div>
                         </div>
                         
-                        <div style="width: calc((100% - 27px) / 10); min-width: 20px; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;" title="CPU 4: 31.4% avg">
-                            <div style="width: 31.414285714285715%; height: 100%; background: #666666;"></div>
+                        <div style="width: calc((100% - 27px) / 10); min-width: 20px; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;" title="CPU 4: 36.4% avg">
+                            <div style="width: 36.357142857142854%; height: 100%; background: #666666;"></div>
                         </div>
                         
-                        <div style="width: calc((100% - 27px) / 10); min-width: 20px; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;" title="CPU 5: 21.9% avg">
-                            <div style="width: 21.885714285714283%; height: 100%; background: #666666;"></div>
+                        <div style="width: calc((100% - 27px) / 10); min-width: 20px; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;" title="CPU 5: 9.4% avg">
+                            <div style="width: 9.442857142857141%; height: 100%; background: #666666;"></div>
                         </div>
                         
-                        <div style="width: calc((100% - 27px) / 10); min-width: 20px; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;" title="CPU 6: 9.2% avg">
-                            <div style="width: 9.171428571428573%; height: 100%; background: #666666;"></div>
+                        <div style="width: calc((100% - 27px) / 10); min-width: 20px; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;" title="CPU 6: 4.0% avg">
+                            <div style="width: 4.0%; height: 100%; background: #666666;"></div>
                         </div>
                         
-                        <div style="width: calc((100% - 27px) / 10); min-width: 20px; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;" title="CPU 7: 5.9% avg">
-                            <div style="width: 5.942857142857142%; height: 100%; background: #666666;"></div>
+                        <div style="width: calc((100% - 27px) / 10); min-width: 20px; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;" title="CPU 7: 2.2% avg">
+                            <div style="width: 2.242857142857143%; height: 100%; background: #666666;"></div>
                         </div>
                         
-                        <div style="width: calc((100% - 27px) / 10); min-width: 20px; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;" title="CPU 8: 3.7% avg">
-                            <div style="width: 3.685714285714286%; height: 100%; background: #666666;"></div>
+                        <div style="width: calc((100% - 27px) / 10); min-width: 20px; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;" title="CPU 8: 1.2% avg">
+                            <div style="width: 1.157142857142857%; height: 100%; background: #666666;"></div>
                         </div>
                         
-                        <div style="width: calc((100% - 27px) / 10); min-width: 20px; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;" title="CPU 9: 1.7% avg">
-                            <div style="width: 1.6714285714285713%; height: 100%; background: #666666;"></div>
+                        <div style="width: calc((100% - 27px) / 10); min-width: 20px; height: 8px; background: rgba(128, 128, 128, 0.2); border-radius: 2px; overflow: hidden;" title="CPU 9: 1.1% avg">
+                            <div style="width: 1.1142857142857143%; height: 100%; background: #666666;"></div>
                         </div>
                         </div></div></div>
 </div>
@@ -402,11 +409,11 @@ div.progress-bar { /* Inner bar */
 </section>
 <section id="less-intrusive-progress-bars" class="level2">
 <h2 class="anchored" data-anchor-id="less-intrusive-progress-bars">Less intrusive progress bars</h2>
-<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-01-31T09:15:49.033342Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-01-31T09:15:49.033223Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-01-31T09:15:50.101235Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-01-31T09:15:50.100685Z&quot;}}" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> vscodenb <span class="im">import</span> pqdm, prange</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> prange(<span class="dv">10</span>, persist<span class="op">=</span><span class="va">True</span>):</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="fl">0.1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-02-09T00:16:49.993266Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-02-09T00:16:49.993128Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-02-09T00:16:51.082840Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-02-09T00:16:51.081800Z&quot;}}" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> vscodenb <span class="im">import</span> pqdm, prange</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> prange(<span class="dv">10</span>, persist<span class="op">=</span><span class="va">True</span>):</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="fl">0.1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
         <div style="font-family: monospace; font-size: 10px; padding: 0px 10px 5px 10px; display: flex; align-items: center; gap: 1ch;">
@@ -420,9 +427,9 @@ div.progress-bar { /* Inner bar */
         
 </div>
 </div>
-<div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-01-31T09:15:50.102791Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-01-31T09:15:50.102659Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-01-31T09:15:50.435846Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-01-31T09:15:50.435271Z&quot;}}" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> pqdm([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], persist<span class="op">=</span><span class="va">True</span>):</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="fl">0.1</span>)    </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-02-09T00:16:51.084568Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-02-09T00:16:51.084456Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-02-09T00:16:51.426371Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-02-09T00:16:51.425550Z&quot;}}" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> pqdm([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], persist<span class="op">=</span><span class="va">True</span>):</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="fl">0.1</span>)    </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 
         <div style="font-family: monospace; font-size: 10px; padding: 0px 10px 5px 10px; display: flex; align-items: center; gap: 1ch;">
@@ -441,16 +448,16 @@ div.progress-bar { /* Inner bar */
 <section id="slurm-cell-magic" class="level2">
 <h2 class="anchored" data-anchor-id="slurm-cell-magic">SLURM cell magic</h2>
 <p>Run a single cell as a SLURM job:</p>
-<div id="cell-18" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-01-31T09:15:50.437714Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-01-31T09:15:50.437525Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-01-31T09:15:50.459705Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-01-31T09:15:50.459165Z&quot;}}" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>slurm</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="st">"Variable values updated in the slurm job are automatically transferred back to the notebook!"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-18" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-02-09T00:16:51.427862Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-02-09T00:16:51.427767Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-02-09T00:16:51.447554Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-02-09T00:16:51.446967Z&quot;}}" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>slurm</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="st">"Variable values updated in the slurm job are automatically transferred back to the notebook!"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Not running on SLURM cluster.</code></pre>
 </div>
 </div>
 <div id="cell-19" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;active&quot;:&quot;ipynb&quot;,&quot;iopub.execute_input&quot;:&quot;2025-12-09T13:39:50.518684Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-12-09T13:39:50.518503Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-12-09T13:39:50.764165Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-12-09T13:39:50.762870Z&quot;}}" data-tags="[&quot;skip-execution&quot;]">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"It works: </span><span class="sc">{</span>s<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"It works: </span><span class="sc">{</span>s<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>It works: Variable values updated in the slurm job are automatically transferred back to the notebook!</code></pre>
 </div>
@@ -862,6 +869,38 @@ div.progress-bar { /* Inner bar */
   });
   </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
