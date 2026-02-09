@@ -87,6 +87,7 @@ class suppress_plotting_output:
 
     def __exit__(self, exc_type, exc_value, traceback):
         plt.ion()
+        plt.close('all')
 
     
 def get_vscode_settings_path() -> Path:
@@ -134,7 +135,7 @@ def is_vscode_dark_theme(mode=None) -> bool:
 
     env_theme = os.environ.get('NOTEBOOK_THEME', None)
     if env_theme is not None:
-        print("Overriding theme from NOTEBOOK_THEME environment variable.", sys.stderr)
+        # print("Overriding theme from NOTEBOOK_THEME environment variable.", sys.stderr)
         return 'dark' in env_theme.lower()
 
     if mode is not None:
@@ -152,7 +153,6 @@ def is_vscode_dark_theme(mode=None) -> bool:
             plt.close(fig)
             luminance = matplotlib.colors.rgb_to_hsv(matplotlib.colors.to_rgb(bg_color))[2]
             is_dark = luminance < 0.5
-            plt.close('all')
 
     return is_dark
 
