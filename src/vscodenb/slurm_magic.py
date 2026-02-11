@@ -26,7 +26,8 @@ from pathlib import Path
 from IPython.core.magic import Magics, magics_class, cell_magic
 from IPython.core.magic_arguments import argument, magic_arguments, parse_argstring
 from IPython.core.getipython import get_ipython
-from IPython.display import display, HTML
+from IPython.display import display
+
 import numpy as np
 import pandas as pd
 import shutil
@@ -114,13 +115,11 @@ def serialize_globals(globals_dict):
             dill.loads(serialized)
             serializable[key] = value
         except Exception as e:
-            # If dill fails, try to handle specific types
+            # dill.dumps() failed - only rescue scalar types that are
+            # guaranteed serializable. Do NOT rescue containers (list, dict,
+            # tuple, set) because their contents may be unpicklable.
             try:
-                if isinstance(value, (np.ndarray, pd.DataFrame, pd.Series)):
-                    # These should work with dill, but have a fallback
-                    serializable[key] = value
-                elif isinstance(value, (int, float, str, bool, list, dict, tuple, set)):
-                    # Basic types should always work
+                if isinstance(value, (int, float, str, bool)):
                     serializable[key] = value
                 else:
                     failed[key] = f"{type(value).__name__}: {str(e)[:50]}"
@@ -206,6 +205,25 @@ if len(sys.argv) > 2:
 '''
     
     return script
+
+
+class _StatusHTML:
+    """HTML display object with empty text/plain repr.
+
+    Using IPython's HTML() class produces '<IPython.core.display.HTML object>'
+    as the text/plain MIME type, which some notebook frontends render as visible
+    text.  This wrapper only provides _repr_html_ and returns an empty string
+    from __repr__, so the text/plain fallback is blank.
+    """
+
+    def __init__(self, html):
+        self._html = html
+
+    def _repr_html_(self):
+        return self._html
+
+    def __repr__(self):
+        return ''
 
 
 @magics_class
@@ -341,14 +359,17 @@ class SlurmMagic(Magics):
             # Submit the job
             result = subprocess.run(sbatch_cmd, capture_output=True, text=True)
             if result.returncode != 0:
-                display(HTML(self._generate_status_html([('Failed', '#666666')])))
+                display(_StatusHTML(self._generate_status_html([('Failed', '#666666')])))
                 return
 
             job_id = result.stdout.strip()
 
             # Initialize HTML status display
             status_stages = []
-            status_display = display(HTML(self._generate_status_html(status_stages)), display_id=True)
+            status_display = display(
+                _StatusHTML(self._generate_status_html(status_stages)),
+                display_id=True,
+            )
 
             # Poll for job state
             poll_interval = 0.5
@@ -369,10 +390,12 @@ class SlurmMagic(Magics):
                     if state and state != prev_state:
                         if state == 'PENDING' and prev_state is None:
                             status_stages.append(('Allocated...', '#666666'))
-                            status_display.update(HTML(self._generate_status_html(status_stages)))
+                            status_display.update(
+                                _StatusHTML(self._generate_status_html(status_stages)))
                         elif state == 'RUNNING':
                             status_stages.append(('Running...', '#666666'))
-                            status_display.update(HTML(self._generate_status_html(status_stages)))
+                            status_display.update(
+                                _StatusHTML(self._generate_status_html(status_stages)))
                         prev_state = state
 
                     if state in ('COMPLETED', 'FAILED', 'CANCELLED', 'TIMEOUT', 'OUT_OF_MEMORY'):
@@ -416,7 +439,8 @@ class SlurmMagic(Magics):
             else:
                 status_stages.append(('Failed', '#666666'))
 
-            status_display.update(HTML(self._generate_status_html(status_stages)))
+            status_display.update(
+                _StatusHTML(self._generate_status_html(status_stages)))
 
             # Print output from job
             if Path(output_file).exists():
@@ -426,15 +450,29 @@ class SlurmMagic(Magics):
                     print(output, end='')
 
         except KeyboardInterrupt:
-            display(HTML(self._generate_status_html([('Killed', '#666666')])))
+            display(_StatusHTML(self._generate_status_html([('Killed', '#666666')])))
         except Exception:
-            display(HTML(self._generate_status_html([('Failed', '#666666')])))
+            display(_StatusHTML(self._generate_status_html([('Failed', '#666666')])))
+
         finally:
             # Clean up temporary files
             for temp_file in [script_file, state_file, output_state_file, output_file]:
                 if temp_file:
                     Path(temp_file).unlink(missing_ok=True)
     
+    def _generate_status_html(self, stages):
+        """Generate HTML for status display.
+
+        Args:
+            stages: list of (status_text, color) tuples
+        """
+        spans = []
+        for text, color in stages:
+            spans.append(f'<span style="color: {color};">{text}</span>')
+
+        html = f'''<div style="font-family: monospace; font-size: 10px; padding: 4px;">{''.join(spans)}</div>'''
+        return html
+
     def _compare_values(self, val1, val2):
         """Compare two values for equality, handling special cases."""
         try:
@@ -451,19 +489,6 @@ class SlurmMagic(Magics):
         except:
             return False
 
-    def _generate_status_html(self, stages):
-        """Generate HTML for status display.
-
-        Args:
-            stages: list of (status_text, color) tuples
-        """
-        # Color mapping for final states
-        spans = []
-        for text, color in stages:
-            spans.append(f'<span style="color: {color};">{text}</span>')
-
-        html = f'''<div style="font-family: monospace; font-size: 10px; padding: 4px;">{''.join(spans)}</div>'''
-        return html
 
 
 # def load_ipython_extension(ipython):
