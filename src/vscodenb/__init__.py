@@ -80,6 +80,10 @@ div.progress-bar { /* Inner bar */
     color: 'white' !important;
     padding-bottom: 0px !important;    
 }
+
+table {
+    font-variant-numeric: tabular-nums; 
+}
 </style>
 '''
 display(HTML(html_style))
