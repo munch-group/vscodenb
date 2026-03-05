@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "pages/progress.html",
+    "href": "pages/progress.html",
+    "title": "tqdm like progress bars",
+    "section": "",
+    "text": "import vscodenb # importing automatically registers the ipython magic\nfrom vscodenb import pqdm, prange\n\n\n\n\n\n\nimport time\nfor i in prange(1000, persist=True):\n    time.sleep(0.001)\n\n\n        \n            \n                 100% | 0 s\n            \n            \n                \n            \n        \n        \n\n\n\nelememnts = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\nfor i in pqdm(elememnts):\n    time.sleep(0.1)\n\n\nimport time\nfor i in prange(3, persist=True):\n    for k in prange(3, persist=True):\n        time.sleep(0.1)\n\n\n        \n            \n                 100% | 0 s\n            \n            \n                \n            \n        \n        \n\n\n\n        \n            \n                 100% | 0 s"
+  },
+  {
     "objectID": "pages/cpu_monitoring.html",
     "href": "pages/cpu_monitoring.html",
     "title": "CPU monitoring",
@@ -11,98 +18,81 @@
     "href": "pages/cpu_monitoring.html#magic-for-cells",
     "title": "CPU monitoring",
     "section": "Magic: For cells",
-    "text": "Magic: For cells\nThe %%monitor cell magic lets you monitor CPU and memory usage as a cell runs. Just add it at the top of any cell.\n\n%%monitor\n\nwork()\n\n\n\n\nUse --persist or -p if you want the widget to persist after cell execution completes. This can be useful as a reminder of CPU/memory used:\n\n%%monitor -p\n\nwork()\n\nmacbookpro (32%/32% mem)\n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n\n\nIncrease update frequency for smoother visualization use four updates per second:\n\n%%monitor -p -i 0.25\n\nwork()\n\nmacbookpro (32%/32% mem)\n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n\n\n\n%%monitor -p -c\n\nwork()\n\nmacbookpro (32%/32% mem)\n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n\n\nProduce summary percentages instead of gauges (overrides -p):\n\n%%monitor -s\n\nwork()\n\nmacbookpro (32%/33% mem)\n\n\n\nCPU %\n97\n97\n97\n96\n95\n95\n95\n95\n94\n93\n\n\n\nTotal CPU time: 19.29 s\n\n\nWidget fills width of cell by default. To limit width, use -w option:\n\n%%monitor -p -w 100\n\nwork()\n\nmacbookpro (32%/32% mem)\n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n\n\nYou can also override the automatic computation of CPU gauges per line:\n\n%%monitor -p -f 4 -w 50\n\nwork()\n\nmacbookpro (32%/33% mem)"
+    "text": "Magic: For cells\nThe %%monitor cell magic lets you monitor CPU and memory usage as a cell runs. Just add it at the top of any cell.\n\n%%monitor\n\nwork()\n\n\n\n\nUse --persist or -p if you want the widget to persist after cell execution completes. This can be useful as a reminder of CPU/memory used:\n\n%%monitor -p\n\nwork()\n\nperry (40%/40% mem)\n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n\n\nIncrease update frequency for smoother visualization use four updates per second:\n\n%%monitor -p -i 0.25\n\nwork()\n\nperry (39%/39% mem)\n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n\n\n\n%%monitor -p -c\n\nwork()\n\nperry (39%/39% mem)\n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n\n\nProduce summary percentages instead of gauges (overrides -p):\n\n%%monitor -s\n\nwork()\n\nperry (39%/39% mem)\n\n\n\nCPU %\n99\n99\n97\n97\n96\n95\n95\n94\n93\n93\n\n\n\nTotal CPU time: 24.30 s\n\n\nWidget fills width of cell by default. To limit width, use -w option:\n\n%%monitor -p -w 100\n\nwork()\n\nperry (39%/39% mem)\n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n\n\nYou can also override the automatic computation of CPU gauges per line:\n\n%%monitor -p -f 4 -w 50\n\nwork()\n\nperry (39%/39% mem)"
   },
   {
     "objectID": "pages/cpu_monitoring.html#context-manager-for-scripts-or-parts-of-cells",
     "href": "pages/cpu_monitoring.html#context-manager-for-scripts-or-parts-of-cells",
     "title": "CPU monitoring",
     "section": "Context Manager: For scripts or parts of cells",
-    "text": "Context Manager: For scripts or parts of cells\nThe context manager gives you explicit control over monitoring. Perfect for Python scripts or when you want programmatic control.\n\nBasic Context Manager\n\nfrom vscodenb import CPUMonitor\n\nwith CPUMonitor(label=\"Computation Phase\", persist=True, color=True):\n    work()\n\nComputation Phasemacbookpro (32%/33% mem)\n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n\n\nAll arguments to the monitor magic can also be passed to CPUMonitor:\n\nwith CPUMonitor(summary=True, label=\"First computation\"):\n    work()\n\nwith CPUMonitor(summary=True, label=\"Second computation\"):\n    work()\n\nFirst computationmacbookpro (31%/32% mem)\n\n\n\nCPU %\n98\n98\n96\n94\n93\n93\n94\n93\n92\n92\n\n\n\nTotal CPU time: 19.11 s\n\n\nSecond computationmacbookpro (31%/31% mem)\n\n\n\nCPU %\n96\n95\n97\n96\n95\n94\n93\n92\n92\n91\n\n\n\nTotal CPU time: 19.03 s"
+    "text": "Context Manager: For scripts or parts of cells\nThe context manager gives you explicit control over monitoring. Perfect for Python scripts or when you want programmatic control.\n\nBasic Context Manager\n\nfrom vscodenb import CPUMonitor\n\nwith CPUMonitor(label=\"Computation Phase\", persist=True, color=True):\n    work()\n\nComputation Phaseperry (39%/39% mem)\n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n\n\nAll arguments to the monitor magic can also be passed to CPUMonitor:\n\nwith CPUMonitor(summary=True, label=\"First computation\"):\n    work()\n\nwith CPUMonitor(summary=True, label=\"Second computation\"):\n    work()\n\nFirst computationperry (39%/39% mem)\n\n\n\nCPU %\n95\n95\n92\n87\n85\n85\n86\n85\n84\n83\n\n\n\nTotal CPU time: 22.19 s\n\n\nSecond computationperry (39%/39% mem)\n\n\n\nCPU %\n99\n100\n93\n89\n86\n84\n84\n83\n82\n81\n\n\n\nTotal CPU time: 22.38 s"
   },
   {
     "objectID": "pages/cpu_monitoring.html#decorator-for-functions",
     "href": "pages/cpu_monitoring.html#decorator-for-functions",
     "title": "CPU monitoring",
     "section": "Decorator: For functions",
-    "text": "Decorator: For functions\nWrap any function with @monitor to automatically monitor its execution. The decorator takes the same arguments as the magic and the context manager, but here the label defaults to the function name.\n\nfrom vscodenb import monitor\n\n@monitor\ndef some_function():\n    work()\n\n@monitor\ndef other_function():\n    work()      \n\nThat lets you track CPU usage for your code in real time:\n\nfor _ in range(3):\n    some_function()\nother_function()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n@monitor(persist=True)\ndef some_function():\n    work()\n\nfor _ in range(3):\n    some_function()\n\nsome_functionmacbookpro (32%/32% mem)\n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n\n\nsome_functionmacbookpro (32%/32% mem)\n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n\n\nsome_functionmacbookpro (32%/32% mem)\n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n\n\nOr profile them using summary=True:\n\n@monitor(summary=True)\ndef some_function():\n    work()\n\n@monitor(summary=True)\ndef other_function():\n    work()     \n\n\nsome_function()   \nother_function() \n\nsome_functionmacbookpro (32%/32% mem)\n\n\n\nCPU %\n99\n98\n96\n95\n94\n93\n94\n93\n92\n92\n\n\n\nTotal CPU time: 19.17 s\n\n\nother_functionmacbookpro (32%/32% mem)\n\n\n\nCPU %\n99\n99\n92\n85\n84\n83\n83\n81\n81\n80\n\n\n\nTotal CPU time: 21.86 s"
+    "text": "Decorator: For functions\nWrap any function with @monitor to automatically monitor its execution. The decorator takes the same arguments as the magic and the context manager, but here the label defaults to the function name.\n\nfrom vscodenb import monitor\n\n@monitor\ndef some_function():\n    work()\n\n@monitor\ndef other_function():\n    work()      \n\nThat lets you track CPU usage for your code in real time:\n\nfor _ in range(3):\n    some_function()\nother_function()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n@monitor(persist=True)\ndef some_function():\n    work()\n\nfor _ in range(3):\n    some_function()\n\nsome_functionperry (39%/39% mem)\n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n\n\nsome_functionperry (39%/39% mem)\n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n\n\nsome_functionperry (39%/39% mem)\n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n\n\nOr profile them using summary=True:\n\n@monitor(summary=True)\ndef some_function():\n    work()\n\n@monitor(summary=True)\ndef other_function():\n    work()     \n\n\nsome_function()   \nother_function() \n\nsome_functionperry (39%/39% mem)\n\n\n\nCPU %\n97\n97\n92\n89\n85\n84\n85\n84\n82\n82\n\n\n\nTotal CPU time: 22.13 s\n\n\nother_functionperry (39%/39% mem)\n\n\n\nCPU %\n100\n100\n96\n94\n93\n92\n91\n91\n91\n89\n\n\n\nTotal CPU time: 23.66 s"
   },
   {
-    "objectID": "pages/plot_theme.html",
-    "href": "pages/plot_theme.html",
-    "title": "Plot theme",
+    "objectID": "pages/overview.html",
+    "href": "pages/overview.html",
+    "title": "Overview",
     "section": "",
-    "text": "Tip\n\n\n\nTo enable automatic theme detection, you must add the following setting to your vscode settings.json:\n\"jupyter.themeMatplotlibPlots\": true,\nYou can open settings.json from the command palette (Cmd-Shift-p) by typing “user settings” and select “Preferences: Open User Settings (JSON)”.\n\n\n\nfrom numpy.random import random\nimport matplotlib.pyplot as plt\n\nVanilla plot without theme:\n\nplt.scatter(random(10), random(10)) ;\n\n\n\n\n\n\n\n\nStyle a single plot:\n\nfrom vscodenb import vscode_theme \n\nwith vscode_theme():\n    plt.scatter(random(10), random(10))\n\n\n\n\n\n\n                                  \n        \n\n\n\n\n\n\n\n\n\nDefault plotting style is preserved:\n\nplt.scatter(random(10), random(10)) ;\n\n\n\n\n\n\n\n\nSet theme for all plots:\n\nimport vscodenb\nvscodenb.set_vscode_theme()\n\nplt.scatter(random(10), random(10)) ;\n\n\n                                  \n        \n\n\n\n\n\n\n\n\n\n\nplt.scatter(random(10), random(10)) ;\n\n\n\n\n\n\n\n\nEven with global styling set, the context manager is useful for setting figsize and font_scale for individual plots:\n\nwith vscode_theme(font_scale=1.5, figsize=(2,1)):\n    plt.scatter(random(10), random(10)) ;\n\n\n                                  \n        \n\n\n\n\n\n\n\n\n\n\nwith vscode_theme(font_scale=0.8, figsize=(7,3)):\n    plt.subplot(121).scatter(random(10), random(10))\n    plt.subplot(122).scatter(random(10), random(10))\n\n\n                                  \n        \n\n\n\n\n\n\n\n\n\n\nwith vscode_theme(frame=True):\n    plt.scatter(random(10), random(10)) ;\n\n\n                                  \n        \n\n\n\n\n\n\n\n\n\n\nwith vscode_theme(style='ticks'):\n    plt.scatter(random(10), random(10)) ;\n\n\n                                  \n        \n\n\n\n\n\n\n\n\n\n\nwith vscode_theme(style='ticks', frame=True):\n    plt.scatter(random(10), random(10)) ;"
+    "text": "vscodenb lets you …\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+    "crumbs": [
+      "Overview"
+    ]
   },
   {
-    "objectID": "pages/progress.html",
-    "href": "pages/progress.html",
-    "title": "tqdm like progress bars",
-    "section": "",
-    "text": "import vscodenb # importing automatically registers the ipython magic\nfrom vscodenb import pqdm, prange\n\n\n\n\n\n\nimport time\nfor i in prange(1000, persist=True):\n    time.sleep(0.001)\n\n\n        \n            \n                 100% | 0 s\n            \n            \n                \n            \n        \n        \n\n\n\nelememnts = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\nfor i in pqdm(elememnts):\n    time.sleep(0.1)\n\n\nimport time\nfor i in prange(3, persist=True):\n    for k in prange(3, persist=True):\n        time.sleep(0.1)\n\n\n        \n            \n                 100% | 0 s\n            \n            \n                \n            \n        \n        \n\n\n\n        \n            \n                 100% | 0 s"
+    "objectID": "pages/overview.html#installation",
+    "href": "pages/overview.html#installation",
+    "title": "Overview",
+    "section": "Installation",
+    "text": "Installation\n\npixicondapip\n\n\npixi workspace channel add munch-group\npixi add vscodenb\n\n\nconda install -c munch-group vscodenb\n\n\npip install vscodenb\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nTo enable automatic theme detection, you must add the following setting to your vscode settings.json:\n\"jupyter.themeMatplotlibPlots\": true,\nYou can open settings.json from the command palette (Cmd-Shift-p) by typing “user settings” and select “Preferences: Open User Settings (JSON)”.\n\n\n\nfrom numpy.random import random\nimport matplotlib.pyplot as plt\nimport time\n\n\nplt.rcParams['figure.figsize'] = (5, 3.7)",
+    "crumbs": [
+      "Overview"
+    ]
   },
   {
-    "objectID": "api/prange.html",
-    "href": "api/prange.html",
-    "title": "prange",
-    "section": "",
-    "text": "prange\nvscodenb.prange(n, desc='', persist=False, **kwargs)\nHTML progress bar for range() in notebooks, tqdm for terminal. Renders as thin bar matching cpu_monitor.py style.\nArgs: n: The number to iterate up to (like range(n)). desc: Description text shown next to the progress bar. persist: If False (default), the progress bar disappears after completion. If True, the progress bar remains visible in its completed state. **kwargs: Additional arguments passed to tqdm (terminal fallback).\nUsage: for i in prange(100, desc=“Processing”): process(i)"
+    "objectID": "pages/overview.html#plot-theme",
+    "href": "pages/overview.html#plot-theme",
+    "title": "Overview",
+    "section": "Plot theme",
+    "text": "Plot theme\n\nimport vscodenb\nvscodenb.set_vscode_theme()\n\nplt.scatter(random(10), random(10)) ;\n\n\n\n\n\n\n                                  \n        \n\n\n\n\n\n\n\n\n\nSee a full demo at here.",
+    "crumbs": [
+      "Overview"
+    ]
   },
   {
-    "objectID": "api/html_style.html",
-    "href": "api/html_style.html",
-    "title": "html_style",
-    "section": "",
-    "text": "html_style\nvscodenb.html_style"
+    "objectID": "pages/overview.html#resource-monitor-utils",
+    "href": "pages/overview.html#resource-monitor-utils",
+    "title": "Overview",
+    "section": "Resource monitor utils",
+    "text": "Resource monitor utils\n\nimport vscodenb # importing vscodenb automatically enables monitoring\n\n\n%%monitor -p\n\ntime.sleep(3)\n\nperry (39%/39% mem)\n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n\n\nSee a full demo at here.",
+    "crumbs": [
+      "Overview"
+    ]
   },
   {
-    "objectID": "api/CPUMonitorMagics.html",
-    "href": "api/CPUMonitorMagics.html",
-    "title": "CPUMonitorMagics",
-    "section": "",
-    "text": "vscodenb.CPUMonitorMagics()\nIPython magics for CPU monitoring.\n\n\n\n\n\nName\nDescription\n\n\n\n\nmonitor\nMonitor CPU usage during cell execution.\n\n\n\n\n\nvscodenb.CPUMonitorMagics.monitor(line, cell)\nMonitor CPU usage during cell execution.\nUsage: %%monitor # your code here\n%%monitor --width 100 --interval 1.0\n# your code here\n\n%%monitor --persist\n# display remains after completion\n\n%%monitor --color\n# use color coding (green/yellow/red)\n\n%%monitor --summary\n# show table with CPU and memory statistics\n\n%%monitor --group-by task\n# group by SLURM task instead of node\n\n%%monitor --label \"Training Epoch 1\"\n# display with custom label"
+    "objectID": "pages/overview.html#less-intrusive-progress-bars",
+    "href": "pages/overview.html#less-intrusive-progress-bars",
+    "title": "Overview",
+    "section": "Less intrusive progress bars",
+    "text": "Less intrusive progress bars\n\nfrom vscodenb import pqdm, prange\n\nfor i in prange(10, persist=True):\n    time.sleep(0.1)\n\n\n        \n            \n                 100% | 0 s\n            \n            \n                \n            \n        \n        \n\n\n\nfor i in pqdm([1, 2, 3], persist=True):\n    time.sleep(0.1)    \n\n\n        \n            \n                 100% | 0 s\n            \n            \n                \n            \n        \n        \n\n\nSee a full demo at here.",
+    "crumbs": [
+      "Overview"
+    ]
   },
   {
-    "objectID": "api/CPUMonitorMagics.html#methods",
-    "href": "api/CPUMonitorMagics.html#methods",
-    "title": "CPUMonitorMagics",
-    "section": "",
-    "text": "Name\nDescription\n\n\n\n\nmonitor\nMonitor CPU usage during cell execution.\n\n\n\n\n\nvscodenb.CPUMonitorMagics.monitor(line, cell)\nMonitor CPU usage during cell execution.\nUsage: %%monitor # your code here\n%%monitor --width 100 --interval 1.0\n# your code here\n\n%%monitor --persist\n# display remains after completion\n\n%%monitor --color\n# use color coding (green/yellow/red)\n\n%%monitor --summary\n# show table with CPU and memory statistics\n\n%%monitor --group-by task\n# group by SLURM task instead of node\n\n%%monitor --label \"Training Epoch 1\"\n# display with custom label"
-  },
-  {
-    "objectID": "api/truncate_colormap.html",
-    "href": "api/truncate_colormap.html",
-    "title": "truncate_colormap",
-    "section": "",
-    "text": "truncate_colormap\nvscodenb.truncate_colormap(cmap, minval=0.0, maxval=1.0, n=100)"
-  },
-  {
-    "objectID": "api/vscode_theme.html",
-    "href": "api/vscode_theme.html",
-    "title": "vscode_theme",
-    "section": "",
-    "text": "vscode_theme\nvscodenb.vscode_theme(mode=None, style='grid', frame=False, **theme_kwargs)"
-  },
-  {
-    "objectID": "api/scriptname.html",
-    "href": "api/scriptname.html",
-    "title": "scriptname",
-    "section": "",
-    "text": "scriptname\nvscodenb.modulename.scriptname()"
-  },
-  {
-    "objectID": "api/get_cached_nodes.html",
-    "href": "api/get_cached_nodes.html",
-    "title": "get_cached_nodes",
-    "section": "",
-    "text": "vscodenb.get_cached_nodes()\nGet cached compute nodes, detecting them if not already cached.\n\n\n\n : List[NodeInfo]\n\nList of detected compute nodes"
-  },
-  {
-    "objectID": "api/get_cached_nodes.html#returns",
-    "href": "api/get_cached_nodes.html#returns",
-    "title": "get_cached_nodes",
-    "section": "",
-    "text": ": List[NodeInfo]\n\nList of detected compute nodes"
+    "objectID": "pages/overview.html#slurm-cell-magic",
+    "href": "pages/overview.html#slurm-cell-magic",
+    "title": "Overview",
+    "section": "SLURM cell magic",
+    "text": "SLURM cell magic\nRun a single cell as a SLURM job:\n\n%%slurm\n\ns = \"Variable values updated in the slurm job are automatically transferred back to the notebook!\"\n\nNot running on SLURM cluster.\n\n\n\nprint(f\"It works: {s}\")\n\nIt works: Variable values updated in the slurm job are automatically transferred back to the notebook!\n\n\nSee a full demo at here.",
+    "crumbs": [
+      "Overview"
+    ]
   },
   {
     "objectID": "api/pqdm.html",
@@ -110,83 +100,6 @@
     "title": "pqdm",
     "section": "",
     "text": "pqdm\nvscodenb.pqdm(iterable=None, total=None, desc='', persist=False, **kwargs)\nHTML progress bar for notebooks, tqdm for terminal. Renders as thin bar matching cpu_monitor.py style.\nArgs: iterable: The iterable to iterate over. total: Total number of items (optional if iterable has len). desc: Description text shown next to the progress bar. persist: If False (default), the progress bar disappears after completion. If True, the progress bar remains visible in its completed state. **kwargs: Additional arguments passed to tqdm (terminal fallback).\nUsage: for item in pqdm(iterable, desc=“Processing”): process(item)"
-  },
-  {
-    "objectID": "api/Left.html",
-    "href": "api/Left.html",
-    "title": "Left",
-    "section": "",
-    "text": "Left\nvscodenb.Left()"
-  },
-  {
-    "objectID": "api/lighten_colors.html",
-    "href": "api/lighten_colors.html",
-    "title": "lighten_colors",
-    "section": "",
-    "text": "vscodenb.lighten_colors(\n    colors,\n    factor=0.0,\n    n_colors=None,\n    as_cmap=None,\n    target_lightness=None,\n)\nLighten a colormap or palette using HSL color space.\n\n\n\ncolors : str, Colormap, or list\n\nMatplotlib colormap, seaborn palette name, or list of colors\n\nfactor : float = 0.0\n\nBlend factor toward white (0 = original, 1 = white). Ignored if target_lightness is set.\n\nn_colors : int = None\n\nNumber of colors for discrete palettes\n\nas_cmap : bool = None\n\nForce output type. If None, auto-detects based on input.\n\ntarget_lightness : float = None\n\nIf set (0-1), all colors will be adjusted to this lightness value, preserving hue and saturation.\n\n\n\n\n\n\n : list or LinearSegmentedColormap"
-  },
-  {
-    "objectID": "api/lighten_colors.html#parameters",
-    "href": "api/lighten_colors.html#parameters",
-    "title": "lighten_colors",
-    "section": "",
-    "text": "colors : str, Colormap, or list\n\nMatplotlib colormap, seaborn palette name, or list of colors\n\nfactor : float = 0.0\n\nBlend factor toward white (0 = original, 1 = white). Ignored if target_lightness is set.\n\nn_colors : int = None\n\nNumber of colors for discrete palettes\n\nas_cmap : bool = None\n\nForce output type. If None, auto-detects based on input.\n\ntarget_lightness : float = None\n\nIf set (0-1), all colors will be adjusted to this lightness value, preserving hue and saturation."
-  },
-  {
-    "objectID": "api/lighten_colors.html#returns",
-    "href": "api/lighten_colors.html#returns",
-    "title": "lighten_colors",
-    "section": "",
-    "text": ": list or LinearSegmentedColormap"
-  },
-  {
-    "objectID": "api/detect_compute_nodes.html",
-    "href": "api/detect_compute_nodes.html",
-    "title": "detect_compute_nodes",
-    "section": "",
-    "text": "detect_compute_nodes\nvscodenb.detect_compute_nodes()\nDetect compute nodes and allocated CPUs.\nReturns list of NodeInfo objects, one per node. For local execution, returns single node. For SLURM, returns all allocated nodes."
-  },
-  {
-    "objectID": "api/iridis.html",
-    "href": "api/iridis.html",
-    "title": "iridis",
-    "section": "",
-    "text": "iridis\nvscodenb.iridis"
-  },
-  {
-    "objectID": "api/index.html",
-    "href": "api/index.html",
-    "title": "Function reference",
-    "section": "",
-    "text": "set_vscode_theme\nSet the default theme for the graph plotter.\n\n\nvscode_theme\n\n\n\nis_vscode_dark_theme\nDetermine if a given VS Code theme name is dark or light.\n\n\nlighten_colors\nLighten a colormap or palette using HSL color space.\n\n\ntruncate_colormap\n\n\n\niridis\n\n\n\npqdm\nHTML progress bar for notebooks, tqdm for terminal.\n\n\nprange\nHTML progress bar for range() in notebooks, tqdm for terminal.\n\n\nCPUMonitor\nLive CPU monitoring with adaptive display.\n\n\nmonitor\nDecorator for CPU monitoring.\n\n\nCPUMonitorMagics\nIPython magics for CPU monitoring.\n\n\ndetect_compute_nodes\nDetect compute nodes and allocated CPUs.\n\n\nget_cached_nodes\nGet cached compute nodes, detecting them if not already cached.\n\n\nSlurmMagic\nIPython magics for running code in SLURM jobs.\n\n\nLeft\n\n\n\nipython\n\n\n\nhtml_style"
-  },
-  {
-    "objectID": "api/index.html#vscodenb",
-    "href": "api/index.html#vscodenb",
-    "title": "Function reference",
-    "section": "",
-    "text": "set_vscode_theme\nSet the default theme for the graph plotter.\n\n\nvscode_theme\n\n\n\nis_vscode_dark_theme\nDetermine if a given VS Code theme name is dark or light.\n\n\nlighten_colors\nLighten a colormap or palette using HSL color space.\n\n\ntruncate_colormap\n\n\n\niridis\n\n\n\npqdm\nHTML progress bar for notebooks, tqdm for terminal.\n\n\nprange\nHTML progress bar for range() in notebooks, tqdm for terminal.\n\n\nCPUMonitor\nLive CPU monitoring with adaptive display.\n\n\nmonitor\nDecorator for CPU monitoring.\n\n\nCPUMonitorMagics\nIPython magics for CPU monitoring.\n\n\ndetect_compute_nodes\nDetect compute nodes and allocated CPUs.\n\n\nget_cached_nodes\nGet cached compute nodes, detecting them if not already cached.\n\n\nSlurmMagic\nIPython magics for running code in SLURM jobs.\n\n\nLeft\n\n\n\nipython\n\n\n\nhtml_style"
-  },
-  {
-    "objectID": "api/set_vscode_theme.html",
-    "href": "api/set_vscode_theme.html",
-    "title": "set_vscode_theme",
-    "section": "",
-    "text": "vscodenb.set_vscode_theme(\n    mode=None,\n    style='grid',\n    frame=False,\n    cmap=None,\n    figsize=(5, 3.7),\n    font_scale=1.0,\n)\nSet the default theme for the graph plotter. The theme can be either ‘dark’ or ‘light’. The default theme is autodetected. NOTEBOOK_THEME environment variable can be used to override the theme.\n\n\n\nmode : str = None\n\n‘dark’ or ‘light’ to force a specific theme. If None, autodetected.\n\nstyle : str = 'grid'\n\n‘grid’ for grid style, ‘ticks’ for ticks style.\n\nframe : bool = False\n\nWhether to show frame around plots.\n\ncmap : Colormap = None\n\nMatplotlib colormap to use for plots.\n\nfigsize : tuple = (5, 3.7)\n\nDefault figure size.\n\nfont_scale : float = 1.0\n\nScale factor for fonts."
-  },
-  {
-    "objectID": "api/set_vscode_theme.html#parameters",
-    "href": "api/set_vscode_theme.html#parameters",
-    "title": "set_vscode_theme",
-    "section": "",
-    "text": "mode : str = None\n\n‘dark’ or ‘light’ to force a specific theme. If None, autodetected.\n\nstyle : str = 'grid'\n\n‘grid’ for grid style, ‘ticks’ for ticks style.\n\nframe : bool = False\n\nWhether to show frame around plots.\n\ncmap : Colormap = None\n\nMatplotlib colormap to use for plots.\n\nfigsize : tuple = (5, 3.7)\n\nDefault figure size.\n\nfont_scale : float = 1.0\n\nScale factor for fonts."
-  },
-  {
-    "objectID": "api/ipython.html",
-    "href": "api/ipython.html",
-    "title": "ipython",
-    "section": "",
-    "text": "ipython\nvscodenb.ipython"
   },
   {
     "objectID": "api/functionname.html",
@@ -224,6 +137,111 @@
     "text": "libraryname.modulename.scriptname"
   },
   {
+    "objectID": "api/truncate_colormap.html",
+    "href": "api/truncate_colormap.html",
+    "title": "truncate_colormap",
+    "section": "",
+    "text": "truncate_colormap\nvscodenb.truncate_colormap(cmap, minval=0.0, maxval=1.0, n=100)"
+  },
+  {
+    "objectID": "api/scriptname.html",
+    "href": "api/scriptname.html",
+    "title": "scriptname",
+    "section": "",
+    "text": "scriptname\nvscodenb.modulename.scriptname()"
+  },
+  {
+    "objectID": "api/Left.html",
+    "href": "api/Left.html",
+    "title": "Left",
+    "section": "",
+    "text": "Left\nvscodenb.Left()"
+  },
+  {
+    "objectID": "api/prange.html",
+    "href": "api/prange.html",
+    "title": "prange",
+    "section": "",
+    "text": "prange\nvscodenb.prange(n, desc='', persist=False, **kwargs)\nHTML progress bar for range() in notebooks, tqdm for terminal. Renders as thin bar matching cpu_monitor.py style.\nArgs: n: The number to iterate up to (like range(n)). desc: Description text shown next to the progress bar. persist: If False (default), the progress bar disappears after completion. If True, the progress bar remains visible in its completed state. **kwargs: Additional arguments passed to tqdm (terminal fallback).\nUsage: for i in prange(100, desc=“Processing”): process(i)"
+  },
+  {
+    "objectID": "api/html_style.html",
+    "href": "api/html_style.html",
+    "title": "html_style",
+    "section": "",
+    "text": "html_style\nvscodenb.html_style"
+  },
+  {
+    "objectID": "api/SlurmMagic.html",
+    "href": "api/SlurmMagic.html",
+    "title": "SlurmMagic",
+    "section": "",
+    "text": "vscodenb.SlurmMagic()\nIPython magics for running code in SLURM jobs.\n\n\n\n\n\nName\nDescription\n\n\n\n\nslurm\nRun code in a SLURM job with optional state transfer.\n\n\n\n\n\nvscodenb.SlurmMagic.slurm(line, cell)\nRun code in a SLURM job with optional state transfer.\nUsage: %%slurm # your code here\n%%slurm --mem 4G --cores 4 --time 00:10:00\n# your code here with SLURM resources\n\n%%slurm --no-state\n# run truly isolated without state transfer"
+  },
+  {
+    "objectID": "api/SlurmMagic.html#methods",
+    "href": "api/SlurmMagic.html#methods",
+    "title": "SlurmMagic",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\nslurm\nRun code in a SLURM job with optional state transfer.\n\n\n\n\n\nvscodenb.SlurmMagic.slurm(line, cell)\nRun code in a SLURM job with optional state transfer.\nUsage: %%slurm # your code here\n%%slurm --mem 4G --cores 4 --time 00:10:00\n# your code here with SLURM resources\n\n%%slurm --no-state\n# run truly isolated without state transfer"
+  },
+  {
+    "objectID": "api/iridis.html",
+    "href": "api/iridis.html",
+    "title": "iridis",
+    "section": "",
+    "text": "iridis\nvscodenb.iridis"
+  },
+  {
+    "objectID": "api/index.html",
+    "href": "api/index.html",
+    "title": "Function reference",
+    "section": "",
+    "text": "set_vscode_theme\nSet the default theme for the graph plotter.\n\n\nvscode_theme\n\n\n\nis_vscode_dark_theme\nDetermine if a given VS Code theme name is dark or light.\n\n\nlighten_colors\nLighten a colormap or palette using HSL color space.\n\n\ntruncate_colormap\n\n\n\niridis\n\n\n\npqdm\nHTML progress bar for notebooks, tqdm for terminal.\n\n\nprange\nHTML progress bar for range() in notebooks, tqdm for terminal.\n\n\nCPUMonitor\nLive CPU monitoring with adaptive display.\n\n\nmonitor\nDecorator for CPU monitoring.\n\n\nCPUMonitorMagics\nIPython magics for CPU monitoring.\n\n\ndetect_compute_nodes\nDetect compute nodes and allocated CPUs.\n\n\nget_cached_nodes\nGet cached compute nodes, detecting them if not already cached.\n\n\nSlurmMagic\nIPython magics for running code in SLURM jobs.\n\n\nLeft\n\n\n\nipython\n\n\n\nhtml_style"
+  },
+  {
+    "objectID": "api/index.html#vscodenb",
+    "href": "api/index.html#vscodenb",
+    "title": "Function reference",
+    "section": "",
+    "text": "set_vscode_theme\nSet the default theme for the graph plotter.\n\n\nvscode_theme\n\n\n\nis_vscode_dark_theme\nDetermine if a given VS Code theme name is dark or light.\n\n\nlighten_colors\nLighten a colormap or palette using HSL color space.\n\n\ntruncate_colormap\n\n\n\niridis\n\n\n\npqdm\nHTML progress bar for notebooks, tqdm for terminal.\n\n\nprange\nHTML progress bar for range() in notebooks, tqdm for terminal.\n\n\nCPUMonitor\nLive CPU monitoring with adaptive display.\n\n\nmonitor\nDecorator for CPU monitoring.\n\n\nCPUMonitorMagics\nIPython magics for CPU monitoring.\n\n\ndetect_compute_nodes\nDetect compute nodes and allocated CPUs.\n\n\nget_cached_nodes\nGet cached compute nodes, detecting them if not already cached.\n\n\nSlurmMagic\nIPython magics for running code in SLURM jobs.\n\n\nLeft\n\n\n\nipython\n\n\n\nhtml_style"
+  },
+  {
+    "objectID": "api/get_cached_nodes.html",
+    "href": "api/get_cached_nodes.html",
+    "title": "get_cached_nodes",
+    "section": "",
+    "text": "vscodenb.get_cached_nodes()\nGet cached compute nodes, detecting them if not already cached.\n\n\n\n : List[NodeInfo]\n\nList of detected compute nodes"
+  },
+  {
+    "objectID": "api/get_cached_nodes.html#returns",
+    "href": "api/get_cached_nodes.html#returns",
+    "title": "get_cached_nodes",
+    "section": "",
+    "text": ": List[NodeInfo]\n\nList of detected compute nodes"
+  },
+  {
+    "objectID": "api/is_vscode_dark_theme.html",
+    "href": "api/is_vscode_dark_theme.html",
+    "title": "is_vscode_dark_theme",
+    "section": "",
+    "text": "is_vscode_dark_theme\nvscodenb.is_vscode_dark_theme(mode=None)\nDetermine if a given VS Code theme name is dark or light."
+  },
+  {
+    "objectID": "api/set_vscode_theme.html",
+    "href": "api/set_vscode_theme.html",
+    "title": "set_vscode_theme",
+    "section": "",
+    "text": "vscodenb.set_vscode_theme(\n    mode=None,\n    style='grid',\n    frame=False,\n    cmap=None,\n    figsize=(5, 3.7),\n    font_scale=1.0,\n)\nSet the default theme for the graph plotter. The theme can be either ‘dark’ or ‘light’. The default theme is autodetected. NOTEBOOK_THEME environment variable can be used to override the theme.\n\n\n\nmode : str = None\n\n‘dark’ or ‘light’ to force a specific theme. If None, autodetected.\n\nstyle : str = 'grid'\n\n‘grid’ for grid style, ‘ticks’ for ticks style.\n\nframe : bool = False\n\nWhether to show frame around plots.\n\ncmap : Colormap = None\n\nMatplotlib colormap to use for plots.\n\nfigsize : tuple = (5, 3.7)\n\nDefault figure size.\n\nfont_scale : float = 1.0\n\nScale factor for fonts."
+  },
+  {
+    "objectID": "api/set_vscode_theme.html#parameters",
+    "href": "api/set_vscode_theme.html#parameters",
+    "title": "set_vscode_theme",
+    "section": "",
+    "text": "mode : str = None\n\n‘dark’ or ‘light’ to force a specific theme. If None, autodetected.\n\nstyle : str = 'grid'\n\n‘grid’ for grid style, ‘ticks’ for ticks style.\n\nframe : bool = False\n\nWhether to show frame around plots.\n\ncmap : Colormap = None\n\nMatplotlib colormap to use for plots.\n\nfigsize : tuple = (5, 3.7)\n\nDefault figure size.\n\nfont_scale : float = 1.0\n\nScale factor for fonts."
+  },
+  {
     "objectID": "api/monitor.html",
     "href": "api/monitor.html",
     "title": "monitor",
@@ -243,27 +261,6 @@
     "title": "monitor",
     "section": "",
     "text": "&gt;&gt;&gt; @monitor\n&gt;&gt;&gt; def my_function():\n...     # computation\n...     pass  # Label will be \"my_function\"\n&gt;&gt;&gt; @monitor(width=100, update_interval=1.0)\n&gt;&gt;&gt; def my_function():\n...     # computation\n...     pass  # Label will be \"my_function\"\n&gt;&gt;&gt; @monitor(label=None)\n&gt;&gt;&gt; def my_function():\n...     # computation\n...     pass  # No label"
-  },
-  {
-    "objectID": "api/SlurmMagic.html",
-    "href": "api/SlurmMagic.html",
-    "title": "SlurmMagic",
-    "section": "",
-    "text": "vscodenb.SlurmMagic()\nIPython magics for running code in SLURM jobs.\n\n\n\n\n\nName\nDescription\n\n\n\n\nslurm\nRun code in a SLURM job with optional state transfer.\n\n\n\n\n\nvscodenb.SlurmMagic.slurm(line, cell)\nRun code in a SLURM job with optional state transfer.\nUsage: %%slurm # your code here\n%%slurm --mem 4G --cores 4 --time 00:10:00\n# your code here with SLURM resources\n\n%%slurm --no-state\n# run truly isolated without state transfer"
-  },
-  {
-    "objectID": "api/SlurmMagic.html#methods",
-    "href": "api/SlurmMagic.html#methods",
-    "title": "SlurmMagic",
-    "section": "",
-    "text": "Name\nDescription\n\n\n\n\nslurm\nRun code in a SLURM job with optional state transfer.\n\n\n\n\n\nvscodenb.SlurmMagic.slurm(line, cell)\nRun code in a SLURM job with optional state transfer.\nUsage: %%slurm # your code here\n%%slurm --mem 4G --cores 4 --time 00:10:00\n# your code here with SLURM resources\n\n%%slurm --no-state\n# run truly isolated without state transfer"
-  },
-  {
-    "objectID": "api/is_vscode_dark_theme.html",
-    "href": "api/is_vscode_dark_theme.html",
-    "title": "is_vscode_dark_theme",
-    "section": "",
-    "text": "is_vscode_dark_theme\nvscodenb.is_vscode_dark_theme(mode=None)\nDetermine if a given VS Code theme name is dark or light."
   },
   {
     "objectID": "api/CPUMonitor.html",
@@ -294,70 +291,73 @@
     "text": "Name\nDescription\n\n\n\n\nstart\nStart monitoring.\n\n\nstop\nStop monitoring.\n\n\n\n\n\nvscodenb.CPUMonitor.start()\nStart monitoring.\n\n\n\nvscodenb.CPUMonitor.stop(had_error=False)\nStop monitoring."
   },
   {
+    "objectID": "api/lighten_colors.html",
+    "href": "api/lighten_colors.html",
+    "title": "lighten_colors",
+    "section": "",
+    "text": "vscodenb.lighten_colors(\n    colors,\n    factor=0.0,\n    n_colors=None,\n    as_cmap=None,\n    target_lightness=None,\n)\nLighten a colormap or palette using HSL color space.\n\n\n\ncolors : str, Colormap, or list\n\nMatplotlib colormap, seaborn palette name, or list of colors\n\nfactor : float = 0.0\n\nBlend factor toward white (0 = original, 1 = white). Ignored if target_lightness is set.\n\nn_colors : int = None\n\nNumber of colors for discrete palettes\n\nas_cmap : bool = None\n\nForce output type. If None, auto-detects based on input.\n\ntarget_lightness : float = None\n\nIf set (0-1), all colors will be adjusted to this lightness value, preserving hue and saturation.\n\n\n\n\n\n\n : list or LinearSegmentedColormap"
+  },
+  {
+    "objectID": "api/lighten_colors.html#parameters",
+    "href": "api/lighten_colors.html#parameters",
+    "title": "lighten_colors",
+    "section": "",
+    "text": "colors : str, Colormap, or list\n\nMatplotlib colormap, seaborn palette name, or list of colors\n\nfactor : float = 0.0\n\nBlend factor toward white (0 = original, 1 = white). Ignored if target_lightness is set.\n\nn_colors : int = None\n\nNumber of colors for discrete palettes\n\nas_cmap : bool = None\n\nForce output type. If None, auto-detects based on input.\n\ntarget_lightness : float = None\n\nIf set (0-1), all colors will be adjusted to this lightness value, preserving hue and saturation."
+  },
+  {
+    "objectID": "api/lighten_colors.html#returns",
+    "href": "api/lighten_colors.html#returns",
+    "title": "lighten_colors",
+    "section": "",
+    "text": ": list or LinearSegmentedColormap"
+  },
+  {
+    "objectID": "api/CPUMonitorMagics.html",
+    "href": "api/CPUMonitorMagics.html",
+    "title": "CPUMonitorMagics",
+    "section": "",
+    "text": "vscodenb.CPUMonitorMagics()\nIPython magics for CPU monitoring.\n\n\n\n\n\nName\nDescription\n\n\n\n\nmonitor\nMonitor CPU usage during cell execution.\n\n\n\n\n\nvscodenb.CPUMonitorMagics.monitor(line, cell)\nMonitor CPU usage during cell execution.\nUsage: %%monitor # your code here\n%%monitor --width 100 --interval 1.0\n# your code here\n\n%%monitor --persist\n# display remains after completion\n\n%%monitor --color\n# use color coding (green/yellow/red)\n\n%%monitor --summary\n# show table with CPU and memory statistics\n\n%%monitor --group-by task\n# group by SLURM task instead of node\n\n%%monitor --label \"Training Epoch 1\"\n# display with custom label"
+  },
+  {
+    "objectID": "api/CPUMonitorMagics.html#methods",
+    "href": "api/CPUMonitorMagics.html#methods",
+    "title": "CPUMonitorMagics",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\nmonitor\nMonitor CPU usage during cell execution.\n\n\n\n\n\nvscodenb.CPUMonitorMagics.monitor(line, cell)\nMonitor CPU usage during cell execution.\nUsage: %%monitor # your code here\n%%monitor --width 100 --interval 1.0\n# your code here\n\n%%monitor --persist\n# display remains after completion\n\n%%monitor --color\n# use color coding (green/yellow/red)\n\n%%monitor --summary\n# show table with CPU and memory statistics\n\n%%monitor --group-by task\n# group by SLURM task instead of node\n\n%%monitor --label \"Training Epoch 1\"\n# display with custom label"
+  },
+  {
+    "objectID": "api/vscode_theme.html",
+    "href": "api/vscode_theme.html",
+    "title": "vscode_theme",
+    "section": "",
+    "text": "vscode_theme\nvscodenb.vscode_theme(mode=None, style='grid', frame=False, **theme_kwargs)"
+  },
+  {
+    "objectID": "api/detect_compute_nodes.html",
+    "href": "api/detect_compute_nodes.html",
+    "title": "detect_compute_nodes",
+    "section": "",
+    "text": "detect_compute_nodes\nvscodenb.detect_compute_nodes()\nDetect compute nodes and allocated CPUs.\nReturns list of NodeInfo objects, one per node. For local execution, returns single node. For SLURM, returns all allocated nodes."
+  },
+  {
+    "objectID": "api/ipython.html",
+    "href": "api/ipython.html",
+    "title": "ipython",
+    "section": "",
+    "text": "ipython\nvscodenb.ipython"
+  },
+  {
+    "objectID": "pages/plot_theme.html",
+    "href": "pages/plot_theme.html",
+    "title": "Plot theme",
+    "section": "",
+    "text": "Tip\n\n\n\nTo enable automatic theme detection, you must add the following setting to your vscode settings.json:\n\"jupyter.themeMatplotlibPlots\": true,\nYou can open settings.json from the command palette (Cmd-Shift-p) by typing “user settings” and select “Preferences: Open User Settings (JSON)”.\n\n\n\nfrom numpy.random import random\nimport matplotlib.pyplot as plt\n\nVanilla plot without theme:\n\nplt.scatter(random(10), random(10)) ;\n\n\n\n\n\n\n\n\nStyle a single plot:\n\nfrom vscodenb import vscode_theme \n\nwith vscode_theme():\n    plt.scatter(random(10), random(10))\n\n\n\n\n\n\n                                  \n        \n\n\n\n\n\n\n\n\n\nDefault plotting style is preserved:\n\nplt.scatter(random(10), random(10)) ;\n\n\n\n\n\n\n\n\nSet theme for all plots:\n\nimport vscodenb\nvscodenb.set_vscode_theme()\n\nplt.scatter(random(10), random(10)) ;\n\n\n                                  \n        \n\n\n\n\n\n\n\n\n\n\nplt.scatter(random(10), random(10)) ;\n\n\n\n\n\n\n\n\nEven with global styling set, the context manager is useful for setting figsize and font_scale for individual plots:\n\nwith vscode_theme(font_scale=1.5, figsize=(2,1)):\n    plt.scatter(random(10), random(10)) ;\n\n\n                                  \n        \n\n\n\n\n\n\n\n\n\n\nwith vscode_theme(font_scale=0.8, figsize=(7,3)):\n    plt.subplot(121).scatter(random(10), random(10))\n    plt.subplot(122).scatter(random(10), random(10))\n\n\n                                  \n        \n\n\n\n\n\n\n\n\n\n\nwith vscode_theme(frame=True):\n    plt.scatter(random(10), random(10)) ;\n\n\n                                  \n        \n\n\n\n\n\n\n\n\n\n\nwith vscode_theme(style='ticks'):\n    plt.scatter(random(10), random(10)) ;\n\n\n                                  \n        \n\n\n\n\n\n\n\n\n\n\nwith vscode_theme(style='ticks', frame=True):\n    plt.scatter(random(10), random(10)) ;"
+  },
+  {
     "objectID": "pages/slurm_magic.html",
     "href": "pages/slurm_magic.html",
     "title": "SLURM cell magic",
     "section": "",
     "text": "import vscodenb # importing automatically registers the ipython magic\n\n\n\n\n\nThe slurm cell magic allows you to run code in a SLURM job directly from a Jupyter notebook. For example:\n\n%%slurm\n\ns = \"Hello from slurm magic!\"\n\nNot running on SLURM cluster.\n\n\nVariable values updated in slurm job are automatically transferred back to the notebook:\n\nprint(s)\n\nHello from slurm magic!\n\n\nSpecify memory per cpu, number of cpus, wall time, account, etc.\n\n%%slurm -m 8G -c 4 -t 00:10:00 -A xy-drive\n\ns = \"Hello again from slurm magic!\"\nprint(s)\n\nNot running on SLURM cluster."
-  },
-  {
-    "objectID": "pages/overview.html",
-    "href": "pages/overview.html",
-    "title": "Overview",
-    "section": "",
-    "text": "vscodenb lets you …\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "pages/overview.html#installation",
-    "href": "pages/overview.html#installation",
-    "title": "Overview",
-    "section": "Installation",
-    "text": "Installation\n\npixicondapip\n\n\npixi workspace channel add munch-group\npixi add vscodenb\n\n\nconda install -c munch-group vscodenb\n\n\npip install vscodenb\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nTo enable automatic theme detection, you must add the following setting to your vscode settings.json:\n\"jupyter.themeMatplotlibPlots\": true,\nYou can open settings.json from the command palette (Cmd-Shift-p) by typing “user settings” and select “Preferences: Open User Settings (JSON)”.\n\n\n\nfrom numpy.random import random\nimport matplotlib.pyplot as plt\nimport time\n\n\nplt.rcParams['figure.figsize'] = (5, 3.7)",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "pages/overview.html#plot-theme",
-    "href": "pages/overview.html#plot-theme",
-    "title": "Overview",
-    "section": "Plot theme",
-    "text": "Plot theme\n\nimport vscodenb\nvscodenb.set_vscode_theme()\n\nplt.scatter(random(10), random(10)) ;\n\n\n\n\n\n\n                                  \n        \n\n\n\n\n\n\n\n\n\nSee a full demo at here.",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "pages/overview.html#resource-monitor-utils",
-    "href": "pages/overview.html#resource-monitor-utils",
-    "title": "Overview",
-    "section": "Resource monitor utils",
-    "text": "Resource monitor utils\n\nimport vscodenb # importing vscodenb automatically enables monitoring\n\n\n%%monitor -p\n\ntime.sleep(3)\n\nmacbookpro (32%/32% mem)\n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n\n\nSee a full demo at here.",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "pages/overview.html#less-intrusive-progress-bars",
-    "href": "pages/overview.html#less-intrusive-progress-bars",
-    "title": "Overview",
-    "section": "Less intrusive progress bars",
-    "text": "Less intrusive progress bars\n\nfrom vscodenb import pqdm, prange\n\nfor i in prange(10, persist=True):\n    time.sleep(0.1)\n\n\n        \n            \n                 100% | 0 s\n            \n            \n                \n            \n        \n        \n\n\n\nfor i in pqdm([1, 2, 3], persist=True):\n    time.sleep(0.1)    \n\n\n        \n            \n                 100% | 0 s\n            \n            \n                \n            \n        \n        \n\n\nSee a full demo at here.",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "pages/overview.html#slurm-cell-magic",
-    "href": "pages/overview.html#slurm-cell-magic",
-    "title": "Overview",
-    "section": "SLURM cell magic",
-    "text": "SLURM cell magic\nRun a single cell as a SLURM job:\n\n%%slurm\n\ns = \"Variable values updated in the slurm job are automatically transferred back to the notebook!\"\n\nNot running on SLURM cluster.\n\n\n\nprint(f\"It works: {s}\")\n\nIt works: Variable values updated in the slurm job are automatically transferred back to the notebook!\n\n\nSee a full demo at here.",
-    "crumbs": [
-      "Overview"
-    ]
   }
 ]
