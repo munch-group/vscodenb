@@ -361,30 +361,36 @@ def detect_compute_nodes() -> List[NodeInfo]:
                 nodes = [f"node-{i}" for i in range(node_count)]
 
             # Get allocated CPUs from SLURM
+            # Try CPU affinity first - this gives actual CPU IDs assigned by SLURM
+            # (e.g., [48, 49, 50, 51] instead of [0, 1, 2, 3])
             allocated_cpus = None
-            if 'SLURM_JOB_CPUS_PER_NODE' in os.environ:
-                cpu_spec = os.environ['SLURM_JOB_CPUS_PER_NODE']
-                # Parse format like "4" or "4(x2)" or "4,8"
-                if '(' in cpu_spec:
-                    # Format: "4(x2)" means 4 CPUs per node
-                    num_cpus = int(cpu_spec.split('(')[0])
-                    allocated_cpus = list(range(num_cpus))
-                elif ',' in cpu_spec:
-                    # Multiple nodes with different CPU counts
-                    num_cpus = int(cpu_spec.split(',')[process_id])
-                    allocated_cpus = list(range(num_cpus))
-                else:
-                    num_cpus = int(cpu_spec)
-                    allocated_cpus = list(range(num_cpus))
+            try:
+                allocated_cpus = psutil.Process().cpu_affinity()
+                if not allocated_cpus:
+                    allocated_cpus = None
+            except (AttributeError, OSError):
+                pass
 
-            # Try CPU affinity as fallback
+            # Fall back to SLURM_JOB_CPUS_PER_NODE (only gives count, not IDs)
             if not allocated_cpus:
-                try:
-                    allocated_cpus = psutil.Process().cpu_affinity()
-                    if not allocated_cpus:
-                        allocated_cpus = list(range(cpus_per_task))
-                except (AttributeError, OSError):
-                    allocated_cpus = list(range(cpus_per_task))
+                if 'SLURM_JOB_CPUS_PER_NODE' in os.environ:
+                    cpu_spec = os.environ['SLURM_JOB_CPUS_PER_NODE']
+                    # Parse format like "4" or "4(x2)" or "4,8"
+                    if '(' in cpu_spec:
+                        # Format: "4(x2)" means 4 CPUs per node
+                        num_cpus = int(cpu_spec.split('(')[0])
+                        allocated_cpus = list(range(num_cpus))
+                    elif ',' in cpu_spec:
+                        # Multiple nodes with different CPU counts
+                        num_cpus = int(cpu_spec.split(',')[process_id])
+                        allocated_cpus = list(range(num_cpus))
+                    else:
+                        num_cpus = int(cpu_spec)
+                        allocated_cpus = list(range(num_cpus))
+
+            # Final fallback to cpus_per_task count
+            if not allocated_cpus:
+                allocated_cpus = list(range(cpus_per_task))
 
             # Get allocated memory from SLURM
             allocated_memory_mb = None
