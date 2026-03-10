@@ -1860,6 +1860,11 @@ class CPUMonitorMagics(Magics):
             %%monitor --label "Training Epoch 1"
             # display with custom label
         """
+        # Skip monitoring when running under nbconvert
+        if os.environ.get('NBCONVERT', False):
+            self.shell.run_cell(cell)
+            return
+
         args = parse_argstring(self.monitor, line)
 
         monitor = CPUMonitor(width=args.width, update_interval=args.interval,

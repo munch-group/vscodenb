@@ -17,7 +17,7 @@ from .cpu_monitor import (
     detect_compute_nodes,
     get_cached_nodes,
 )
-from .slurm_magic import SlurmMagic
+from .slurm_magic import SlurmMagic, jobinfo
 from .utils import Left
 
 try:

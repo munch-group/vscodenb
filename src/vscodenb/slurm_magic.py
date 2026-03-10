@@ -226,6 +226,63 @@ class _StatusHTML:
         return ''
 
 
+def jobinfo(job_id):
+    """Print job info (name, allocated mem/cpus, time remaining) for a SLURM job.
+
+    Args:
+        job_id: SLURM job ID (int or str)
+    """
+    result = subprocess.run(
+        ['sacct', '-j', str(job_id), '-X',
+         '--state=PENDING,RUNNING',
+         '--format=jobid,jobname%20,ReqMem,ReqCPUS,timelimit,elapsed'],
+        capture_output=True, text=True
+    )
+    if result.returncode != 0:
+        print(f"sacct failed: {result.stderr.strip()}", file=sys.stderr)
+        return
+    lines = result.stdout.strip().splitlines()
+    if len(lines) < 3:
+        print(f"No pending/running job found for {job_id}")
+        return
+
+    # Parse header + data (skip separator line)
+    header = lines[0].split()
+    values = lines[2].split()
+    row = dict(zip(header, values))
+
+    # Parse time strings (HH:MM:SS or D-HH:MM:SS)
+    def parse_time(s):
+        """Parse SLURM time string to total seconds."""
+        days = 0
+        if '-' in s:
+            d, s = s.split('-', 1)
+            days = int(d)
+        parts = s.split(':')
+        parts = [int(p) for p in parts]
+        if len(parts) == 3:
+            return days * 86400 + parts[0] * 3600 + parts[1] * 60 + parts[2]
+        elif len(parts) == 2:
+            return days * 86400 + parts[0] * 60 + parts[1]
+        return days * 86400 + parts[0]
+
+    def fmt_time(seconds):
+        """Format seconds as HH:MM:SS."""
+        h, rem = divmod(int(seconds), 3600)
+        m, s = divmod(rem, 60)
+        return f"{h:02d}:{m:02d}:{s:02d}"
+
+    timelimit = row.get('Timelimit', '00:00:00')
+    elapsed = row.get('Elapsed', '00:00:00')
+    remaining = parse_time(timelimit) - parse_time(elapsed)
+
+    print(f"  Job ID:     {row.get('JobID', '?')}")
+    print(f"  Job Name:   {row.get('JobName', '?')}")
+    print(f"  Memory:     {row.get('ReqMem', '?')}")
+    print(f"  CPUs:       {row.get('ReqCPUS', '?')}")
+    print(f"  Remaining:  {fmt_time(max(remaining, 0))} (of {timelimit})")
+
+
 @magics_class
 class SlurmMagic(Magics):
     """IPython magics for running code in SLURM jobs."""
