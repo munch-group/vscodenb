@@ -361,36 +361,42 @@ def detect_compute_nodes() -> List[NodeInfo]:
                 nodes = [f"node-{i}" for i in range(node_count)]
 
             # Get allocated CPUs from SLURM
-            # Try CPU affinity first - this gives actual CPU IDs assigned by SLURM
-            # (e.g., [48, 49, 50, 51] instead of [0, 1, 2, 3])
+            # First determine the expected CPU count from SLURM env vars,
+            # then try cpu_affinity() to get actual CPU IDs if they match.
+            # cpu_affinity() alone is unreliable: without srun/TaskPlugin
+            # it returns ALL node CPUs, not just the allocated ones.
+            expected_count = None
+            if 'SLURM_JOB_CPUS_PER_NODE' in os.environ:
+                cpu_spec = os.environ['SLURM_JOB_CPUS_PER_NODE']
+                # Parse format like "4" or "4(x2)" or "4,8"
+                if '(' in cpu_spec:
+                    expected_count = int(cpu_spec.split('(')[0])
+                elif ',' in cpu_spec:
+                    expected_count = int(cpu_spec.split(',')[process_id])
+                else:
+                    expected_count = int(cpu_spec)
+            elif cpus_per_task > 1:
+                expected_count = cpus_per_task
+
+            # Try cpu_affinity to get actual CPU IDs (e.g., [48, 49, 50, 51])
             allocated_cpus = None
             try:
-                allocated_cpus = psutil.Process().cpu_affinity()
-                if not allocated_cpus:
-                    allocated_cpus = None
+                affinity = psutil.Process().cpu_affinity()
+                if affinity and expected_count and len(affinity) == expected_count:
+                    # Affinity matches SLURM allocation — use it for real CPU IDs
+                    allocated_cpus = affinity
+                elif affinity and expected_count and len(affinity) > expected_count:
+                    # Affinity not restricted (returns all node CPUs) — ignore it
+                    allocated_cpus = list(range(expected_count))
             except (AttributeError, OSError):
                 pass
 
-            # Fall back to SLURM_JOB_CPUS_PER_NODE (only gives count, not IDs)
+            # Fallback if affinity wasn't available
             if not allocated_cpus:
-                if 'SLURM_JOB_CPUS_PER_NODE' in os.environ:
-                    cpu_spec = os.environ['SLURM_JOB_CPUS_PER_NODE']
-                    # Parse format like "4" or "4(x2)" or "4,8"
-                    if '(' in cpu_spec:
-                        # Format: "4(x2)" means 4 CPUs per node
-                        num_cpus = int(cpu_spec.split('(')[0])
-                        allocated_cpus = list(range(num_cpus))
-                    elif ',' in cpu_spec:
-                        # Multiple nodes with different CPU counts
-                        num_cpus = int(cpu_spec.split(',')[process_id])
-                        allocated_cpus = list(range(num_cpus))
-                    else:
-                        num_cpus = int(cpu_spec)
-                        allocated_cpus = list(range(num_cpus))
-
-            # Final fallback to cpus_per_task count
-            if not allocated_cpus:
-                allocated_cpus = list(range(cpus_per_task))
+                if expected_count:
+                    allocated_cpus = list(range(expected_count))
+                else:
+                    allocated_cpus = list(range(cpus_per_task))
 
             # Get allocated memory from SLURM
             allocated_memory_mb = None
