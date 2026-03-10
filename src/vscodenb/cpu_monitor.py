@@ -901,6 +901,10 @@ class CPUMonitor:
     label : str, optional
         Label to display at the top left of the widget. If None (default),
         no label is displayed.
+    cpus : int, optional
+        Override the number of CPUs to monitor. Useful when auto-detection
+        fails (e.g., on SLURM nodes where CPU affinity is not available).
+        If None (default), the number of CPUs is auto-detected.
 
     Examples
     --------
@@ -933,7 +937,8 @@ class CPUMonitor:
         summary: bool = False,
         fold: int = 16,
         group_by: str = "node",
-        label: Optional[str] = None
+        label: Optional[str] = None,
+        cpus: Optional[int] = None
     ):
         self.width = width
         self.update_interval = update_interval
@@ -958,6 +963,12 @@ class CPUMonitor:
             self.units = get_cached_tasks()
         else:
             self.units = get_cached_nodes()
+
+        # Override CPU count if specified
+        if cpus is not None:
+            for unit in self.units:
+                unit.cpu_count = cpus
+                unit.allocated_cpus = list(range(cpus))
 
         # Keep nodes reference for compatibility
         self.nodes = self.units
@@ -1815,6 +1826,8 @@ class CPUMonitorMagics(Magics):
                 help='Use per-node layout for CPU bars')
     @argument('--label', '-l', type=str, default=None,
                 help='Label to display at top left of widget')
+    @argument('--cpus', type=int, default=None,
+                help='Override number of CPUs to monitor (useful when auto-detection fails)')
     def monitor(self, line, cell):
         """
         Monitor CPU usage during cell execution.
@@ -1845,7 +1858,8 @@ class CPUMonitorMagics(Magics):
 
         monitor = CPUMonitor(width=args.width, update_interval=args.interval,
                         persist=args.persist, color=args.color, summary=args.summary,
-                        fold=args.fold, group_by=args.group_by, label=args.label)
+                        fold=args.fold, group_by=args.group_by, label=args.label,
+                        cpus=args.cpus)
 
         monitor.start()
         try:
