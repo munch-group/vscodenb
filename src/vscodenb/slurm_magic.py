@@ -13,6 +13,7 @@ Usage:
 """
 
 import ast
+import os
 import subprocess
 import sys
 import tempfile
@@ -226,12 +227,15 @@ class _StatusHTML:
         return ''
 
 
-def jobinfo(job_id):
-    """Print job info (name, allocated mem/cpus, time remaining) for a SLURM job.
+def jobinfo():
+    """Print job info (name, allocated mem/cpus, time remaining) for the current SLURM job.
 
-    Args:
-        job_id: SLURM job ID (int or str)
+    Gets the job ID from the SLURM_JOB_ID environment variable.
     """
+    job_id = os.environ.get('SLURM_JOB_ID')
+    if not job_id:
+        print("Not running inside a SLURM job (SLURM_JOB_ID not set).", file=sys.stderr)
+        return
     result = subprocess.run(
         ['sacct', '-j', str(job_id), '-X',
          '--state=PENDING,RUNNING',
