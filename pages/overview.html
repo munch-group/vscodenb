@@ -258,32 +258,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div id="cell-3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-03-05T11:27:48.856613Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-03-05T11:27:48.856471Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-05T11:27:58.357474Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-05T11:27:58.356937Z&quot;}}" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy.random <span class="im">import</span> random</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>To enable automatic theme detection, you must add the following setting to your vscode <code>settings.json</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="st">"jupyter.themeMatplotlibPlots"</span><span class="er">:</span> <span class="kw">true</span><span class="er">,</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>You can open <code>settings.json</code> from the command palette (Cmd-Shift-p) by typing “user settings” and select “Preferences: Open User Settings (JSON)”.</p>
-</div>
-</div>
-<div id="cell-4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-03-05T11:27:48.856613Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-03-05T11:27:48.856471Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-05T11:27:58.357474Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-05T11:27:58.356937Z&quot;}}" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy.random <span class="im">import</span> random</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="cell-5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-03-05T11:27:58.360236Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-03-05T11:27:58.360059Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-05T11:27:58.372868Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-05T11:27:58.372420Z&quot;}}" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'figure.figsize'</span>] <span class="op">=</span> (<span class="dv">5</span>, <span class="fl">3.7</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-03-05T11:27:58.360236Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-03-05T11:27:58.360059Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-05T11:27:58.372868Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-05T11:27:58.372420Z&quot;}}" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'figure.figsize'</span>] <span class="op">=</span> (<span class="dv">5</span>, <span class="fl">3.7</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="plot-theme" class="level2">
 <h2 class="anchored" data-anchor-id="plot-theme">Plot theme</h2>
+<p>To enable automatic theme detection, you must add the following setting to your vscode <code>settings.json</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="st">"jupyter.themeMatplotlibPlots"</span><span class="er">:</span> <span class="kw">true</span><span class="er">,</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You can open <code>settings.json</code> from the command palette (Cmd-Shift-p) by typing “user settings” and select “Preferences: Open User Settings (JSON)”.</p>
 <div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-03-05T11:27:58.374987Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-03-05T11:27:58.374826Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-05T11:28:44.908461Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-05T11:28:44.907931Z&quot;}}" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> vscodenb</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>vscodenb.set_vscode_theme()</span>
@@ -381,7 +369,7 @@ table {
 </div>
 </div>
 </div>
-<p>See a full demo at <a href="../pages/plot_theme.html">here</a>.</p>
+<p>See a full demo <a href="../pages/plot_theme.html">here</a>.</p>
 </section>
 <section id="resource-monitor-utils" class="level2">
 <h2 class="anchored" data-anchor-id="resource-monitor-utils">Resource monitor utils</h2>
@@ -436,7 +424,7 @@ table {
                         </div></div></div>
 </div>
 </div>
-<p>See a full demo at <a href="../pages/cpu_monitoring.html">here</a>.</p>
+<p>See a full demo <a href="../pages/cpu_monitoring.html">here</a>.</p>
 </section>
 <section id="less-intrusive-progress-bars" class="level2">
 <h2 class="anchored" data-anchor-id="less-intrusive-progress-bars">Less intrusive progress bars</h2>
@@ -474,7 +462,7 @@ table {
         
 </div>
 </div>
-<p>See a full demo at <a href="../pages/progress.html">here</a>.</p>
+<p>See a full demo <a href="../pages/progress.html">here</a>.</p>
 </section>
 <section id="slurm-cell-magic" class="level2">
 <h2 class="anchored" data-anchor-id="slurm-cell-magic">SLURM cell magic</h2>

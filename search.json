@@ -64,7 +64,7 @@
     "href": "pages/overview.html#installation",
     "title": "Overview",
     "section": "Installation",
-    "text": "Installation\n\npixicondapip\n\n\npixi workspace channel add munch-group\npixi add vscodenb\n\n\nconda install -c munch-group vscodenb\n\n\npip install vscodenb\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nTo enable automatic theme detection, you must add the following setting to your vscode settings.json:\n\"jupyter.themeMatplotlibPlots\": true,\nYou can open settings.json from the command palette (Cmd-Shift-p) by typing “user settings” and select “Preferences: Open User Settings (JSON)”.\n\n\n\nfrom numpy.random import random\nimport matplotlib.pyplot as plt\nimport time\n\n\nplt.rcParams['figure.figsize'] = (5, 3.7)",
+    "text": "Installation\n\npixicondapip\n\n\npixi workspace channel add munch-group\npixi add vscodenb\n\n\nconda install -c munch-group vscodenb\n\n\npip install vscodenb\n\n\n\n\nfrom numpy.random import random\nimport matplotlib.pyplot as plt\nimport time\n\n\nplt.rcParams['figure.figsize'] = (5, 3.7)",
     "crumbs": [
       "Overview"
     ]
@@ -74,7 +74,7 @@
     "href": "pages/overview.html#plot-theme",
     "title": "Overview",
     "section": "Plot theme",
-    "text": "Plot theme\n\nimport vscodenb\nvscodenb.set_vscode_theme()\n\nplt.scatter(random(10), random(10)) ;\n\n\n\n\n\n\n                                  \n        \n\n\n\n\n\n\n\n\n\nSee a full demo at here.",
+    "text": "Plot theme\nTo enable automatic theme detection, you must add the following setting to your vscode settings.json:\n\"jupyter.themeMatplotlibPlots\": true,\nYou can open settings.json from the command palette (Cmd-Shift-p) by typing “user settings” and select “Preferences: Open User Settings (JSON)”.\n\nimport vscodenb\nvscodenb.set_vscode_theme()\n\nplt.scatter(random(10), random(10)) ;\n\n\n\n\n\n\n                                  \n        \n\n\n\n\n\n\n\n\n\nSee a full demo here.",
     "crumbs": [
       "Overview"
     ]
@@ -84,7 +84,7 @@
     "href": "pages/overview.html#resource-monitor-utils",
     "title": "Overview",
     "section": "Resource monitor utils",
-    "text": "Resource monitor utils\n\nimport vscodenb # importing vscodenb automatically enables monitoring\n\n\n%%monitor -p\n\ntime.sleep(3)\n\nperry (39%/39% mem)\n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n\n\nSee a full demo at here.",
+    "text": "Resource monitor utils\n\nimport vscodenb # importing vscodenb automatically enables monitoring\n\n\n%%monitor -p\n\ntime.sleep(3)\n\nperry (39%/39% mem)\n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n                        \n                            \n                        \n                        \n\n\nSee a full demo here.",
     "crumbs": [
       "Overview"
     ]
@@ -94,7 +94,7 @@
     "href": "pages/overview.html#less-intrusive-progress-bars",
     "title": "Overview",
     "section": "Less intrusive progress bars",
-    "text": "Less intrusive progress bars\n\nfrom vscodenb import pqdm, prange\n\nfor i in prange(10, persist=True):\n    time.sleep(0.1)\n\n\n        \n            \n                 100% | 0 s\n            \n            \n                \n            \n        \n        \n\n\n\nfor i in pqdm([1, 2, 3], persist=True):\n    time.sleep(0.1)    \n\n\n        \n            \n                 100% | 0 s\n            \n            \n                \n            \n        \n        \n\n\nSee a full demo at here.",
+    "text": "Less intrusive progress bars\n\nfrom vscodenb import pqdm, prange\n\nfor i in prange(10, persist=True):\n    time.sleep(0.1)\n\n\n        \n            \n                 100% | 0 s\n            \n            \n                \n            \n        \n        \n\n\n\nfor i in pqdm([1, 2, 3], persist=True):\n    time.sleep(0.1)    \n\n\n        \n            \n                 100% | 0 s\n            \n            \n                \n            \n        \n        \n\n\nSee a full demo here.",
     "crumbs": [
       "Overview"
     ]
