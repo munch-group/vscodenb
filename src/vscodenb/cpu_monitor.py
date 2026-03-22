@@ -62,6 +62,19 @@ except ImportError:
     notebook_tqdm = std_tqdm
 
 
+def _slurm_env(name, default=None):
+    """Look up a SLURM_* variable, falling back to VS_SLURM_* if not found."""
+    val = os.environ.get(name)
+    if val is not None:
+        return val
+    return os.environ.get('VS_' + name, default)
+
+
+def _slurm_env_exists(name):
+    """Check if a SLURM_* variable exists, including VS_SLURM_* fallback."""
+    return name in os.environ or ('VS_' + name) in os.environ
+
+
 # ============================================================================
 # Data Classes
 # ============================================================================
@@ -280,23 +293,23 @@ def detect_slurm_environment() -> Dict[str, Any]:
     env = {}
 
     # Check if running under SLURM
-    env['is_slurm'] = 'SLURM_JOB_ID' in os.environ
+    env['is_slurm'] = _slurm_env_exists('SLURM_JOB_ID')
 
     if not env['is_slurm']:
         # logger.info("Not running under SLURM - using single-node setup")
         return env
 
     # Parse SLURM environment variables
-    env['job_id'] = os.environ.get('SLURM_JOB_ID')
-    env['process_id'] = int(os.environ.get('SLURM_PROCID', 0))
-    env['num_processes'] = int(os.environ.get('SLURM_NTASKS', 1))
-    env['cpus_per_task'] = int(os.environ.get('SLURM_CPUS_PER_TASK', 1))
-    env['nodelist'] = os.environ.get('SLURM_JOB_NODELIST', '')
-    env['node_count'] = int(os.environ.get('SLURM_JOB_NUM_NODES', 1))
+    env['job_id'] = _slurm_env('SLURM_JOB_ID')
+    env['process_id'] = int(_slurm_env('SLURM_PROCID', 0))
+    env['num_processes'] = int(_slurm_env('SLURM_NTASKS', 1))
+    env['cpus_per_task'] = int(_slurm_env('SLURM_CPUS_PER_TASK', 1))
+    env['nodelist'] = _slurm_env('SLURM_JOB_NODELIST', '')
+    env['node_count'] = int(_slurm_env('SLURM_JOB_NUM_NODES', 1))
 
     # Check if actually running under srun/sbatch (not just in allocation)
     # SLURM_STEP_ID is only set when running as part of a job step
-    env['in_job_step'] = 'SLURM_STEP_ID' in os.environ
+    env['in_job_step'] = _slurm_env_exists('SLURM_STEP_ID')
 
     if env['num_processes'] > 1 and not env['in_job_step']:
         # logger.warning(
@@ -329,7 +342,7 @@ def detect_compute_nodes() -> List[NodeInfo]:
     import socket
 
     # Check for SLURM environment variables
-    if 'SLURM_JOB_ID' in os.environ:
+    if _slurm_env_exists('SLURM_JOB_ID'):
         # Running inside SLURM allocation
         slurm_env = detect_slurm_environment()
 
@@ -366,8 +379,8 @@ def detect_compute_nodes() -> List[NodeInfo]:
             # cpu_affinity() alone is unreliable: without srun/TaskPlugin
             # it returns ALL node CPUs, not just the allocated ones.
             expected_count = None
-            if 'SLURM_JOB_CPUS_PER_NODE' in os.environ:
-                cpu_spec = os.environ['SLURM_JOB_CPUS_PER_NODE']
+            if _slurm_env_exists('SLURM_JOB_CPUS_PER_NODE'):
+                cpu_spec = _slurm_env('SLURM_JOB_CPUS_PER_NODE')
                 # Parse format like "4" or "4(x2)" or "4,8"
                 if '(' in cpu_spec:
                     expected_count = int(cpu_spec.split('(')[0])
@@ -400,13 +413,13 @@ def detect_compute_nodes() -> List[NodeInfo]:
 
             # Get allocated memory from SLURM
             allocated_memory_mb = None
-            if 'SLURM_MEM_PER_CPU' in os.environ:
+            if _slurm_env_exists('SLURM_MEM_PER_CPU'):
                 # Memory per CPU in MB
-                mem_per_cpu = float(os.environ['SLURM_MEM_PER_CPU'])
+                mem_per_cpu = float(_slurm_env('SLURM_MEM_PER_CPU'))
                 allocated_memory_mb = mem_per_cpu * len(allocated_cpus)
-            elif 'SLURM_MEM_PER_NODE' in os.environ:
+            elif _slurm_env_exists('SLURM_MEM_PER_NODE'):
                 # Total memory per node in MB
-                allocated_memory_mb = float(os.environ['SLURM_MEM_PER_NODE'])
+                allocated_memory_mb = float(_slurm_env('SLURM_MEM_PER_NODE'))
             else:
                 # Fallback: use total system memory / node count
                 try:
@@ -573,18 +586,18 @@ def detect_compute_tasks() -> List[TaskInfo]:
     import socket
 
     # Check for SLURM environment variables
-    if 'SLURM_JOB_ID' in os.environ:
+    if _slurm_env_exists('SLURM_JOB_ID'):
         # Running inside SLURM allocation
         slurm_env = detect_slurm_environment()
 
         if slurm_env.get('is_slurm', False):
             # Get task information
-            num_tasks = int(os.environ.get('SLURM_NTASKS', 1))
-            cpus_per_task = int(os.environ.get('SLURM_CPUS_PER_TASK', 1))
-            current_task_id = int(os.environ.get('SLURM_PROCID', 0))
-            num_nodes = int(os.environ.get('SLURM_NNODES', 1))
-            tasks_per_node_str = os.environ.get('SLURM_TASKS_PER_NODE', '')
-            nodelist = os.environ.get('SLURM_JOB_NODELIST', '')
+            num_tasks = int(_slurm_env('SLURM_NTASKS', 1))
+            cpus_per_task = int(_slurm_env('SLURM_CPUS_PER_TASK', 1))
+            current_task_id = int(_slurm_env('SLURM_PROCID', 0))
+            num_nodes = int(_slurm_env('SLURM_NNODES', 1))
+            tasks_per_node_str = _slurm_env('SLURM_TASKS_PER_NODE', '')
+            nodelist = _slurm_env('SLURM_JOB_NODELIST', '')
 
             # Parse task distribution
             tasks_per_node = _parse_slurm_tasks_per_node(tasks_per_node_str, num_nodes)
@@ -620,13 +633,13 @@ def detect_compute_tasks() -> List[TaskInfo]:
 
             # Get allocated memory per task from SLURM
             allocated_memory_mb = None
-            if 'SLURM_MEM_PER_CPU' in os.environ:
+            if _slurm_env_exists('SLURM_MEM_PER_CPU'):
                 # Memory per CPU in MB
-                mem_per_cpu = float(os.environ['SLURM_MEM_PER_CPU'])
+                mem_per_cpu = float(_slurm_env('SLURM_MEM_PER_CPU'))
                 allocated_memory_mb = mem_per_cpu * cpus_per_task
-            elif 'SLURM_MEM_PER_NODE' in os.environ:
+            elif _slurm_env_exists('SLURM_MEM_PER_NODE'):
                 # Total memory per node - divide by tasks per node
-                mem_per_node = float(os.environ['SLURM_MEM_PER_NODE'])
+                mem_per_node = float(_slurm_env('SLURM_MEM_PER_NODE'))
                 # Use average tasks per node
                 avg_tasks_per_node = num_tasks / num_nodes
                 allocated_memory_mb = mem_per_node / avg_tasks_per_node if avg_tasks_per_node > 0 else None

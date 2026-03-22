@@ -34,6 +34,19 @@ import pandas as pd
 import shutil
 
 
+def _slurm_env(name, default=None):
+    """Look up a SLURM_* variable, falling back to VS_SLURM_* if not found."""
+    val = os.environ.get(name)
+    if val is not None:
+        return val
+    return os.environ.get('VS_' + name, default)
+
+
+def _slurm_env_exists(name):
+    """Check if a SLURM_* variable exists, including VS_SLURM_* fallback."""
+    return name in os.environ or ('VS_' + name) in os.environ
+
+
 def extract_imports_from_code(code):
     """Extract import statements from Python code."""
     imports = []
@@ -232,7 +245,7 @@ def jobinfo():
 
     Gets the job ID from the SLURM_JOB_ID environment variable.
     """
-    job_id = os.environ.get('SLURM_JOB_ID')
+    job_id = _slurm_env('SLURM_JOB_ID')
     if not job_id:
         print("Not running inside a SLURM job (SLURM_JOB_ID not set).", file=sys.stderr)
         return
