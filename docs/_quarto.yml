@@ -55,6 +55,10 @@ website:
       align: left
       contents:
         - pages/overview.ipynb
+        - pages/cpu_monitoring.ipynb
+        - pages/plot_theme.ipynb
+        - pages/progress.ipynb
+        - pages/slurm_magic.ipynb
         # - section: "Examples"
         #   contents:
         #     - pages/example.ipynb                   
