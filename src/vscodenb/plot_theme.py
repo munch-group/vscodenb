@@ -316,8 +316,10 @@ def set_vscode_theme(mode=None, style='grid', frame=False, cmap=None, figsize=(5
             # plt.set_cmap(cmap if cmap else dark_cmap)        
         else:
             plt.rcParams.update({
-                'figure.facecolor': 'white', 
-                'axes.facecolor': 'white',
+                # 'figure.facecolor': 'white', 
+                # 'axes.facecolor': 'white',
+                'figure.facecolor': '#faf9f6', 
+                'axes.facecolor': '#faf9f6',
                 'grid.color': '#000000',
                 'grid.linewidth': 0.4,
                 'grid.alpha': 0.3,            
