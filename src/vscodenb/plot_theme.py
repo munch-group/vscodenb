@@ -131,12 +131,12 @@ def is_vscode_dark_theme(mode=None) -> bool:
 
     # always light theme when executing via nbconvert
     if os.environ.get('NBCONVERT', False):
-        return False
+        return False, 'white'
 
     env_theme = os.environ.get('NOTEBOOK_THEME', None)
     if env_theme is not None:
         # print("Overriding theme from NOTEBOOK_THEME environment variable.", sys.stderr)
-        return 'dark' in env_theme.lower()
+        return 'dark' in env_theme.lower(), None
 
     if mode is not None:
         is_dark = 'dark' in mode.lower()
@@ -145,6 +145,7 @@ def is_vscode_dark_theme(mode=None) -> bool:
         if theme is not None:
             is_dark = 'dark' in theme.lower()
 
+    bg_color = None
     if is_dark is None:
         with suppress_plotting_output():
             # make a plot to check background color
@@ -154,7 +155,7 @@ def is_vscode_dark_theme(mode=None) -> bool:
             luminance = matplotlib.colors.rgb_to_hsv(matplotlib.colors.to_rgb(bg_color))[2]
             is_dark = luminance < 0.5
 
-    return is_dark
+    return is_dark, bg_color
 
 
 def lighten_colors(colors, factor=0.0, n_colors=None, as_cmap=None, target_lightness=None):
@@ -284,7 +285,7 @@ def set_vscode_theme(mode=None, style='grid', frame=False, cmap=None, figsize=(5
 
     with suppress_plotting_output():
 
-        is_dark = is_vscode_dark_theme(mode=mode)
+        is_dark, bg_color = is_vscode_dark_theme(mode=mode)
 
         set_matplotlib_formats('retina', 'png')
 
@@ -306,18 +307,20 @@ def set_vscode_theme(mode=None, style='grid', frame=False, cmap=None, figsize=(5
             matplotlib.pyplot.set_cmap(cmap)
 
         if is_dark:
+            bg_color = bg_color if bg_color else '#1F1F1F'
             plt.rcParams.update({
-                'figure.facecolor': '#1F1F1F', 
-                'axes.facecolor': '#1F1F1F',
+                'figure.facecolor': bg_color,
+                'axes.facecolor': bg_color,
                 'grid.linewidth': 0.4,
                 'grid.alpha': 0.3,
                 'grid.color': '#ffffff',            
                 })
             # plt.set_cmap(cmap if cmap else dark_cmap)        
         else:
+            bg_color = bg_color if bg_color else 'white'
             plt.rcParams.update({
-                # 'figure.facecolor': 'white', 
-                # 'axes.facecolor': 'white',
+                'figure.facecolor': bg_color, 
+                'axes.facecolor': bg_color,
                 'figure.facecolor': '#faf9f6', 
                 'axes.facecolor': '#faf9f6',
                 'grid.color': '#000000',
