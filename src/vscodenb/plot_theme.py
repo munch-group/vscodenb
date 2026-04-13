@@ -130,7 +130,7 @@ def is_vscode_dark_theme(mode=None) -> bool:
     is_dark = None
 
     # always light theme when executing via nbconvert
-    if os.environ.get('NBCONVERT', False):
+    if 'NBCONVERT' in os.environ:
         return False, 'white'
 
     env_theme = os.environ.get('NOTEBOOK_THEME', None)
@@ -317,12 +317,10 @@ def set_vscode_theme(mode=None, style='grid', frame=False, cmap=None, figsize=(5
                 })
             # plt.set_cmap(cmap if cmap else dark_cmap)        
         else:
-            bg_color = bg_color if bg_color else 'white'
+            bg_color = bg_color if bg_color else '#faf9f6'
             plt.rcParams.update({
                 'figure.facecolor': bg_color, 
                 'axes.facecolor': bg_color,
-                'figure.facecolor': '#faf9f6', 
-                'axes.facecolor': '#faf9f6',
                 'grid.color': '#000000',
                 'grid.linewidth': 0.4,
                 'grid.alpha': 0.3,            
