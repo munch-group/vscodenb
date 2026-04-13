@@ -130,8 +130,8 @@ def is_vscode_dark_theme(mode=None) -> bool:
     is_dark = None
 
     # always light theme when executing via nbconvert
-    if 'NBCONVERT' in os.environ:
-        return False, 'white'
+    if 'NBCONVERT_BGCOLOR' in os.environ:
+        return False, os.environ.get('NBCONVERT_BGCOLOR')
 
     env_theme = os.environ.get('NOTEBOOK_THEME', None)
     if env_theme is not None:
