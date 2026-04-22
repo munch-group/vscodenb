@@ -145,15 +145,15 @@ def is_vscode_dark_theme(mode=None) -> bool:
         if theme is not None:
             is_dark = 'dark' in theme.lower()
 
-    bg_color = None
+    with suppress_plotting_output():
+        # make a plot to check background color
+        fig, ax = plt.subplots()
+        bg_color = ax.get_facecolor()
+        plt.close(fig)
+        luminance = matplotlib.colors.rgb_to_hsv(matplotlib.colors.to_rgb(bg_color))[2]
+
     if is_dark is None:
-        with suppress_plotting_output():
-            # make a plot to check background color
-            fig, ax = plt.subplots()
-            bg_color = ax.get_facecolor()
-            plt.close(fig)
-            luminance = matplotlib.colors.rgb_to_hsv(matplotlib.colors.to_rgb(bg_color))[2]
-            is_dark = luminance < 0.5
+        is_dark = luminance < 0.5
 
     return is_dark, bg_color
 
