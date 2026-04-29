@@ -319,7 +319,7 @@ def set_vscode_theme(mode=None, style='grid', frame=False, cmap=None, figsize=(5
                 })
             # plt.set_cmap(cmap if cmap else dark_cmap)        
         else:
-            bg_color = bg_color if bg_color else '#faf9f6'
+            bg_color = bg_color if bg_color else 'white'
             plt.rcParams.update({
                 'figure.facecolor': bg_color, 
                 'axes.facecolor': bg_color,
