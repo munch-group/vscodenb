@@ -261,7 +261,7 @@ def lighten_colors(colors, factor=0.0, n_colors=None, as_cmap=None, target_light
 # theme(style='ticks') despined ticks style 
 # theme(style='ticks', frame=True)
 
-def set_vscode_theme(mode=None, style='grid', frame=False, cmap=None, figsize=(5, 3.7), font_scale=1.0):
+def set_vscode_theme(mode=None, style='grid', frame=False, cmap=None, figsize=(5, 3.7), plot_format=None, font_scale=1.0):
     """
     Set the default theme for the graph plotter.
     The theme can be either 'dark' or 'light'. The default theme is autodetected.
@@ -279,6 +279,8 @@ def set_vscode_theme(mode=None, style='grid', frame=False, cmap=None, figsize=(5
         Matplotlib colormap to use for plots.
     figsize : tuple, optional
         Default figure size.
+    plot_format : str, list, optional
+        Figure format. 'svg', 'png', 'retina', 'pdf'. Defaults to format already registered with matplotlib.
     font_scale : float, optional
         Scale factor for fonts.
     """
@@ -287,7 +289,11 @@ def set_vscode_theme(mode=None, style='grid', frame=False, cmap=None, figsize=(5
 
         is_dark, bg_color = is_vscode_dark_theme(mode=mode)
 
-        set_matplotlib_formats('retina', 'png')
+        if plot_format is not None:
+            if isinstance(plot_format, list):
+                set_matplotlib_formats(*plot_format)
+            else:
+                set_matplotlib_formats(plot_format)
 
         sns.set_context('paper', font_scale=font_scale)
 
