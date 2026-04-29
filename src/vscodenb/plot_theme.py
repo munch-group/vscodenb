@@ -287,9 +287,9 @@ def set_vscode_theme(mode=None, style='grid', frame=False, cmap=None, figsize=(5
 
         is_dark, bg_color = is_vscode_dark_theme(mode=mode)
 
-        set_matplotlib_formats(['retina', 'png'])
+        set_matplotlib_formats('retina', 'png')
         # if os.environ.get('NBCONVERT_BGCOLOR', None) == 'white':
-        #     set_matplotlib_formats(['svg', 'pdf'])
+        #     set_matplotlib_formats('svg', 'pdf')
             
         sns.set_context('paper', font_scale=font_scale)
 
