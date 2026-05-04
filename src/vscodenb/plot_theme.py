@@ -145,12 +145,20 @@ def is_vscode_dark_theme(mode=None) -> bool:
         if theme is not None:
             is_dark = 'dark' in theme.lower()
 
-    with suppress_plotting_output():
-        # make a plot to check background color
-        fig, ax = plt.subplots()
-        bg_color = ax.get_facecolor()
-        plt.close(fig)
-        luminance = matplotlib.colors.rgb_to_hsv(matplotlib.colors.to_rgb(bg_color))[2]
+    bg_color = matplotlib.rcParams['axes.facecolor']
+    luminance = matplotlib.colors.rgb_to_hsv(matplotlib.colors.to_rgb(bg_color))[2]
+    # with matplotlib.rc_context({'interactive': False}):
+    #     # make a plot to check background color
+    #     fig, ax = plt.subplots()
+    #     bg_color = ax.get_facecolor()
+    #     plt.close(fig)
+    #     luminance = matplotlib.colors.rgb_to_hsv(matplotlib.colors.to_rgb(bg_color))[2]
+    # with suppress_plotting_output():
+    #     # make a plot to check background color
+    #     fig, ax = plt.subplots()
+    #     bg_color = ax.get_facecolor()
+    #     plt.close(fig)
+    #     luminance = matplotlib.colors.rgb_to_hsv(matplotlib.colors.to_rgb(bg_color))[2]
 
     if is_dark is None:
         is_dark = luminance < 0.5
@@ -283,7 +291,9 @@ def set_vscode_theme(mode=None, style='grid', frame=False, cmap=None, figsize=(5
         Scale factor for fonts.
     """
 
-    with suppress_plotting_output():
+    # with suppress_plotting_output():
+    # with matplotlib.rc_context({'interactive': False}):
+    with plt.ioff():
 
         is_dark, bg_color = is_vscode_dark_theme(mode=mode)
 
