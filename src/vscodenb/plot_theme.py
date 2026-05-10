@@ -83,11 +83,13 @@ class suppress_plotting_output:
         pass
 
     def __enter__(self):
-        plt.ioff()
+        # plt.ioff()
+        plt.rcParams['interactive'] = False
 
     def __exit__(self, exc_type, exc_value, traceback):
-        plt.ion()
+        # plt.ion()
         plt.close('all')
+        plt.rcParams['interactive'] = True
 
     
 def get_vscode_settings_path() -> Path:
@@ -291,9 +293,9 @@ def set_vscode_theme(mode=None, style='grid', frame=False, cmap=None, figsize=(5
         Scale factor for fonts.
     """
 
-    # with suppress_plotting_output():
+    with suppress_plotting_output():
     # with matplotlib.rc_context({'interactive': False}):
-    with plt.ioff():
+    # with plt.ioff():
 
         is_dark, bg_color = is_vscode_dark_theme(mode=mode)
 
