@@ -325,7 +325,7 @@ def set_vscode_theme(mode=None, figformat=['svg', 'pdf'], style='grid', frame=Fa
             matplotlib.pyplot.set_cmap(cmap)
 
         if is_dark:
-            bg_color = bg_color if bg_color else '#1F1F1F'
+            bg_color = bg_color if bg_color not in [None, 'black', '#000000'] else '#1F1F1F'
             plt.rcParams.update({
                 'figure.facecolor': bg_color,
                 'axes.facecolor': bg_color,
