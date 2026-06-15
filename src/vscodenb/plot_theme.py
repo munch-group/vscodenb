@@ -409,6 +409,9 @@ def set_vscode_theme(mode=None, figformat=['svg', 'pdf'], style='grid', frame=Fa
             color: 'white' !important;
             padding-bottom: 0px !important;    
         }
+        table {
+            font-variant-numeric: tabular-nums; 
+        }                     
         </style>                          
         """))
 

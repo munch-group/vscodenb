@@ -48,42 +48,42 @@ from IPython.display import display, HTML
 # </style>                          
 # """))
 
-# make tqdm progress bar less intrusive:
-html_style = '''
-<style>
-.widget-label,
-.widget-html,
-.widget-button,
-.widget-dropdown,
-.widget-text,
-.widget-textarea {
-    color: #CCCCCC !important;  /* Set to desired color */
-    font-size: 10px !important;      /* Font size */
+# # make tqdm progress bar less intrusive:
+# html_style = '''
+# <style>
+# .widget-label,
+# .widget-html,
+# .widget-button,
+# .widget-dropdown,
+# .widget-text,
+# .widget-textarea {
+#     color: #CCCCCC !important;  /* Set to desired color */
+#     font-size: 10px !important;      /* Font size */
 
-}
-div.widget-html-content > progress { /* Outer container */
-    height: 10px !important;
+# }
+# div.widget-html-content > progress { /* Outer container */
+#     height: 10px !important;
 
-}
-div.jp-OutputArea-output td.output_html { /* tqdm HTML output area */
-    height: 5px !important;
-}
-div.progress { /* Jupyter Notebook (classic) */
-    height: 5px !important;
-    min-height: 5px !important;
-    margin-top: 12px !important;    
-}
-div.progress-bar { /* Inner bar */
-    height: 5px !important;
-    min-height: 5px !important;
-    line-height: 5px !important;
-    color: 'white' !important;
-    padding-bottom: 0px !important;    
-}
+# }
+# div.jp-OutputArea-output td.output_html { /* tqdm HTML output area */
+#     height: 5px !important;
+# }
+# div.progress { /* Jupyter Notebook (classic) */
+#     height: 5px !important;
+#     min-height: 5px !important;
+#     margin-top: 12px !important;    
+# }
+# div.progress-bar { /* Inner bar */
+#     height: 5px !important;
+#     min-height: 5px !important;
+#     line-height: 5px !important;
+#     color: 'white' !important;
+#     padding-bottom: 0px !important;    
+# }
 
-table {
-    font-variant-numeric: tabular-nums; 
-}
-</style>
-'''
-display(HTML(html_style))
+# table {
+#     font-variant-numeric: tabular-nums; 
+# }
+# </style>
+# '''
+# display(HTML(html_style))
