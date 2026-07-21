@@ -27,6 +27,8 @@ try:
         ipython.register_magics(CPUMonitorMagics)
     if ipython is not None and SlurmMagic is not None:
         ipython.register_magics(SlurmMagic)
+    if ipython is not None:
+        set_vscode_theme()
 except (ImportError, NameError):
     print("IPython not available, skipping magic registration.", file=sys.stderr)
     # Not in IPython environment or magic not available
