@@ -365,9 +365,25 @@ def set_vscode_theme(mode=None, figformat=['svg', 'pdf'], style='grid', frame=Fa
             'figure.figsize': figsize,            
         })
 
+        # VS Code renders ipywidgets with JupyterLab's light-theme defaults, so
+        # widget text (e.g. tqdm progress bar labels) stays dark once the widget
+        # background is made transparent below. Follow the live editor
+        # foreground where available, falling back to a literal matching the
+        # detected theme (e.g. when exporting with nbconvert).
+        fg_color = '#cccccc' if is_dark else '#1f1f1f'
+
         # Apply CSS to make ipywidget backgrounds transparent to match VS Code theme
         # Also make tqdm progress bars less intrusive
-        display(HTML("""
+        display(HTML(
+        f"""
+        <style>
+        :root {{
+            --vscodenb-foreground: var(--vscode-editor-foreground, var(--jp-content-font-color1, {fg_color}));
+            --jp-widgets-color: var(--vscodenb-foreground);
+        }}
+        </style>
+        """
+        """
         <style>
         .cell-output-ipywidget-background {
             background-color: transparent !important;
@@ -375,12 +391,6 @@ def set_vscode_theme(mode=None, figformat=['svg', 'pdf'], style='grid', frame=Fa
        .jp-OutputArea-output {
            background-color: transparent;
         }  
-        /*
-        :root {
-            --jp-widgets-color: var(--vscode-editor-foreground);
-            --jp-widgets-font-size: var(--vscode-editor-font-size);
-        }  
-        */
         /* tqdm styling: */
         .widget-label,
         .widget-html,
@@ -389,6 +399,14 @@ def set_vscode_theme(mode=None, figformat=['svg', 'pdf'], style='grid', frame=Fa
         .widget-text,
         .widget-textarea {
             font-size: 10px !important;      /* Font size */
+        }
+        /* tqdm progress bar labels ("47%" and "470/1000 [00:03<00:03, ...]") */
+        .widget-label,
+        .widget-html,
+        .widget-htmlmath,
+        .widget-html-content,
+        .widget-htmlmath-content {
+            color: var(--vscodenb-foreground) !important;
         }
         div.widget-html-content > progress { /* Outer container */
             height: 10px !important;
@@ -406,7 +424,7 @@ def set_vscode_theme(mode=None, figformat=['svg', 'pdf'], style='grid', frame=Fa
             height: 5px !important;
             min-height: 5px !important;
             line-height: 5px !important;
-            color: 'white' !important;
+            color: white !important;
             padding-bottom: 0px !important;    
         }
         table {
