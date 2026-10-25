@@ -394,11 +394,16 @@ def set_vscode_theme(mode=None, figformat=['svg', 'pdf'], style='grid', frame=Fa
         /* tqdm styling: */
         .widget-label,
         .widget-html,
-        .widget-button,
         .widget-dropdown,
         .widget-text,
         .widget-textarea {
             font-size: 10px !important;      /* Font size */
+        }
+        /* Not !important, so widgets.Button(style={'font_size': ...}), which
+           sets an inline style, still applies. The element selector outranks
+           ipywidgets' own .jupyter-button rule. */
+        button.widget-button {
+            font-size: 10px;
         }
         /* tqdm progress bar labels ("47%" and "470/1000 [00:03<00:03, ...]") */
         .widget-label,
